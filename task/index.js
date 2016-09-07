@@ -21,20 +21,19 @@ rss.songshuhui = function* (feed) {
   yield this.save(news, feed);
 }
 rss.nanfanzhoukan = function* (feed) {
-  // let res = yield request.get(feed.toJSON().link);
-  // let news = yield parseNanfang(res.body);
-  // yield this.save(news, feed);
+  let res = yield request.get(feed.toJSON().link);
+  let news = yield parseNanfang(res.body);
+  yield this.save(news, feed);
 }
 rss.engadget = function* (feed) {
-  // let res = yield request.get(feed.toJSON().link);
-  // let news = yield parseEngadget(res.body);
-  // yield this.save(news, feed)
+  let res = yield request.get(feed.toJSON().link);
+  let news = yield parseEngadget(res.body);
+  yield this.save(news, feed)
 }
 rss.weiguanchang = function* (feed) {
   let res = yield request.get(feed.toJSON().link);
   let news = yield parseWeiguanchang(res.body);
-  console.log(news.coontent[0])
-  // yield this.save(news, feed);
+  yield this.save(news, feed);
 }
 rss._36kr = function* (feed) {
   let res = yield request.get(feed.toJSON().link);
@@ -44,7 +43,7 @@ rss._36kr = function* (feed) {
 rss.save = function* (news, feed) {
   try {
     for (let newsItem of news.content) {
-      let ret = yield News.findOne({where: {title: newsItem.title}, filds: 'id'}) 
+      let ret = yield News.findOne({where: {title: newsItem.title}, filds: 'id'})
       if (ret.length > 0) {
         delete newsItem
         continue

@@ -15,4 +15,4 @@ app.use(static({rootDir: path.join(__dirname, './client/dist')}));
 app.use(router.routes())
 app.listen(3000)
 console.info('server listen on %s', 3000)
-// task();
+task();

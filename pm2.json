@@ -1,0 +1,21 @@
+{
+    "apps": [{
+        "name"              : "learnonce.cn",
+        "script"            : "app.js",
+        "merge_logs"        : true,
+        "instances"         : 1,
+        "watch"             : [],
+        "ignoreWatch"       : [],
+        "log_date_format"   : "YYYY-MM-DD HH:mm:ss Z",
+        "error_file"        : "log/pm2-error.log",
+        "out_file"          : "log/-m2-out.log",
+        "merge-logs"        : true,
+        "max_memory_restart": "400M",
+        "env_production"    : {
+            "NODE_ENV"      : "production"
+        },
+        "env_develop"       : {
+            "NODE_ENV"      : "develop"
+        }
+    }]
+}
