@@ -1,0 +1,34 @@
+{
+  "develop": {
+    "uri": "mongodb://127.0.0.1/learnonce",
+    "option": {
+      "server": {
+        "socketOptions": {
+          "keepAlive": true
+        }
+      },
+      "replset": {
+        "socketOptions": {
+          "keepAlive": true
+        }
+      }
+    }
+  },
+  "production": {
+    "uri": "mongodb://127.0.0.1/learnonce",
+    "option": {
+      "server": {
+        "socketOptions": {
+          "keepAlive": true
+        }
+      },
+      "replset": {
+        "socketOptions": {
+          "keepAlive": true
+        }
+      },
+      "user": "learnonce.cn",
+      "pass": "blog.learnonce.cn"
+    }
+  }
+}

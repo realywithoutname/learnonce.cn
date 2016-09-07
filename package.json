@@ -1,0 +1,36 @@
+{
+  "name": "learnonce.cn",
+  "version": "1.0.0",
+  "description": "liu jiandong blog",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/realywithoutname/learnonce.cn.git"
+  },
+  "keywords": [
+    "learnonce",
+    "blog",
+    "news"
+  ],
+  "author": "learnonce@163.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/realywithoutname/learnonce.cn/issues"
+  },
+  "homepage": "https://github.com/realywithoutname/learnonce.cn#readme",
+  "dependencies": {
+    "co": "^4.6.0",
+    "koa": "^1.2.2",
+    "koa-body": "^1.5.0",
+    "koa-request": "^1.0.0",
+    "koa-router": "^5.4.0",
+    "koa-static-server": "^0.1.8",
+    "koa-xml-body": "^1.0.3",
+    "mongoose": "^4.6.0",
+    "superagent": "^2.2.0",
+    "xml2js": "^0.4.17"
+  }
+}

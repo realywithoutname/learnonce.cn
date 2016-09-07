@@ -1,0 +1,8 @@
+{
+  "name": "bluereader",
+  "desc": "bluereader config",
+  "user": "learnonce@163.com",
+  "pwd": "liu121004",
+  "authUrl": "http://bluereader.org/index.php?do=login&act=submit",
+  "dataUrl": "http://bluereader.org/index.php?do=action&act=articlecount"
+}
