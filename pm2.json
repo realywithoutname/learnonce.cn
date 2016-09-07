@@ -8,7 +8,7 @@
         "ignoreWatch"       : [],
         "log_date_format"   : "YYYY-MM-DD HH:mm:ss Z",
         "error_file"        : "log/pm2-error.log",
-        "out_file"          : "log/-m2-out.log",
+        "out_file"          : "log/pm2-out.log",
         "merge-logs"        : true,
         "max_memory_restart": "400M",
         "env_production"    : {
