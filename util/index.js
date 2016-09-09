@@ -125,13 +125,13 @@ const parseWeiguanchang = function* (xml) {
   const {rss: {$, channel: [{title, description, item: items}]}} = yield xml2js(xml);
   let content = [];
   for (item of items) {
-    let {title: [t], description: [desc], link: [l], pubDate: [d]} = item;
+    let {title: [t], description: [desc], link: [l]} = item;
     content.push({
       title: t,
       description: html2text(desc).substr(200),
       content: desc,
       link: l,
-      pubTime: d ? new Date(d) : new Date()
+      pubTime: new Date()
     });
   }
   return {
