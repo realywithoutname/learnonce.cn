@@ -14,7 +14,6 @@ router.get('/img', function* (next) {
   yield CorsCtrl.images(this);
 });
 router.get('/api/news', function* (next) {
-  console.log(1)
   yield NewsCtrl.find(this);
 });
 router.get('/api/news/:id', function* (next) {

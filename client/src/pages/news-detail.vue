@@ -47,14 +47,7 @@ export default {
     }
   },
   ready () {
-    let cache = window.localStorage.ONREADNEWS
     this.$root.needNote = true
-    if (cache) {
-      cache = JSON.parse(cache)
-      if (cache.id === this.$route.params.id) {
-        return
-      }
-    }
     this.query()
   },
   methods: {

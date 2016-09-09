@@ -48,7 +48,7 @@ export default {
     font-weight: 600px;
     display: inline-block;
     width: 45px;
-    color: #b098c7;
+    color: #b098c7 !important;
   }
   h1 {
     font-size: 64px;

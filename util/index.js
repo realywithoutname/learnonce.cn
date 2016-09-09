@@ -121,7 +121,7 @@ const parse36kr = function* (xml) {
   }
 }
 const parseWeiguanchang = function* (xml) {
-  let data = yield xml2js(xml)
+  let data = yield xml2js(xml);
   const {rss: {$, channel: [{title, description, item: items}]}} = yield xml2js(xml);
   let content = [];
   for (item of items) {
@@ -142,9 +142,33 @@ const parseWeiguanchang = function* (xml) {
     content
   }
 }
+const parseWeibo = function* (xml) {
+  const {rss: {$, channel: [{title, description, lastBuildDate: [buildTime], item: items}]}} = yield xml2js(xml);
+  let content = [];
+  for (item of items) {
+    let {title: [t], description: [desc], link: [l], pubDate: [d]} = item;
+    let img = desc.match(/src="(.+)"/);
+    content.push({
+      title: t.substr(0, 25) + '...',
+      description: t,
+      content: desc,
+      link: l,
+      image: img === null ? undefined : img[1],
+      pubTime: d ? new Date(d) : new Date()
+    });
+  }
+  return {
+    from: title[0],
+    description: description[0],
+    version: $.version,
+    buildTime,
+    content
+  }
+}
 module.exports = {
   xml2js,
   parse36kr,
+  parseWeibo,
   parseZhiHu,
   parseNanfang,
   parseEngadget,

@@ -51,7 +51,7 @@ a {
   margin: 0 auto;
   min-height: 100%;
 }
-.dark .container {
+.dark .body {
   background-color: rgb(65, 65, 65);
   color: #fff;
 }
@@ -110,7 +110,7 @@ a {
   height: 100%;
 }
 .body {
-  height: calc(100% - 5rem);
+  height: calc(100% - 5rem - 2px);
 }
 @media screen and (min-width: 768px) and (max-width: 991px) {
   .header {
@@ -269,6 +269,7 @@ a {
 .read-source a {
   color: #fff !important;
   text-align: center;
+  line-height: 3rem;
   position: relative !important;
 }
 .editor-container {
@@ -276,7 +277,7 @@ a {
   margin: 0;
   position: relative;
   height: 100%;
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 #editor {
   margin: 0;
@@ -313,7 +314,6 @@ a {
 }*/
 #editor .editor-tool {
   padding: 10px;
-  width: calc(100% - 45px);
   background-color: #eee;
   font-size: 1.3rem;
   margin-top: -3px;
@@ -321,7 +321,6 @@ a {
 #editor .editor-tool .save {
   color: #000;
   float: right;
-  margin-right: 15px;
   font-weight: bolder;
 }
 #editor .editor-tool .pre {
@@ -355,6 +354,7 @@ a {
   .article img {
     max-width: 100% !important;
     height: auto;
+    width: 100%;
   }
   .editor-container #editor {
     position: absolute;
@@ -363,7 +363,7 @@ a {
     height: 50%;
   }
   #editor .editor-tool {
-    width: calc(100% - 10px);
+    width: calc(100% - 20px);
   }
   #editor .editor-tool .pre:before {
     content: "\25B2";
@@ -390,13 +390,12 @@ a {
     height: 100%;
   }
   .editor-container #editor {
-    width: 50%;
+    width: calc(50% - 47px);
     display: inline-block;
     position: absolute;
-    margin-left: -15px;
   }
   #editor textarea {
-    width: calc(100% - 60px);
+    width: calc(100% - 30px);
   }
 }
 @media screen and (min-width: 1401px) {
@@ -415,12 +414,11 @@ a {
     height: auto;
   }
   .editor-container #editor {
-    width: 50%;
+    width: calc(50% - 30px);
     display: inline-block;
     position: absolute;
-    margin-left: -15px;
   }
   #editor textarea {
-    width: calc(100% - 60px);
+    width: calc(100% - 30px);
   }
 }

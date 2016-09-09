@@ -99,7 +99,7 @@ export default {
 <style lang="css" scoped>
 .container {
   padding-top: 10px;
-  background: #eee;
+  background: rgb(239, 240, 241);
 }
 .dark .container {
   background-color: rgb(65, 65, 65);
@@ -116,5 +116,8 @@ export default {
   float:right;
   font-size: 1.3rem;
   cursor: pointer;
+}
+.read-source {
+  padding: 0 !important;
 }
 </style>

@@ -32,7 +32,7 @@ export default {
       timestamp: new Date().getTime(),
       filter: {
         where: {},
-        limit: 200,
+        limit: 20,
         offset: 0,
         sort: {createTime: 'desc'}
       }
@@ -70,7 +70,7 @@ export default {
 <style lang="css" scoped>
   .container {
     padding-top: 10px;
-    background: #eee;
+    background: rgb(239, 240, 241);;
   }
   .dark .container {
     background-color: rgb(65, 65, 65);

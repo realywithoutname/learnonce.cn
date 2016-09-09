@@ -23,9 +23,7 @@ let route = (() => {
   let routes = {}
   for (let key of config) {
     routes[key.route] = {
-      component (resolve) {
-        require(['./pages/' + key.component], resolve)
-      },
+      component: require('./pages/' + key.component),
       name: key.name
     }
   }
