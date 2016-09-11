@@ -11,7 +11,7 @@ let app = koa();
 
 app.use(xmlParser());
 app.use(bodyParser());
-app.use(static({rootDir: 'client/dist'}));
+app.use(static({rootDir: 'dist'}));
 app.use(router.routes());
 app.on('error', function (err, ctx) {
   console.log("server err: %s", err)
