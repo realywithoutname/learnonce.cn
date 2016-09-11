@@ -12,7 +12,10 @@ let app = koa();
 app.use(xmlParser());
 app.use(bodyParser());
 app.use(static({rootDir: path.join(__dirname, './client/dist')}));
-app.use(router.routes())
+app.use(router.routes());
+app.on('error', function (err, ctx) {
+  console.log("server err: %s", err)
+});
 app.listen(3000)
 console.info('server listen on %s', 3000)
 task();
