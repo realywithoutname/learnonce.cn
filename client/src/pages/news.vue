@@ -34,6 +34,7 @@ export default {
         where: {},
         limit: 20,
         offset: 0,
+        filds: ['id', 'title', 'description', 'from', 'createTime', 'image'],
         sort: {createTime: 'desc'}
       }
     }
@@ -60,7 +61,6 @@ export default {
       e.target.src = 'http://e.hiphotos.baidu.com/zhidao/wh%3D600%2C800/sign=bdd0bc965882b2b7a7ca31c2019de7d7/622762d0f703918fbc781958503d269758eec4f2.jpg'
     },
     readMore (news) {
-      window.localStorage.ONREADNEWS = JSON.stringify(news)
       this.$router.go({path: `/news/${news._id}`})
     }
   }

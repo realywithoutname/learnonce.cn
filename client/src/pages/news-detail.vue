@@ -6,9 +6,9 @@
       </article>
       <article v-show="!preview">
         <h1 v-html="news.title"></h1>
-        <div v-html="news.content"></div>
+        <div v-html="news.content || '没有内容'"></div>
         <div class="read-source">
-          <a :href="news.link">阅读原文</a>
+          <a :href="news.link" target="_blank">阅读原文</a>
         </div>
       </article>
     </section>

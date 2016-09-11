@@ -6,7 +6,7 @@ class CorsCtrl {
       let data = yield request.get(url);
       ctx.body = data.body
     } catch (err) {
-      console.error(err)
+      console.error("agent faild: %s", err)
       ctx.body = "not found"
     }
   }

@@ -60,7 +60,7 @@ let app = Vue.extend({
     }
   }
 })
-let router = new VueRouter({history: true})
+let router = new VueRouter({history: false})
 
 router.map(route)
 router.start(app, 'body')

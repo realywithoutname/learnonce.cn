@@ -23,6 +23,7 @@
   "homepage": "https://github.com/realywithoutname/learnonce.cn#readme",
   "dependencies": {
     "co": "^4.6.0",
+    "co-fs": "^1.2.0",
     "koa": "^1.2.2",
     "koa-body": "^1.5.0",
     "koa-request": "^1.0.0",

@@ -4,7 +4,7 @@
         "script"            : "app.js",
         "merge_logs"        : true,
         "instances"         : 1,
-        "watch"             : [],
+        "watch"             : ["app.js"],
         "ignoreWatch"       : ["node_nodules", "client"],
         "log_date_format"   : "YYYY-MM-DD HH:mm:ss Z",
         "error_file"        : "log/pm2-error.log",

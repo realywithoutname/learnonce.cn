@@ -35,6 +35,13 @@ module.exports = {
         pathRewrite: {
 
         }
+      },
+      '/offline.manifest': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        pathRewrite: {
+
+        }
       }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html manifest="/offline.manifest">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -9,8 +9,6 @@
   </head>
   <body :class="{dark: dark}">
     <v-header></v-header>
-    <div class="body">
-      <router-view></router-view>
-    </div>
+    <router-view></router-view>
   </body>
 </html>
