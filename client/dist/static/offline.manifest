@@ -1,6 +1,13 @@
 CACHE MANIFEST
 #v1
 CACHE:
-#/static/js/vendor.31493497de865a47cece.js
+/static/js/manifest.5bcc939466e93da9fc11.js
+/static/js/vendor.31493497de865a47cece.js
+/static/js/app.ac8967e7a49708a3d1bd.js
+/static/css/app.82ce6041add61bbb03c1e38aef851980.css
+/static/js/manifest.5bcc939466e93da9fc11.js.map
+/static/js/vendor.31493497de865a47cece.js.map
+/static/js/app.ac8967e7a49708a3d1bd.js.map
+/static/css/app.82ce6041add61bbb03c1e38aef851980.css.map
 NETWORK:
 *
