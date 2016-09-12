@@ -10,8 +10,7 @@
       </div>
       <h4 class="card-footer">
         <span>来自：{{item.from}} {{item.pubTime | date 'YYYY/MM/dd HH:mm'}}</span>
-        <a href="javascript:void(0)" @click="readMore(item)" v-if="item.content">阅读全文</a>
-        <a :href="item.link" target="_blank" v-if="!item.content" >阅读原文</a>
+        <a href="javascript:void(0)" @click="readMore(item)">阅读全文</a>
       </h4>
     </div>
     <div class="need-more">
@@ -50,6 +49,9 @@ export default {
         .find({filter: this.filter})
         .then((res) => {
           this.itemIist.push(...res.json())
+          if (this.itemIist.length === 0) {
+            return
+          }
           this.timestamp = new Date(this.itemIist[this.itemIist.length - 1].createTime).getTime()
         })
     },

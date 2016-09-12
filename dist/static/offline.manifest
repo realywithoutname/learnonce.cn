@@ -1,9 +1,13 @@
 CACHE MANIFEST
 #v1
 CACHE:
-/static/js/manifest.7e2a65590c48a8d204ae.js
-/static/js/vendor.31493497de865a47cece.js
-/static/js/app.245afde2272be7fa20f3.js
-/static/css/app.64323688d7fd17a9c49e0c9adb7a9250.css
+js/manifest.f519273e74dbb787a19d.js
+js/vendor.31493497de865a47cece.js
+js/app.2d4ab1d47985ec43d9b1.js
+css/app.841fbc9c2a76881848e334715fc3070a.css
+js/manifest.f519273e74dbb787a19d.js.map
+js/vendor.31493497de865a47cece.js.map
+js/app.2d4ab1d47985ec43d9b1.js.map
+css/app.841fbc9c2a76881848e334715fc3070a.css.map 
 NETWORK:
 *
