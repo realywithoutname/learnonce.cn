@@ -1,9 +1,16 @@
 CACHE MANIFEST
-#v1
+#v1.1.2
 CACHE:
-/static/js/manifest.7e2a65590c48a8d204ae.js
-/static/js/vendor.31493497de865a47cece.js
-/static/js/app.245afde2272be7fa20f3.js
-/static/css/app.64323688d7fd17a9c49e0c9adb7a9250.css
+/static/js/manifest.ed618e9e354531ce79ed.js
+/static/js/vendor.0d36e66d997a28d56397.js
+/static/js/app.88f9142605db8d7ea354.js
+/static/css/app.4f6ad60e86a45af4a4d4112413291a75.css
+/static/js/manifest.ed618e9e354531ce79ed.js.map
+/static/js/vendor.0d36e66d997a28d56397.js.map
+/static/js/app.88f9142605db8d7ea354.js.map
+/static/css/app.4f6ad60e86a45af4a4d4112413291a75.css.map
+/index.html
+#https://fonts.googleapis.com/icon?family=Material+Icons
+#https://fonts.gstatic.com/s/materialicons/v18/2fcrYFNaTjcS6g4U3t-Y5ZjZjT5FdEJ140U2DJYC3mY.woff2
 NETWORK:
 *

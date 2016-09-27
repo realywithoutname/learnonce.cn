@@ -28,6 +28,18 @@ API.Note = {
     url: '/api/notes{/id}'
   }
 }
+API.Feed = {
+  find: {
+    method: 'GET',
+    url: '/api/feeds'
+  }
+}
+API.Tag = {
+  find: {
+    method: 'GET',
+    url: '/api/tags'
+  }
+}
 let install = (vue) => {
   for (let key in API) {
     if (API.hasOwnProperty(key)) {

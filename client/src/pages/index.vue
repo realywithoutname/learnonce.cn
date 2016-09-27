@@ -4,7 +4,7 @@
       <h1>A·O</h1>
       <p>衡量价值的标准不是值不值钱,而是值不值得</p>
       <a v-link="{path: '/news'}">新闻</a>
-      <a v-link="{path: '/notes'}">笔记</a>
+      <a v-link="{path: '/note'}">笔记</a>
     </div>
   </div>
 </template>
@@ -34,23 +34,28 @@ export default {
     font-family: cursive;
     position: relative;
     top: 50%;
-    margin-top: -100px;
-    color: #b098c7;
+    margin-top: -200px;
+    color: #fff;
   }
   .home {
-    background: #fff;
     position: fixed;
     width: 100%;
     height: 100%;
+    background: #212121;
   }
   a {
     font-size: 14px;
     font-weight: 600px;
     display: inline-block;
-    width: 45px;
-    color: #b098c7 !important;
+    color: #fff;
+    height: 3rem;
+    line-height: 3rem;
+    padding: 0.5rem;
+    font-size: 1.2rem;
   }
   h1 {
-    font-size: 64px;
+    font-size: 5rem;
+    padding: 0;
+    margin: 1rem;
   }
 </style>

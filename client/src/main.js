@@ -5,6 +5,7 @@ import VueResource from 'vue-resource'
 import vHeader from 'components/Head'
 import route from './route'
 import './assets/style/base.css'
+import './assets/style/style.css'
 import './assets/script/util.js'
 import resources from './resources'
 
@@ -51,12 +52,15 @@ let app = Vue.extend({
   components: {vHeader},
   data () {
     return {
-      dark: false,
+      filterCtrl: false,
+      sideCtrl: false,
       noting: false,
       list: false,
-      needNote: false,
+      noteCtrl: true,
       needList: false,
-      needHead: true
+      needHead: true,
+      keyword: '',
+      menu: false
     }
   }
 })

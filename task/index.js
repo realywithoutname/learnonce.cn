@@ -68,7 +68,7 @@ rss.save = function* (news, feed) {
       newsItem.description = newsItem.description;
       newsItem.content = newsItem.content.replace(/<img.+?src=\"/g, '<img src="/img?source-url=');
       newsItem.content = newsItem.content.replace(/\<script.+?\<\/script\>|\<style.+?\<\/style\>/g, ' ');
-      newsItem.image = newsItem.image || (imgs === null ? undefined : '/img?source-url=' + imgs[1]);
+      // newsItem.image = newsItem.image || (imgs === null ? undefined : '/img?source-url=' + imgs[1]);
       newsItem.createTime = new Date();
       newsItem.feedId = feed._id
     }

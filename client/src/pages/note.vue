@@ -1,19 +1,40 @@
 <template>
   <div class="container">
-    <section v-for="note in notes" track-by="_id" class="card">
-      <h2 class="card-title">
-        <b class="time">{{note.createTime | date 'YYYY/MM/DD'}}</b>
-        <b class="title">{{note.title}}</b>
-        <b @click="findOne(note._id, $index)" class="view">{{note.read ? '收起' : '阅读'}}</b>
-      </h2>
-      <div v-show="note.read" v-html="note.content | marked" class="card-content">
+    <side>
+      <div slot="header" class="nav-bar-equal">
+        <a href="#" class="brand  indigo-5">A·O</a>
+        <span class="hidden-small-and-up">if you know, please more</span>
       </div>
-      <div class="card-footer read-source" v-show="note.read">
-        <a v-link="{path: '/notes/' + note._id}">阅读原文</a>
+      <ul slot="body" class="collections par-bg divider">
+        <li>
+          <h3>Tags</h3>
+        </li>
+        <li class="tag" v-for="tag in tags">
+          <span>{{tag.name}}{{tag.count}}</span>
+        </li>
+      </ul>
+    </side>
+    <div class="col l-left-2 m-left-2 s-left-3 l-10 m-6 s-4 xs-8">
+      <div class="nav-bar-equal margin-bottom"></div>
+      <div class="col xs-8 m-6 l-6 m-left-1 l-left-3">
+        <ul class="collections  zindex-2">
+          <li v-for="note in notes" class="collection divider">
+            <a v-link="{path: '/note/' + note._id}" target="_blank">
+              <div class="content">
+                <span class="title">{{note.title}}</span>
+                <p>
+                  {{note.createTime | date 'YYYY-MM-DD'}}
+                  <br>
+                  {{note.description}}
+                  <p v-if="note.tags">
+                    <b class="tag" v-for="tag in note.tags.split(',')">{{tag}}</b>
+                  </p>
+                </p>
+              </div>
+            </a>
+          </li>
+        </ul>
       </div>
-    </section>
-    <div class="need-more">
-      <a href="javescript:void(0)" :class="{'no-data': noData}" class="waves-effect" @click="loadMore"></a>
     </div>
   </div>
 </template>
@@ -21,6 +42,7 @@
 <script>
 import marked from 'marked'
 import hljs from 'highlight.js'
+import side from 'components/Side'
 import './../assets/style/github.min.css'
 marked.setOptions({
   highlight: function (code, lang) {
@@ -34,16 +56,21 @@ export default {
       filter: {
         limit: 20,
         offset: 0,
-        filds: ['title', 'createTime']
+        fields: ['id', 'title', 'createTime', 'description', 'tags'],
+        sort: {createTime: 'desc'}
       },
       notes: [],
+      tags: [],
       noData: false
     }
   },
   ready () {
     this.query()
+    this.getTags()
+    // this.$root.sideCtrl = true
     this.$root.needNote = true
   },
+  components: {side},
   methods: {
     query () {
       this
@@ -66,20 +93,10 @@ export default {
       this.filter.offset = this.notes.length
       this.query()
     },
-    findOne (id, index) {
-      if (this.notes[index].read) {
-        this.notes[index].read = false
-        return
-      } else if (this.notes[index].content) {
-        this.notes[index].read = true
-        return
-      }
-      this
-        .Note
-        .findById({id: id})
+    getTags () {
+      this.Tag.find({filter: {fields: ['id', 'name', 'count']}})
         .then((res) => {
-          this.notes[index].content = res.json().content
-          this.notes[index].read = true
+          this.tags = res.json()
         })
     }
   },
@@ -97,27 +114,5 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.container {
-  padding-top: 10px;
-  background: rgb(239, 240, 241);
-}
-.dark .container {
-  background-color: rgb(65, 65, 65);
-  color: #fff;
-}
 
-.title {
-  padding: 0 15px;
-}
-.time {
-  color: #ddd;
-}
-.view {
-  float:right;
-  font-size: 1.3rem;
-  cursor: pointer;
-}
-.read-source {
-  padding: 0 !important;
-}
 </style>

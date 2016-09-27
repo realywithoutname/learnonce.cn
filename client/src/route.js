@@ -7,17 +7,21 @@ let config = [{
   route: '/news',
   component: 'news'
 }, {
-  name: 'news detail',
-  route: '/news/:id',
-  component: 'news-detail'
-}, {
   name: 'notes',
-  route: '/notes',
+  route: '/note',
   component: 'note'
 }, {
-  name: 'note editor',
-  route: '/notes/:id',
+  name: 'note create',
+  route: '/note/create',
   component: 'note-editor'
+}, {
+  name: 'note editor',
+  route: '/note/:id/editor',
+  component: 'note-editor'
+}, {
+  name: 'note detail',
+  route: '/note/:id',
+  component: 'note-detail'
 }]
 let route = (() => {
   let routes = {}

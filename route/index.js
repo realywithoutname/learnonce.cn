@@ -2,6 +2,8 @@ let Router = require('koa-router');
 let NewsCtrl = require('./../controller').News;
 let CorsCtrl = require('./../controller').Cors;
 let NoteCtrl = require('./../controller').Note;
+let FeedCtrl = require('./../controller').Feed;
+let TagCtrl = require('./../controller').Tag;
 let router = new Router();
 
 router.use(function* (next) {
@@ -19,6 +21,9 @@ router.get('/api/news', function* (next) {
 router.get('/api/news/:id', function* (next) {
   yield NewsCtrl.findById(this);
 });
+router.get('/api/feeds', function* (next) {
+  yield FeedCtrl.find(this);
+});
 router.post('/api/notes', function* (next) {
   yield NoteCtrl.create(this);
 });
@@ -30,5 +35,8 @@ router.put('/api/notes/:id', function* (next) {
 });
 router.get('/api/notes/:id', function* (next) {
   yield NoteCtrl.findById(this);
+});
+router.get('/api/tags', function* (next) {
+  yield TagCtrl.find(this);
 });
 module.exports = router;

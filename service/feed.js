@@ -3,7 +3,7 @@ let FeedModel = require('./../model').Feed;
 
 class Feed extends Base{
   constructor () {
-    super(FeedsModel);
+    super(FeedModel);
   }
 }
 module.exports = Feed;
