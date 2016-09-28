@@ -96,6 +96,9 @@ export default {
           // if (this.itemIist.length === 0) {
           //   return
           // }
+          if (data[data.length - 1]) {
+            return
+          }
           this.timestamp = new Date(data[data.length - 1].createTime).getTime()
         })
     },

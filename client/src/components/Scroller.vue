@@ -191,12 +191,12 @@ export default {
         window.removeEventListener('scroll', this.scroll)
         this.$emit('pull:start')
       }
-      if (scrollHight - top < 500 && top - lastTop > 0 && this.media === 'm') {
+      if (scrollHight - top < 1000 && top - lastTop > 0 && this.media === 'm') {
         window.removeEventListener('scroll', this.scroll)
         console.log(2)
         this.$emit('pull:start')
       }
-      if (scrollHight - top < 200 && top - lastTop > 0 && this.media === 's') {
+      if (scrollHight - top < 1000 && top - lastTop > 0 && this.media === 's') {
         window.removeEventListener('scroll', this.scroll)
         console.log(3)
         this.$emit('pull:start')
