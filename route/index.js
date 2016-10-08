@@ -52,7 +52,7 @@ router.use(function* (next) {
   if (this.request.method === 'POST' || this.request.method === 'PUT') {
     yield auth(this);
   }
-  if (this.status !== 200) {
+  if (this.status === 403) {
     this.body = '嘿嘿';
     return;
   }
