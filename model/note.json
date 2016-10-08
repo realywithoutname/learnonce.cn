@@ -1,0 +1,14 @@
+{
+  "name": "note",
+  "plural": "notes",
+  "prototype": {
+    "content": "String",
+    "title": "String",
+    "description": "String",
+    "tags": "String",
+    "createTime": {
+      "type": "Date",
+      "default": 0
+    }
+  }
+}

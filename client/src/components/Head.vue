@@ -20,7 +20,7 @@
       </a>
     </div>
     <div v-show="!search" class="right m-right-1 l-right-1">
-      <a v-show="$root.noteCtrl" class="wave-effect" v-link="{path: '/note/create'}">
+      <a v-show="$root.noteCtrl && $root.level" class="wave-effect" v-link="{path: '/note/create'}">
         <i class="material-icons">border_color</i>
       </a>
       <!-- <a class="wave-effect" @click="$root.filterCtrl = true">

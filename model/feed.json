@@ -1,0 +1,13 @@
+{
+  "name": "feed",
+  "plural": "feeds",
+  "prototype": {
+    "name": "String",
+    "description": "String",
+    "url": "String",
+    "lastBuildTime": "Date",
+    "version": "String",
+    "parseFun": "String",
+    "icon": "String"
+  }
+}

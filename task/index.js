@@ -5,7 +5,6 @@ let co = require('co');
 let BaseService = require('./../service/base');
 let {parseZhiHu, parseSongshuhui, parseNanfang, parseEngadget, parse36kr, parseWeiguanchang, parseWeibo} = require('./../util');
 let {Feed, News} = require('./../model');
-
 Feed = new BaseService(Feed);
 News = new BaseService(News);
 
@@ -64,11 +63,9 @@ rss.save = function* (news, feed) {
         continue
       }
       newsItem.from = news.from;
-      let imgs = newsItem.content.match(/img src="(.*?)"/);
       newsItem.description = newsItem.description;
       newsItem.content = newsItem.content.replace(/<img.+?src=\"/g, '<img src="/img?source-url=');
       newsItem.content = newsItem.content.replace(/\<script.+?\<\/script\>|\<style.+?\<\/style\>/g, ' ');
-      // newsItem.image = newsItem.image || (imgs === null ? undefined : '/img?source-url=' + imgs[1]);
       newsItem.createTime = new Date();
       newsItem.feedId = feed._id
     }
@@ -106,7 +103,7 @@ const start = function* () {
 module.exports = function () {
   let i = 1;
   co(start()).catch((e) => {
-    console.log('co error: start task %s', e)
+    console.log('co error: start task:', e)
   });;
   setInterval(() => {
     co(start()).catch((e) => {

@@ -14,7 +14,11 @@ app.use(bodyParser());
 app.use(static({rootDir: 'dist'}));
 app.use(router.routes());
 app.on('error', function (err, ctx) {
-  console.log("server err: %s", err)
+  if (process.env.NODE_ENV === 'production') {
+    console.log("server err: %s", err);
+  } else {
+    console.log(err);
+  }
 });
 app.listen(3000)
 console.info('server listen on %s', 3000)

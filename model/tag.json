@@ -1,0 +1,9 @@
+{
+  "name": "tag",
+  "plural": "tags",
+  "prototype": {
+    "name": "String",
+    "notes": "Array",
+    "count": "String"
+  }
+}

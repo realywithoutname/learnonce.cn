@@ -1,12 +1,9 @@
-let FeedServive = new require('./../service').Feed;
+let FeedServive = require('./../service').Feed;
+let BaseCtrl = require('./base');
 let Feed = new FeedServive();
-
-class FeedCtrl {
-  * find (ctx) {
-    ctx.body = yield Feed.find(ctx.query.filter || {});
-  }
-  * findById (ctx) {
-    ctx.body = yield Feed.findById(ctx.params.id, {});
+class FeedCtrl extends BaseCtrl {
+  constructor () {
+    super(FeedServive);
   }
 }
 module.exports = FeedCtrl;

@@ -17,7 +17,8 @@ export default {
   data: function () {
     return {
       columns: [[], [], []],
-      media: undefined
+      media: undefined,
+      rePull: false
     }
   },
   /**
@@ -187,19 +188,8 @@ export default {
       let top = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop
       let scrollHight = document.documentElement.scrollHeight || document.body.scrollHeight
       // 拉取新数据
-      if (scrollHight - top < 1000 && top - lastTop > 0 && this.media === 'l') {
-        window.removeEventListener('scroll', this.scroll)
-        this.$emit('pull:start')
-      }
-      if (scrollHight - top < 1000 && top - lastTop > 0 && this.media === 'm') {
-        window.removeEventListener('scroll', this.scroll)
-        console.log(2)
-        this.$emit('pull:start')
-      }
-      if (scrollHight - top < 1000 && top - lastTop > 0 && this.media === 's') {
-        window.removeEventListener('scroll', this.scroll)
-        console.log(3)
-        this.$emit('pull:start')
+      if (scrollHight - top < 1000 && top - lastTop > 0) {
+        this.pull()
       }
       // 判断滚动方向
       if (top - lastTop > 0) {
@@ -209,12 +199,21 @@ export default {
       }
       lastTop = top
     },
+    pull () {
+      window.removeEventListener('scroll', this.scroll)
+      if (!this.rePull) {
+        this.rePull = true
+        this.$emit('pull:start')
+      }
+    },
     toTop () {
       document.documentElement.scrollTop = 0
       document.body.scrollTop = 0
       window.pageYOffset = 0
       lastTop = 0
       this.$dispatch('scroll:top', 0)
+      this.columns = [[], [], []]
+      this.$emit('pull:start')
     },
     resize () {
       let ww = window.innerWidth
@@ -234,7 +233,11 @@ export default {
   events: {
     'data:push' (data) {
       this.loadView(data)
+      this.rePull = false
       this.scrollListener()
+    },
+    'data:empty' () {
+      this.columns = [[], [], []]
     }
   },
   watch: {

@@ -86,7 +86,7 @@ const parseEngadget = function* (xml) {
     content.push({
       title: t,
       description: html2text(desc),
-      content: '',
+      content: desc,
       link: l,
       pubTime: d ? new Date(d) : new Date()
     });
@@ -107,7 +107,7 @@ const parse36kr = function* (xml) {
     content.push({
       title: t,
       description: html2text(desc),
-      content: '',
+      content: desc,
       link: l,
       pubTime: d ? new Date(d) : new Date()
     });

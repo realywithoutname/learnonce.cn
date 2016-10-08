@@ -8,11 +8,8 @@
       <a class="right" @click="closeSideNav">
         <i class="material-icons">close</i>
       </a>
-      <a v-show="$root.noting" class="right blue-5">
-        <i class="material-icons">border_color</i>
-      </a>
     </header>
-    <section class="xs-8 body">
+    <section id="sideNavBody" class="xs-8 body">
       <slot></slot>
     </section>
   </div>
@@ -44,6 +41,7 @@ export default {
   methods: {
     closeSideNav () {
       this.show = false
+      document.getElementById('sideNavBody').scrollTop = 0
       this.$root.noting = false
     }
   },

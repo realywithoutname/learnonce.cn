@@ -1,9 +1,9 @@
+let BaseCtrl = require('./base');
 let TagService = require('../service/tag');
-let Tag = new TagService();
 
-class TagCtrl {
-  * find (ctx) {
-    ctx.body = yield Tag.find(ctx.query.filter || {limit: 1000})
+class TagCtrl extends BaseCtrl {
+  constructor () {
+    super(TagService);
   }
 }
 module.exports = TagCtrl;

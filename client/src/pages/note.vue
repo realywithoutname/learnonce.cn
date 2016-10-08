@@ -19,7 +19,7 @@
       <div class="col xs-8 m-6 l-6 m-left-1 l-left-3">
         <ul class="collections  zindex-2">
           <li v-for="note in notes" class="collection divider">
-            <a v-link="{path: '/note/' + note._id}" target="_blank">
+            <a v-link="{path: '/note/' + note._id}">
               <div class="content">
                 <span class="title">{{note.title}}</span>
                 <p>

@@ -1,9 +1,13 @@
 <template lang="html">
   <div class="col xs-8" style="position:relative">
-    <div v-show="!isPreview" v-html="content" :class="{
+    <div v-show="!isPreview && content" :class="{
       'm-4 l-4 m-left-2 l-left-4': !$root.noting,
       'm-4 l-4 l-left-1': $root.noting
       }" class="content col xs-8 s-6 s-left-1 detail-container zindex-2">
+      <div class="xs-8" v-html="content"></div>
+      <div class="right padding">
+        <a :href="link" target="_blank">阅读原文</a>
+      </div>
     </div>
     <div v-show="isPreview" class="content col xs-8 s-6 s-left-1 m-4 l-4 l-left-1 detail-container zindex-2">
       <h2 class="note-title" v-html="note.title || '标题为空'"></h2>
@@ -14,6 +18,7 @@
       <form class="dark">
         <div class="note-action zindex-2">
           <a @click="upload">
+            <input type="file" name="name" value="">
             <i class="material-icons">photo_size_select_actual</i>
           </a>
           <!-- 小屏幕以上预览不关闭编辑器 -->
@@ -52,8 +57,8 @@
         </div>
       </form>
     </div>
-    <button  v-show="!$root.noting" @click="$root.noting = true" type="button" name="button" class="wave-effect note float-btn pink-l-4">
-      <i v-show="!$root.noting" class="material-icons">border_color</i>
+    <button  v-show="!$root.noting && $root.level" @click="$root.noting = true" class="wave-effect note float-btn pink-l-4">
+      <i class="material-icons">border_color</i>
     </button>
   </div>
 </template>
@@ -79,7 +84,7 @@ export default {
       isPreview: false
     }
   },
-  props: ['content', 'editorNote'],
+  props: ['content', 'editorNote', 'link'],
   computed: {},
   ready: function () {
     if (this.editorNote) {
@@ -106,7 +111,6 @@ export default {
       }
     },
     create () {
-      console.log(this.note)
       this
         .Note
         .create(this.note)
@@ -166,7 +170,9 @@ export default {
   position: absolute;
   bottom: 0;
   top: 10rem;
-  width: calc(100% - 2rem);
+  margin: 0.5rem;
+  width: calc(100% - 3rem);
+  box-sizing: border-box;
 }
 .note-content-editor textarea {
   position: absolute;
@@ -187,6 +193,7 @@ export default {
   line-height: 3rem;
   padding: 0.5rem 1rem;
   box-sizing: border-box;
+  position: relative;
 }
 .note-action a i {
   color: #fff;

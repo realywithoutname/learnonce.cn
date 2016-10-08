@@ -1,9 +1,13 @@
+let BaseCtrl = require('./base');
 let NoteService = require('../service/note');
 let Note = new NoteService();
 let TagService = require('../service/tag');
 let Tag = new TagService();
 
-class NoteCtrl {
+class NoteCtrl extends BaseCtrl {
+  constructor () {
+    super(NoteService);
+  }
   * create (ctx) {
     let data = yield Note.create(ctx.request.body);
     data = data[0]
@@ -19,15 +23,6 @@ class NoteCtrl {
       }
     }
     ctx.body = data
-  }
-  * find (ctx) {
-    ctx.body = yield Note.find(ctx.query.filter || {})
-  }
-  * findById (ctx) {
-    ctx.body = yield Note.findById(ctx.params.id, ctx.query.filter || {})
-  }
-  * updateById (ctx) {
-    ctx.body = yield Note.updateById(ctx.params.id, ctx.request.body)
   }
 }
 module.exports = NoteCtrl;

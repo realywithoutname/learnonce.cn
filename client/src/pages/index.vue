@@ -1,11 +1,14 @@
 <template>
-  <div class="home">
+  <div class="home" @click="showSth">
     <div class="content">
       <h1>A·O</h1>
       <p>衡量价值的标准不是值不值钱,而是值不值得</p>
       <a v-link="{path: '/news'}">新闻</a>
       <a v-link="{path: '/note'}">笔记</a>
     </div>
+    <footer>
+      <span v-show="keyShow">{{$root.key}}</span>
+    </footer>
   </div>
 </template>
 
@@ -16,11 +19,31 @@ export default {
 
   data () {
     return {
-
+      keyShow: false,
+      clickTime: new Date().getTime(),
+      times: 1
     }
   },
   ready () {
     this.$root.needHead = false
+  },
+  methods: {
+    showSth () {
+      let time = new Date().getTime()
+
+      if (time - this.clickTime > 900) {
+        this.times = 1
+      } else {
+        this.times === 3 ? this.times = 1 : this.times ++
+      }
+      if (this.times === 1) {
+        this.clickTime = new Date().getTime()
+      }
+      if (this.times === 3 && time - this.clickTime < 500) {
+        this.times = 1
+        this.keyShow = !this.keyShow
+      }
+    }
   },
   beforeDestroy () {
     this.$root.needHead = true
@@ -57,5 +80,14 @@ export default {
     font-size: 5rem;
     padding: 0;
     margin: 1rem;
+  }
+  footer {
+    color: #fff;
+    position: absolute;
+    width: 100%;
+    bottom: 2rem;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: bold;
   }
 </style>

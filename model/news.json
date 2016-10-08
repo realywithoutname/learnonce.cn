@@ -1,0 +1,16 @@
+{
+  "name": "news",
+  "plural": "news",
+  "prototype": {
+    "title": "String",
+    "description": "String",
+    "link": "String",
+    "createTime": "Date",
+    "pubTime": "Date",
+    "from": "String",
+    "image": "String",
+    "content": "String",
+    "feedId": "Object",
+    "star": "Boolean"
+  }
+}

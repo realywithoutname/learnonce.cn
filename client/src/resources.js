@@ -8,6 +8,10 @@ API.News = {
   findById: {
     method: 'GET',
     url: '/api/news{/id}'
+  },
+  updateById: {
+    method: 'PUT',
+    url: '/api/news{/id}'
   }
 }
 API.Note = {

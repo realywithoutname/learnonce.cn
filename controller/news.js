@@ -1,12 +1,26 @@
-let NewsServive = new require('./../service').News;
-let News = new NewsServive();
-
-class NewsCtrl {
-  * find (ctx) {
-    ctx.body = yield News.find(ctx.query.filter || {});
+let NewsServive = require('./../service').News;
+let BaseCtrl = require('./base');
+const mongoose = require('mongoose')
+class NewsCtrl extends BaseCtrl {
+  constructor () {
+    super(NewsServive);
   }
-  * findById (ctx) {
-    ctx.body = yield News.findById(ctx.params.id, {});
+  * beforeFind (ctx, next) {
+    let filter = ctx.request.query.filter
+
+    if (filter.where && filter.where.feedId) {
+      filter.where.feedId = mongoose.Types.ObjectId(filter.where.feedId)
+    }
+    yield next
+  }
+  * afterFind (ctx, next) {
+    ctx.body.forEach((news) => {
+      news.content = this._getFirstTagP(news.content)
+    })
+  }
+  _getFirstTagP (data) {
+    let p = data.match(/.*?<\/p>/);
+    return p === null ? data : p[0];
   }
 }
 module.exports = NewsCtrl;
