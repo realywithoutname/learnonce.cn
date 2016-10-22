@@ -34,15 +34,8 @@
                 <header>
                   <a href="javascript:void(0)" @click.stop="readMore(item)" v-html="item.title" class="card-title"></a>
                 </header>
-                <!-- <div  v-if="item.image" class="card-image">
-                  <img @error="imgError($event)" :src="item.image">
-                </div> -->
                 <div class="content">
                   <p v-html="item.content"></p>
-                  <!-- <p class="chip">
-                    <img alt="" />
-                    <span class="title" v-html="item.from"></span>
-                  </p> -->
                 </div>
                 <footer class="card-footer">
                   <span class="title" v-html="item.from"></span>
@@ -60,7 +53,15 @@
     <side-nav class="col xs-8 s-4 l-3" :title="sideNavTitle" :show.sync="sideNavShow">
     </side-nav>
     <side-nav class="col xs-8" :title="curNews.title" :show.sync="detailShow">
-      <note :link="curNews.link" :content="curNews.content"></note>
+      <note :defined-content="true">
+        <div slot="content">
+          <div class="xs-8" v-html="curNews.content"></div>
+          <div class="right padding">
+            <a :href="curNews.link" target="_blank">阅读原文</a>
+            <a v-link="{path: '/news/' + curNews._id}" target="_blank">本文地址</a>
+          </div>
+        </div>
+      </note>
     </side-nav>
   </div>
 </template>
@@ -187,7 +188,7 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
   .card .content {
     max-height: 400px;
     overflow: hidden;
@@ -195,9 +196,5 @@ export default {
   .card .content-full {
     max-height: initial;
     overflow: auto;
-  }
-  .card .content img {
-    max-width: 100% !important;
-    height: auto;
   }
 </style>

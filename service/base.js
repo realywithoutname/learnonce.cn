@@ -4,7 +4,7 @@ class Base {
   constructor (model) {
     this.model = model;
   }
-  find ({where = {}, fields = [], limit = 20, offset = 0, sort = {}}) {
+  * find ({where = {}, fields = [], limit = 20, offset = 0, sort = {}}) {
     let query = this.model.find(where);
     query.limit(limit);
     query.skip(offset);
@@ -12,24 +12,24 @@ class Base {
     query.select(fields.join(' '));
     return query;
   }
-  findOne ({where = {}, fields = []}) {
+  * findOne ({where = {}, fields = []}) {
     let query = this.model.find(where);
     query.select(fields.join(''));
     query.limit(1);
     return query;
   }
-  findById (id, {fields = []}) {
+  * findById (id, {fields = []}) {
     let query = this.model.findById(id);
     query.select(fields.join(''));
     return query;
   }
-  updateById (id, data) {
+  * updateById (id, data) {
     return this.model.findByIdAndUpdate(id, data);
   }
-  insertMany (array) {
+  * insertMany (array) {
     return this.model.insertMany(array);
   }
-  create (instance) {
+  * create (instance) {
     return this.model.insertMany([instance])
   }
 }

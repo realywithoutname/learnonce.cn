@@ -1,13 +1,15 @@
 <template lang="html">
   <div class="col xs-8" style="position:relative">
-    <div v-show="!isPreview && content" :class="{
+    <div v-show="!isPreview && (content || definedContent)" :class="{
       'm-4 l-4 m-left-2 l-left-4': !$root.noting,
       'm-4 l-4 l-left-1': $root.noting
       }" class="content col xs-8 s-6 s-left-1 detail-container zindex-2">
-      <div class="xs-8" v-html="content"></div>
-      <div class="right padding">
-        <a :href="link" target="_blank">阅读原文</a>
-      </div>
+      <slot name="content">
+        <div class="xs-8" v-html="content"></div>
+        <div class="right padding">
+          <a :href="link" target="_blank">阅读原文</a>
+        </div>
+      </slot>
     </div>
     <div v-show="isPreview" class="content col xs-8 s-6 s-left-1 m-4 l-4 l-left-1 detail-container zindex-2">
       <h2 class="note-title" v-html="note.title || '标题为空'"></h2>
@@ -34,7 +36,7 @@
             <i class="material-icons">save</i>
           </a>
           <!-- 来自笔记页面时不能关闭编辑器 -->
-          <a v-show="content" @click="closeEditor" class="right">
+          <a v-show="content || definedContent" @click="closeEditor" class="right">
             <i class="material-icons">clear</i>
           </a>
         </div>
@@ -84,7 +86,7 @@ export default {
       isPreview: false
     }
   },
-  props: ['content', 'editorNote', 'link'],
+  props: ['content', 'editorNote', 'link', 'definedContent'],
   computed: {},
   ready: function () {
     if (this.editorNote) {

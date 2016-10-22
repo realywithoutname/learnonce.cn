@@ -7,6 +7,10 @@ let config = [{
   route: '/news',
   component: 'news'
 }, {
+  name: 'news detail',
+  route: '/news/:id',
+  component: 'news-detail'
+}, {
   name: 'notes',
   route: '/note',
   component: 'note'

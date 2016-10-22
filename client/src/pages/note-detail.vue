@@ -14,8 +14,7 @@
 
           </div>
         </div>
-        <footer class="card-action">
-          <button type="button" name="button">复制地址</button>
+        <footer v-show="$root.level" class="card-action">
           <button @click="editorNote" type="button" name="button">编辑文章</button>
         </footer>
       </section>
