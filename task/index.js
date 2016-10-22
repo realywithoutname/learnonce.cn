@@ -95,9 +95,7 @@ const loadFeeds = function* () {
 const start = function* () {
   let feeds = yield loadFeeds();
   for (let feed of feeds) {
-    co(rss[feed.parseFun](feed)).catch((e) => {
-      console.log("co error: %s", e, feed)
-    });
+    yield rss[feed.parseFun](feed);
   }
 }
 module.exports = function () {

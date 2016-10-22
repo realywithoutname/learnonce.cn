@@ -5,23 +5,13 @@ class Base {
     this.model = model;
   }
   * find ({where = {}, fields = [], limit = 20, offset = 0, sort = {}}) {
-    let query = this.model.find(where);
-    query.limit(limit);
-    query.skip(offset);
-    query.sort(sort);
-    query.select(fields.join(' '));
-    return query;
+    return this.model.find(where).limit(limit).skip(offset).sort(sort).select(fields.join(' '));
   }
   * findOne ({where = {}, fields = []}) {
-    let query = this.model.find(where);
-    query.select(fields.join(''));
-    query.limit(1);
-    return query;
+    return this.model.find(where).select(fields.join('')).limit(1);
   }
   * findById (id, {fields = []}) {
-    let query = this.model.findById(id);
-    query.select(fields.join(''));
-    return query;
+    return this.model.findById(id).select(fields.join(''));
   }
   * updateById (id, data) {
     return this.model.findByIdAndUpdate(id, data);

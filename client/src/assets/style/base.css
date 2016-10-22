@@ -844,6 +844,7 @@ input.invalid, textarea.invalid {
   }
   .card .content * {
     max-width: 100%;
+    height: auto;
   }
   .card footer {
     border-top: solid 1px #eee;
