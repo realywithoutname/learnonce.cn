@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
-
+import {plug} from 'assets/script/vue-wheel'
 import vHeader from 'components/Head'
 import route from './route'
 import './assets/style/base.css'
@@ -12,45 +12,22 @@ import resources from './resources'
 let fingerprint = new Fingerprint({canvas: true}).get()
 Vue.use(VueRouter)
 Vue.use(VueResource)
+Vue.use(plug)
 Vue.use(resources)
-Vue.use({
-  install (vue) {
-    vue.prototype.html2text = function (string) {
-      return string.replace(/<\/?.+?>/g, '')
-    }
-    vue.filter('date', function formatTime (date, mode) {
-      date = new Date(date)
-      if (date.toString() === 'Invalid Date') {
-        return
-      }
-      let year = date.getFullYear()
-      let month = ('0' + (date.getMonth() + 1)).substr(-2)
-      let day = ('0' + date.getDate()).substr(-2)
-      let hour = ('0' + date.getHours()).substr(-2)
-      let minute = ('0' + date.getMinutes()).substr(-2)
-      let second = ('0' + date.getSeconds()).substr(-2)
-      return mode
-        .replace('yyyy', year)
-        .replace('YYYY', year)
-        .replace('MM', month)
-        .replace('DD', day)
-        .replace('dd', day)
-        .replace('hh', hour)
-        .replace('HH', hour)
-        .replace('mm', minute)
-        .replace('ss', second)
-    })
-  }
-})
 Vue.http.interceptors.push((req, next) => {
   if (req.params.filter) {
     req.params.filter = JSON.stringify(req.params.filter)
   }
-  if (req.method === 'post') {
+  if (req.method.toLowerCase() === 'post' || req.method.toLowerCase() === 'put') {
     let date = new Date().getTime()
     req.params.finger = (fingerprint + date).toString(32) + 'T' + date
   }
-  next()
+  next((res) => {
+    if (res.status < 200 || res.status >= 400) {
+      let v = new Vue({})
+      v.$toast('请求错误', 'top')
+    }
+  })
 })
 
 let app = Vue.extend({
@@ -76,9 +53,6 @@ let app = Vue.extend({
       this.$http.post('/api/auth', {})
         .then((res) => {
           this.level = Boolean(res.data)
-        })
-        .catch((err) => {
-          window.alert(err.status, fingerprint)
         })
     }
   }

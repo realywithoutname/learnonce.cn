@@ -141,7 +141,7 @@ export default {
     setStar (id) {
       this.News.updateById({id}, {star: true})
         .then(() => {
-
+          this.$toast('收藏成功', 'top')
         })
     },
     getFeedNews (id) {

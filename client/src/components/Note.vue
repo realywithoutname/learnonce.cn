@@ -117,7 +117,7 @@ export default {
         .Note
         .create(this.note)
         .then((res) => {
-          console.log(res)
+          this.$toast('保存成功')
         })
     },
     update () {
@@ -125,7 +125,7 @@ export default {
         .Note
         .updateById({id: this.note._id}, this.note)
         .then((res) => {
-          console.log(res)
+          this.$toast('更新成功')
         })
     },
     closeEditor () {
