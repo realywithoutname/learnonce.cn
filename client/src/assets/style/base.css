@@ -965,7 +965,6 @@ input.invalid, textarea.invalid {
   }
   .chips > .item {
     padding: 0.5rem;
-    height: 3.5rem;
     box-sizing: border-box;
     overflow: hidden;
   }
@@ -995,7 +994,9 @@ input.invalid, textarea.invalid {
   }
   .chips > .item .title {
     font-size: 1rem;
-    line-height: 1.25rem;
+    line-height: 1.5rem;
+  }
+  .chips > .item img + .title {
     display: inline-block;
     width: calc(100% - 5rem);
   }

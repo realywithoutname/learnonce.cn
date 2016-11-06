@@ -11,14 +11,14 @@
             <h3>我的</h3>
           </li>
           <li @click.stop="getStarNews" class="item divider">
-            <i class="material-icons chip-image red-5">favorite</i>
+            <!-- <i class="material-icons chip-image red-5">favorite</i> -->
             <span class="title">收藏</span>
           </li>
           <li>
             <h3>RSS 源</h3>
           </li>
           <li @click.stop="getFeedNews(feed._id)"  class="item" v-for="feed in feeds">
-              <img :src="feed.icon" alt="" />
+              <!-- <img :src="feed.icon" alt="" /> -->
               <span class="title">{{feed.name}}</span>
           </li>
         </ul>

@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="col xs-8" style="position:relative">
     <div v-show="!isPreview && (content || definedContent)" :class="{
-      'm-4 l-4 m-left-2 l-left-4': !$root.noting,
+      'm-6 l-6 m-left-1 l-left-3': !$root.noting,
       'm-4 l-4 l-left-1': $root.noting
       }" class="content col xs-8 s-6 s-left-1 detail-container zindex-2">
       <slot name="content">

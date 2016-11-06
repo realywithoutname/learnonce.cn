@@ -56,8 +56,9 @@ rss.weibo = function* (feed) {
 }
 rss.save = function* (news, feed) {
   try {
+    let cache = []
     for (let newsItem of news.content) {
-      let ret = yield News.findOne({where: {title: newsItem.title}, filds: 'id'})
+      let ret = yield News.findOne({where: {title: newsItem.title}, fields: ['id']})
       if (ret.length > 0) {
         delete newsItem
         continue
@@ -67,9 +68,10 @@ rss.save = function* (news, feed) {
       newsItem.content = newsItem.content.replace(/<img.+?src=\"/g, '<img src="/img?source-url=');
       newsItem.content = newsItem.content.replace(/\<script.+?\<\/script\>|\<style.+?\<\/style\>/g, ' ');
       newsItem.createTime = new Date();
-      newsItem.feedId = feed._id
+      newsItem.feedId = feed._id;
+      cache.push(newsItem);
     }
-    if (new Date(news.buildTime) > new Date(feed.lastBuildTime)) {
+    if (cache.length > 0) {
       if (feed.name) {
         yield Feed.updateById(feed.id, {
           lastBuildTime: news.buildTime
@@ -82,7 +84,7 @@ rss.save = function* (news, feed) {
           version: news.version
         });
       }
-      yield News.insertMany(news.content);
+      yield News.insertMany(cache);
     }
   } catch (err) {
     console.error(err)

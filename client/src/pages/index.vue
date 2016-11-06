@@ -1,7 +1,7 @@
 <template>
   <div class="home" @click="showSth">
     <div class="content">
-      <h1>A·O</h1>
+      <h1>so,so</h1>
       <p>衡量价值的标准不是值不值钱,而是值不值得</p>
       <a v-link="{path: '/news'}">新闻</a>
       <a v-link="{path: '/note'}">笔记</a>
@@ -54,23 +54,25 @@ export default {
 <style lang="css" scoped>
   .content {
     text-align: center;
-    font-family: cursive;
     position: relative;
     top: 50%;
     margin-top: -200px;
-    color: #fff;
+    color: #212121;
+  }
+  .content h1 {
+    font-family: cursive;
   }
   .home {
     position: fixed;
     width: 100%;
     height: 100%;
-    background: #212121;
+    background: #fff;
   }
   a {
     font-size: 14px;
     font-weight: 600px;
     display: inline-block;
-    color: #fff;
+    /*color: #fff;*/
     height: 3rem;
     line-height: 3rem;
     padding: 0.5rem;

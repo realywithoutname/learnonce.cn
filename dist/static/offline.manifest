@@ -1,28 +1,28 @@
 CACHE MANIFEST
-#v1.1.3
+#v1.1.4
 #
 #
 #
 #
 #    *          *                 *                      *                                      *
+#                  *
 #
-#
-#
+#                            *
 #
 #
 #
 CACHE:
-/static/js/app.286c6f94bbab3851d47f.js
+/static/js/app.ae0c834718a129c932d9.js
 /static/fonts/MaterialIcons-Regular.e79bfd8.eot
 /static/fonts/MaterialIcons-Regular.012cf6a.woff
 /static/fonts/MaterialIcons-Regular.570eb83.woff2
-/static/js/manifest.cb267953f8f247e26517.js
+/static/js/manifest.64ec1b6f5c5a9d004216.js
 /static/js/vendor.d4d374cace2dd2b52883.js
 /static/fonts/MaterialIcons-Regular.a37b0c0.ttf
-/static/css/app.132409c9250207a55fcbc2dee0fbd3da.css
-/static/js/manifest.cb267953f8f247e26517.js.map
+/static/css/app.1d6d71310bbae7abda69dd3b20adf7bc.css
+/static/js/manifest.64ec1b6f5c5a9d004216.js.map
 /static/js/vendor.d4d374cace2dd2b52883.js.map
-/static/js/app.286c6f94bbab3851d47f.js.map
-/static/css/app.132409c9250207a55fcbc2dee0fbd3da.css.map
+/static/js/app.ae0c834718a129c932d9.js.map
+/static/css/app.1d6d71310bbae7abda69dd3b20adf7bc.css.map
 NETWORK:
 *

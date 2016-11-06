@@ -3,7 +3,7 @@
   "plural": "tags",
   "prototype": {
     "name": "String",
-    "notes": "Array",
+    "notes": "array",
     "count": "String"
   }
 }
