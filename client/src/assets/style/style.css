@@ -1,14 +1,19 @@
+body {
+  background: linear-gradient(to bottom, rgb(198, 173, 213), rgba(222, 112, 6, 0.2), rgb(201, 172, 220));
+}
 .side-bar {
   padding: 0 !important;
   position: fixed;
   overflow: hidden;
-  padding: 1rem 0;
   bottom: 0;
   top: 0;
   /*background: #fff;*/
 }
 .side-bar:hover {
   overflow: auto;
+}
+.side {
+  padding: 0 1rem;
 }
 @media screen and (min-width: 601px) {
   .side {

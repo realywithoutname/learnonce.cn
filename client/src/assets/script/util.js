@@ -59,3 +59,54 @@ window.unlock = (selector) => {
   let el = document.querySelector(selector)
   el.style.overflow = 'auto'
 }
+window.launchFullscreen = (element) => {
+  element = element || document.body
+  let rfs = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen
+  let wscript
+
+  if (typeof rfs !== 'undefined' && rfs) {
+    rfs.call(element)
+    return
+  }
+  if (typeof window.ActiveXObject !== 'undefined') {
+    wscript = new window.ActiveXObject('WScript.Shell')
+    if (wscript) {
+      wscript.SendKeys('{F11}')
+    }
+  }
+}
+window.exitFullscreen = (element) => {
+  element = element || document.documentElement
+  let cfs = element.cancelFullScreen || element.webkitCancelFullScreen || element.mozCancelFullScreen || element.exitFullScreen
+  let wscript
+  if (typeof cfs !== 'undefined' && cfs) {
+    cfs.call(document)
+    return
+  }
+  if (typeof window.window.ActiveXObject !== 'undefined') {
+    wscript = new window.ActiveXObject('WScript.Shell')
+    if (wscript !== null) {
+      wscript.SendKeys('{F11}')
+    }
+  }
+}
+window.throttle = (fn) => {
+  let firstTime = true
+  let timer = null
+  return () => {
+    let args = arguments
+    if (firstTime) {
+      fn.apply(this, args)
+      firstTime = false
+      return false
+    }
+    if (timer) {
+      return false
+    }
+    timer = setTimeout(() => {
+      clearTimeout(timer)
+      timer = null
+      fn.apply(this, args)
+    }, 500)
+  }
+}

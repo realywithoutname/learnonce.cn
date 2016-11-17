@@ -1,6 +1,5 @@
 <template lang="html">
   <div class="container">
-    <div slot="header" class="nav-bar-equal"></div>
     <note :editor-note="note" v-ref:note>
     </note>
   </div>
@@ -10,7 +9,7 @@
 import marked from 'marked'
 import hljs from 'highlight.js'
 import note from 'components/Note'
-import './../assets/style/github.min.css'
+import './../assets/style/markdown.css'
 marked.setOptions({
   highlight: function (code, lang) {
     return hljs.highlightAuto(code, [lang]).value

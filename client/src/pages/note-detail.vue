@@ -1,16 +1,15 @@
 <template>
   <div class="container">
     <div class="col xs-8 s-6 m-4 l-4 s-left-1 m-left-2 l-left-4">
-      <div class="nav-bar-equal margin-bottom"></div>
       <section class="card">
         <header>
           <h1 class="card-title">{{note.title}}</h1>
         </header>
-        <div class="content">
+        <div class="content wiki-body">
           <p>
             {{note.description}}
           </p>
-          <div class="" v-html="note.content || '' | marked">
+          <div class="markdown-body" v-html="note.content || '' | marked">
 
           </div>
         </div>
@@ -25,7 +24,7 @@
 <script>
 import marked from 'marked'
 import hljs from 'highlight.js'
-import './../assets/style/github.min.css'
+import './../assets/style/markdown.css'
 marked.setOptions({
   highlight: function (code, lang) {
     return hljs.highlightAuto(code, [lang]).value

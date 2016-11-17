@@ -42,7 +42,7 @@ export default {
   ready: function () {
     this.scrollListener()
     this.resize()
-    window.addEventListener('resize', this.resize)
+    window.addEventListener('resize', window.throttle(this.resize))
   },
   attached: function () {},
   methods: {
@@ -182,13 +182,14 @@ export default {
       this.columns = [...this.columns]
     },
     scrollListener () {
-      document.addEventListener('scroll', this.scroll)
+      document.addEventListener('scroll', window.throttle(this.scroll))
     },
     scroll () {
       let top = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop
       let scrollHight = document.documentElement.scrollHeight || document.body.scrollHeight
+      let winHight = window.innerHeight
       // 拉取新数据
-      if (scrollHight - top < 1000 && top - lastTop > 0) {
+      if (scrollHight - top - winHight < 500 && top - lastTop > 0) {
         this.pull()
       }
       // 判断滚动方向
@@ -200,8 +201,8 @@ export default {
       lastTop = top
     },
     pull () {
-      window.removeEventListener('scroll', this.scroll)
       if (!this.rePull) {
+        console.log(1, this.rePull)
         this.rePull = true
         this.$emit('pull:start')
       }
@@ -226,8 +227,10 @@ export default {
       }
     }
   },
-  beforDestroy () {
+  beforeDestroy () {
     window.removeEventListener('scroll', this.scroll)
+    lastTop = 0
+    this.rePull = false
   },
   components: {},
   events: {

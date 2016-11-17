@@ -20,7 +20,17 @@ class NewsCtrl extends BaseCtrl {
   }
   _getFirstTagP (data) {
     let p = data.match(/.*?<\/p>/);
-    return p === null ? data : p[0];
+    p = p === null ? data : p[0];
+    let str = this._getString(p)
+    return str;
+  }
+  _getString (str) {
+    let imgSrc = str.match(/<img.+src="(.+?)"/)
+    if (imgSrc !== null) {
+      imgSrc = imgSrc[1];
+    }
+    str = str.replace(/<[^>]+>/g,"").substr(0, 250);
+    return imgSrc === null ? str : '<img src="' + imgSrc + '"><br>' + str;
   }
 }
 module.exports = NewsCtrl;

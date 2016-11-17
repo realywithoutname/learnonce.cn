@@ -1,7 +1,6 @@
 <template lang="html">
   <div class="container">
     <div class="col xs-8 s-6 m-4 l-4 s-left-1 m-left-2 l-left-4">
-      <div class="nav-bar-equal margin-bottom"></div>
       <section class="card">
         <header>
           <h1 class="card-title">{{news.title}}</h1>

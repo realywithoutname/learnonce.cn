@@ -56,30 +56,30 @@ export default {
     text-align: center;
     position: relative;
     top: 50%;
-    margin-top: -200px;
-    color: #212121;
+    margin-top: -180px;
+    color: rgba(255, 255, 255, 0.25);
   }
   .content h1 {
     font-family: cursive;
+    color: #fff;
   }
   .home {
     position: fixed;
     width: 100%;
     height: 100%;
-    background: #fff;
+    background: linear-gradient(to bottom, rgb(198, 173, 213), rgba(222, 112, 6, 0.2), rgb(189, 105, 245));
   }
   a {
-    font-size: 14px;
     font-weight: 600px;
     display: inline-block;
-    /*color: #fff;*/
     height: 3rem;
     line-height: 3rem;
     padding: 0.5rem;
     font-size: 1.2rem;
+    color: #586666;
   }
   h1 {
-    font-size: 5rem;
+    font-size: 6rem;
     padding: 0;
     margin: 1rem;
   }

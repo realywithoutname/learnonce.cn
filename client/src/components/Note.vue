@@ -5,18 +5,18 @@
       'm-4 l-4 l-left-1': $root.noting
       }" class="content col xs-8 s-6 s-left-1 detail-container zindex-2">
       <slot name="content">
-        <div class="xs-8" v-html="content"></div>
+        <div class="col xs-8" v-html="content"></div>
         <div class="right padding">
-          <a :href="link" target="_blank">阅读原文</a>
+          <a :href="link" target="_blank">阅读原文2</a>
         </div>
       </slot>
     </div>
     <div v-show="isPreview" class="content col xs-8 s-6 s-left-1 m-4 l-4 l-left-1 detail-container zindex-2">
       <h2 class="note-title" v-html="note.title || '标题为空'"></h2>
       <p class="note-description" v-html="note.description || '描述为空'"></p>
-      <div class="note-content" v-html="note.content || '内容为空' | marked"></div>
+      <div class="note-content markdown-body" v-html="note.content || '内容为空' | marked"></div>
     </div>
-    <div v-show="$root.noting" class="note-container zindex-2 xs-8 m-3 l-6 l-left-1">
+    <div v-show="$root.noting" class="note-container xs-8 m-3 l-6 l-left-1">
       <form class="dark">
         <div class="note-action zindex-2">
           <a @click="upload">
@@ -51,11 +51,11 @@
           </div>
         </div>
         <div class="form-input xs-8">
-          <textarea id="description" rows="1" v-model="note.description"></textarea>
+          <textarea spellcheck="false" id="description" rows="1" v-model="note.description"></textarea>
           <label for="description" class="input-label">Description</label>
         </div>
         <div class="note-content-editor">
-          <textarea name="content" rows="3" placeholder="Let`s note something" v-model="note.content"></textarea>
+          <textarea spellcheck="false" name="content" rows="3" placeholder="Let`s note something" v-model="note.content"></textarea>
         </div>
       </form>
     </div>
@@ -68,7 +68,7 @@
 <script>
 import marked from 'marked'
 import hljs from 'highlight.js'
-import './../assets/style/github.min.css'
+import './../assets/style/markdown.css'
 marked.setOptions({
   highlight: function (code, lang) {
     return hljs.highlightAuto(code, [lang]).value
@@ -143,29 +143,31 @@ export default {
 </script>
 
 <style lang="css">
-.note-title {
-
+.detail-container {
+  /*background: #fff;*/
+  margin: 4rem 0;
 }
 .note-description {
   padding: 1rem;
-  background: #bdbdbd;
+  /*background: #bdbdbd;*/
 }
 .note-content {
   margin-top: 1rem;
 }
 .note-container {
   position: fixed;
-  top: 4rem;
+  top: 0;
   bottom: 0;
   right: 0;
-  background: #424242;
+  background: transparent;
   padding: 1rem;
   box-sizing: border-box;
   z-index: 4;
 }
-@media screen and (max-width: 1024px) {
+@media (max-width: 1024px) {
   .note-container {
-    top: 0;
+    background: linear-gradient(to bottom, rgb(198, 173, 213), rgb(226, 211, 197), rgb(201, 172, 220));
+    padding: 0.5rem;
   }
 }
 .note-content-editor {
@@ -181,7 +183,6 @@ export default {
   width: 100%;
   top: 0;
   bottom: 0;
-  font-family: "Roboto Regular";
 }
 .note-action {
   width: 100%;

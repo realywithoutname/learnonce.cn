@@ -1,5 +1,6 @@
 <template>
   <div class="content container">
+    <!-- <v-header></v-header> -->
     <side>
       <div slot="header" class="nav-bar-equal divider">
         <a href="#" class="brand  indigo-5">A·O</a>
@@ -26,7 +27,7 @@
     </side>
     <div class="col l-left-2 m-left-2 s-left-3 l-10 m-6 s-4 xs-8">
       <scroller :l-col="3" :m-col="2" :s-col="1" v-ref:scroller>
-        <div slot="header" class="nav-bar-equal"></div>
+        <!-- <div slot="header" class="nav-bar-equal"></div> -->
         <div slot="scroller-body">
           <div class=""  :class="'col l-4 m-4 s-8 xs-8 col-' + $index + '-List'" v-for="column in $refs.scroller.columns">
             <div class="col xs-8" v-for="item in column">
@@ -35,7 +36,8 @@
                   <a href="javascript:void(0)" @click.stop="readMore(item)" v-html="item.title" class="card-title"></a>
                 </header>
                 <div class="content">
-                  <p v-html="item.content"></p>
+                  <a v-link="{path: '/news/' + item._id}" target="_blank"><p v-html="item.content"></p>
+                </a>
                 </div>
                 <footer class="card-footer">
                   <span class="title" v-html="item.from"></span>
@@ -53,26 +55,25 @@
     <side-nav class="col xs-8 s-4 l-3" :title="sideNavTitle" :show.sync="sideNavShow">
     </side-nav>
     <side-nav class="col xs-8" :title="curNews.title" :show.sync="detailShow">
-      <note :defined-content="true">
-        <div slot="content">
-          <div class="xs-8" v-html="curNews.content"></div>
-          <div class="right padding">
-            <a :href="curNews.link" target="_blank">阅读原文</a>
-            <a v-link="{path: '/news/' + curNews._id}" target="_blank">本文地址</a>
-          </div>
+      <div class="news-detail col xs-8 s-6 m-4 l-4 s-left-1 m-left-2 l-left-4">
+        <div class="xs-8" v-html="curNews.content"></div>
+        <div class="right padding">
+          <a :href="curNews.link" target="_blank">阅读原文</a>
+          <a v-link="{path: '/news/' + curNews._id}" target="_blank">本文地址</a>
         </div>
-      </note>
+      </div>
     </side-nav>
   </div>
 </template>
 
 <script>
 import side from 'components/Side'
+import vHeader from 'components/Head'
 import note from 'components/Note'
 import sideNav from 'components/SideNav'
 import scroller from 'components/Scroller'
 export default {
-  components: {side, note, sideNav, scroller},
+  components: {side, note, sideNav, scroller, vHeader},
   data () {
     return {
       feeds: [],
@@ -189,12 +190,35 @@ export default {
 </script>
 
 <style lang="css" scoped>
+  .card {
+    box-shadow: 0 0 0.125rem 0.125rem rgba(153, 153, 153, 0.75);
+    background: transparent;
+  }
+  .card header, .card footer {
+    border: none;
+  }
   .card .content {
-    max-height: 400px;
+    max-height: 300px;
     overflow: hidden;
+  }
+  /*.card .content:hover {
+    overflow: auto;
+  }*/
+  .card .content img {
+    width: 100%;
   }
   .card .content-full {
     max-height: initial;
     overflow: auto;
+  }
+  .card-title {
+    color: #222;
+    font-weight: 600;
+  }
+  .card-title:hover {
+    color: #2793C7;
+  }
+  .news-detail {
+    margin-top: 1.5rem;
   }
 </style>
