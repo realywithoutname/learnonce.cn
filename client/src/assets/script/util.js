@@ -61,10 +61,6 @@ window.lock = (selector) => {
     el.addEventListener('touchstart', prevent)
     el.addEventListener('touchmove', prevent)
   }
-
-  // setTimeout(() => {
-  //   // el.style.webkitOverflowScrolling = 'touch'
-  // }, 100)
   el.addEventListener('scroll', (ev) => {
     if (el.scrollTop + window.innerHeight >= el.scrollHeight) {
       el.addEventListener('touchstart', prevent)

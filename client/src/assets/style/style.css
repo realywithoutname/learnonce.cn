@@ -6,6 +6,25 @@ body {
 body .home {
 
 }
+body.app .container {
+  margin-top: 20px;
+}
+body.app .container::before {
+  content: '';
+  height: 20px;
+  width: 100%;
+  top: 0;
+  background: rgba(61, 59, 74, 1);
+  display: block;
+  position: fixed;
+}
+/*.app {
+  height: 20px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  background: #fff;
+}*/
 body .home::before {
   position: absolute;
   content: '';
@@ -173,11 +192,15 @@ body .home::after {
 
 .menus .close {
   float: right;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
   margin-right: 0.5rem;
-  width: 3rem;
+  width: 4rem;
+  height: 2rem;
   text-align: right;
   cursor: default;
+}
+body.app .menus .close {
+  margin-top: 2rem;
 }
 @media (min-width: 601px) {
   .menus .close {
