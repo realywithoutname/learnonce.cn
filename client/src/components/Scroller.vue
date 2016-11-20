@@ -3,9 +3,6 @@
     <slot name="header"></slot>
     <slot name="scroller-body"></slot>
     <slot name="footer"></slot>
-    <button @click="toTop" type="button" name="button" class="wave-effect to-top float-btn pink-l-4">
-      <i class="material-icons">vertical_align_top</i>
-    </button>
   </div>
 </template>
 
@@ -36,6 +33,8 @@ export default {
     sCol: {
       type: Number,
       default: 1
+    },
+    isTop: {
     }
   },
   computed: {},
@@ -255,6 +254,12 @@ export default {
         case 'l':
           this.resetView2l(fromMedia)
           break
+      }
+    },
+    'isTop' (is) {
+      if (is) {
+        this.toTop()
+        this.isTop = false
       }
     }
   }

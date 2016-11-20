@@ -30,7 +30,7 @@ class NewsCtrl extends BaseCtrl {
       imgSrc = imgSrc[1];
     }
     str = str.replace(/<[^>]+>/g,"").substr(0, 250);
-    return imgSrc === null ? str : '<img src="' + imgSrc + '"><br>' + str;
+    return imgSrc === null ? str : '<img onerror="imgloadError()" src="' + imgSrc + '"><br>' + str;
   }
 }
 module.exports = NewsCtrl;

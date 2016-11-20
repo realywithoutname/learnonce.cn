@@ -65,7 +65,7 @@ rss.save = function* (news, feed) {
       }
       newsItem.from = news.from;
       newsItem.description = newsItem.description;
-      newsItem.content = newsItem.content.replace(/<img.+?src=\"/g, '<img src="/img?source-url=');
+      newsItem.content = newsItem.content.replace(/<img.+?src=\"/g, '<img onerror="imgloadError()" src=\"');
       newsItem.content = newsItem.content.replace(/\<script.+?\<\/script\>|\<style.+?\<\/style\>/g, ' ');
       newsItem.createTime = new Date();
       newsItem.feedId = feed._id;
@@ -97,7 +97,11 @@ const loadFeeds = function* () {
 const start = function* () {
   let feeds = yield loadFeeds();
   for (let feed of feeds) {
-    yield rss[feed.parseFun](feed);
+    try {
+      yield rss[feed.parseFun](feed);
+    } catch (e) {
+      console.log(feed.name, 'error: %s', e);
+    }
   }
 }
 module.exports = function () {

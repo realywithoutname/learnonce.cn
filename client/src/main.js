@@ -51,23 +51,27 @@ Vue.http.interceptors.push((req, next) => {
     }
   })
 })
-
+Vue.use((vue) => {
+  vue.prototype.toTop = () => {
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
+    window.scrollY = 0
+  }
+  vue.prototype.goback = () => {
+    window.history.go(-1)
+  }
+})
 let app = Vue.extend({
   data () {
     return {
-      filterCtrl: false, // 过滤控制按钮
-      menu: false,
-      sideCtrl: false, // 侧边抽屉显示按钮
-      noteCtrl: true, // 编辑按钮
-      noting: false, // 编辑状态
-      needHead: true, // header控制变量
-      keyword: '',  // 搜索关键字
+      isApp: false,
       level: false, // 用户权限
       key: fingerprint // 浏览器指纹
     }
   },
   ready () {
     this.auth()
+    this.isApp = window.navigator.standalone
   },
   methods: {
     auth () {

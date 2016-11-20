@@ -1,45 +1,25 @@
 <template lang="html">
-  <div class="col xs-8" style="position:relative">
-    <div v-show="!isPreview && (content || definedContent)" :class="{
-      'm-6 l-6 m-left-1 l-left-3': !$root.noting,
-      'm-4 l-4 l-left-1': $root.noting
-      }" class="content col xs-8 s-6 s-left-1 detail-container zindex-2">
-      <slot name="content">
-        <div class="col xs-8" v-html="content"></div>
-        <div class="right padding">
-          <a :href="link" target="_blank">阅读原文2</a>
-        </div>
-      </slot>
-    </div>
-    <div v-show="isPreview" class="content col xs-8 s-6 s-left-1 m-4 l-4 l-left-1 detail-container zindex-2">
-      <h2 class="note-title" v-html="note.title || '标题为空'"></h2>
-      <p class="note-description" v-html="note.description || '描述为空'"></p>
-      <div class="note-content markdown-body" v-html="note.content || '内容为空' | marked"></div>
-    </div>
-    <div v-show="$root.noting" class="note-container xs-8 m-3 l-6 l-left-1">
-      <form class="dark">
-        <div class="note-action zindex-2">
-          <a @click="upload">
-            <input type="file" name="name" value="">
-            <i class="material-icons">photo_size_select_actual</i>
-          </a>
-          <!-- 小屏幕以上预览不关闭编辑器 -->
-          <a class="hidden-med-down" @click="isPreview = !isPreview">
-            <i v-show="!isPreview" class="material-icons">visibility</i>
-            <i v-show="isPreview" class="material-icons">visibility_off</i>
-          </a>
-          <!-- 小屏幕预览时关闭编辑器 -->
-          <a class="hidden-small-up">
-            <i @click="closeEditor" class="material-icons">visibility</i>
-          </a>
-          <a @click="save" class="right">
-            <i class="material-icons">save</i>
-          </a>
-          <!-- 来自笔记页面时不能关闭编辑器 -->
-          <a v-show="content || definedContent" @click="closeEditor" class="right">
-            <i class="material-icons">clear</i>
-          </a>
-        </div>
+    <div v-show="noting" class="note-container">
+      <div class="note-action zindex-2">
+        <a @click="upload">
+          <input type="file" name="name" value="">
+          <i class="material-icons">photo_size_select_actual</i>
+        </a>
+        <a class="hidden-med-down" @click="isPreview = !isPreview">
+          <i v-show="!isPreview" class="material-icons">visibility</i>
+          <i v-show="isPreview" class="material-icons">visibility_off</i>
+        </a>
+        <a @click="save" class="right">
+          <i class="material-icons">save</i>
+        </a>
+        <a @click="closeEditor" class="hidden-small-up">
+          <i  class="material-icons">visibility</i>
+        </a>
+        <a @click="closeEditor" class="right hidden-small-down">
+          <i class="material-icons">close</i>
+        </a>
+      </div>
+      <div class="note-editor">
         <div class="row">
           <div class="form-input xs-5">
             <input type="text" id="title" v-model="note.title">
@@ -57,23 +37,11 @@
         <div class="note-content-editor">
           <textarea spellcheck="false" name="content" rows="3" placeholder="Let`s note something" v-model="note.content"></textarea>
         </div>
-      </form>
+      </div>
     </div>
-    <button  v-show="!$root.noting && $root.level" @click="$root.noting = true" class="wave-effect note float-btn pink-l-4">
-      <i class="material-icons">border_color</i>
-    </button>
-  </div>
 </template>
 
 <script>
-import marked from 'marked'
-import hljs from 'highlight.js'
-import './../assets/style/markdown.css'
-marked.setOptions({
-  highlight: function (code, lang) {
-    return hljs.highlightAuto(code, [lang]).value
-  }
-})
 export default {
   data: function () {
     return {
@@ -83,16 +51,12 @@ export default {
         content: '',
         tags: ''
       },
-      isPreview: false
+      isPreview: false,
+      noting: false
     }
   },
   props: ['content', 'editorNote', 'link', 'definedContent'],
   computed: {},
-  ready: function () {
-    if (this.editorNote) {
-      this.note = Object.assign(this.editorNote)
-    }
-  },
   watch: {
     'note.tags' (value) {
       if (!value) {
@@ -129,53 +93,58 @@ export default {
         })
     },
     closeEditor () {
-      this.$root.noting = false
-      if (!this.editorNote) {
-        this.isPreview = false
-      }
+      this.noting = false
+      this.isPreview = false
     }
-  },
-  filters: {
-    marked: marked
   },
   components: {}
 }
 </script>
 
 <style lang="css">
-.detail-container {
-  /*background: #fff;*/
-  margin: 4rem 0;
-}
-.note-description {
-  padding: 1rem;
-  /*background: #bdbdbd;*/
-}
-.note-content {
-  margin-top: 1rem;
-}
 .note-container {
   position: fixed;
   top: 0;
   bottom: 0;
   right: 0;
-  background: transparent;
-  padding: 1rem;
   box-sizing: border-box;
-  z-index: 4;
+  z-index: 13;
+  width: 100%;
 }
-@media (max-width: 1024px) {
-  .note-container {
-    background: linear-gradient(to bottom, rgb(198, 173, 213), rgb(226, 211, 197), rgb(201, 172, 220));
-    padding: 0.5rem;
-  }
+.note-action {
+  background: #3d3b4a;
+  margin: 0.5rem 1rem;
+  width: calc(100% - 2rem);
+  border-radius: 5px;
+  display: flex;
+  bottom: 0;
+  position: absolute;
+}
+.note-action a, .note-action a i {
+  flex: 1 1 auto;
+  text-align: center;
+  height: 3rem;
+  line-height: 3rem;
+  position: relative;
+  color: #fff;
+  font-size: 1.5rem;
+}
+.note-editor {
+  background: #3d3b4a;
+  margin: 0.5rem 1rem;
+  width: calc(100% - 2rem);
+  bottom: 4rem;
+  top: 0;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  position: absolute;
 }
 .note-content-editor {
   position: absolute;
-  bottom: 0;
-  top: 10rem;
-  margin: 0.5rem;
-  width: calc(100% - 3rem);
+  bottom: 0.5rem;
+  top: 7.5rem;
+  /*margin: 0.5rem ;*/
+  width: calc(100% - 1rem);
   box-sizing: border-box;
 }
 .note-content-editor textarea {
@@ -184,32 +153,5 @@ export default {
   top: 0;
   bottom: 0;
 }
-.note-action {
-  width: 100%;
-  padding: 0 1rem;
-  margin: -1rem;
-  margin-bottom: 0;
-}
-.note-action a {
-  display: inline-block;
-  height: 3rem;
-  line-height: 3rem;
-  padding: 0.5rem 1rem;
-  box-sizing: border-box;
-  position: relative;
-}
-.note-action a i {
-  color: #fff;
-  font-size: 1.5rem;
-}
-.note {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-}
-.note i {
-  font-size: 1.5rem;
-  width: 1.5rem;
-  height: 1.5rem;
-}
+
 </style>

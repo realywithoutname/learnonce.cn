@@ -1,23 +1,28 @@
 <template>
   <div class="container">
-    <v-header></v-header>
-    <side>
-      <div slot="header" class="nav-bar-equal">
-        <a href="#" class="brand  indigo-5">A·O</a>
-        <span class="hidden-small-and-up">if you know, please more</span>
-      </div>
-      <ul slot="body" class="collections par-bg divider">
-        <li>
+    <div class="menu-bar hidden-small-down top zindex-4 col l-2 m-2 s-2">
+      <a v-link="{path: '/'}"><i class="material-icons">home</i></a>
+      <a v-link="{path: '/note/create'}"><i class="material-icons">border_color</i></a>
+    </div>
+    <div class="menu-bar zindex-4 col l-2 m-2 s-2">
+      <a class="hidden-small-and-up"><i class="material-icons" @click="smallMenuShow = true">menu</i></a>
+      <a  class="hidden-small-and-up" v-link="{path: '/'}"><i class="material-icons">home</i></a>
+      <a  class="hidden-small-and-up" v-link="{path: '/note/create'}"><i class="material-icons">border_color</i></a>
+      <a><i class="material-icons" @click="toTop">vertical_align_top</i></a>
+    </div>
+    <div  :class="{'hidden-small-down': !smallMenuShow}" class="menus scrim col l-2 m-2 s-2">
+      <i class="material-icons close" @click="smallMenuShow = false">close</i>
+      <ul class="collections">
+        <li class="title">
           <h3>Tags</h3>
         </li>
         <li class="tag" v-for="tag in tags">
-          <span>{{tag.name}}{{tag.count}}</span>
+          <a>{{tag.name}}<b>{{tag.count}}</b></a>
         </li>
       </ul>
-    </side>
-    <div class="col l-left-2 m-left-2 s-left-3 l-10 m-6 s-4 xs-8">
-      <div class="nav-bar-equal margin-bottom"></div>
-      <div class="notes col xs-8 m-6 l-6 m-left-1 l-left-3">
+    </div>
+    <div class="col notes l-left-2 m-left-2 s-left-3 l-10 m-6 s-4 xs-8">
+      <div class="col xs-8 m-6 l-6 m-left-1 l-left-3">
         <ul class="collections  zindex-2">
           <li v-for="note in notes" class="collection divider">
             <a v-link="{path: '/note/' + note._id}">
@@ -29,6 +34,9 @@
             </a>
           </li>
         </ul>
+      </div>
+      <div v-show="!noData" @click="loadMore" class="xs-8 load-more">
+        <i class="material-icons">expand_more</i>
       </div>
     </div>
   </div>
@@ -57,7 +65,8 @@ export default {
       },
       notes: [],
       tags: [],
-      noData: false
+      noData: false,
+      smallMenuShow: false
     }
   },
   ready () {
@@ -104,6 +113,13 @@ export default {
       if (val) {
         this.$router.go('/notes/editor')
       }
+    },
+    smallMenuShow (isshow) {
+      if (isshow) {
+        window.lock('.menus ul')
+      } else {
+        window.unlock('.menus ul')
+      }
     }
   }
 }
@@ -111,7 +127,8 @@ export default {
 
 <style lang="css" scoped>
 .notes {
-  margin-bottom: 6rem;
+  margin-top: 0.5rem;
+  margin-bottom: 4.5rem;
 }
 .collection .content .title {
   color: #222;

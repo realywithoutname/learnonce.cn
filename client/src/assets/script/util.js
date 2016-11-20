@@ -51,13 +51,33 @@ let offset = (e) => {
   }
   return {x: x - sl, y: y - st}
 }
+const prevent = (e) => { e.preventDefault() }
+// const stop = (ev) => { ev.stopPropagation() }
+
 window.lock = (selector) => {
+  document.body.style.overflow = 'hidden'
   let el = document.querySelector(selector)
-  el.style.overflow = 'hidden'
+  if (el.offsetHeight === window.scrollHeight) {
+    el.addEventListener('touchstart', prevent)
+    el.addEventListener('touchmove', prevent)
+  }
+
+  // setTimeout(() => {
+  //   // el.style.webkitOverflowScrolling = 'touch'
+  // }, 100)
+  el.addEventListener('scroll', (ev) => {
+    if (el.scrollTop + window.innerHeight >= el.scrollHeight) {
+      el.addEventListener('touchstart', prevent)
+      el.addEventListener('touchmove', prevent)
+    }
+  })
 }
+
 window.unlock = (selector) => {
+  document.body.style.overflow = 'auto'
   let el = document.querySelector(selector)
-  el.style.overflow = 'auto'
+  el.removeEventListener('touchstart', prevent)
+  el.removeEventListener('touchmove', prevent)
 }
 window.launchFullscreen = (element) => {
   element = element || document.body
@@ -108,5 +128,23 @@ window.throttle = (fn) => {
       timer = null
       fn.apply(this, args)
     }, 500)
+  }
+}
+window.imgloadError = (e) => {
+  e = e || window.event
+  e.target.style.display = 'none'
+  var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new window.ActiveXObject('Microsoft.XMLHTTP')
+  xmlhttp.responseType = 'blob'
+  xmlhttp.open('GET', '/img?source-url=' + e.target.src, true)
+  xmlhttp.send()
+  xmlhttp.onload = function () {
+    var objectURL = window.URL.createObjectURL(this.response)
+    e.target.src = objectURL
+    e.target.height = 60
+    e.target.onerror = null
+    e.target.onload = function () {
+      window.URL.revokeObjectURL(this.src)
+      e.target.style.display = 'initial'
+    }
   }
 }
