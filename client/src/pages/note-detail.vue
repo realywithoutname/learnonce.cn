@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <div :class="{top: $refs.note.noting}" class="menu-bar zindex-4  xs-8 s-6 m-4 l-6 xl-4">
+    <div :class="{top: $refs.note.noting, noting: $refs.note.noting}" class="menu-bar zindex-4  xs-8 s-6 m-4 l-6 xl-4">
       <a v-link="{path: '/note'}"><i class="material-icons" @click="smallMenuShow = true">view_list</i></a>
       <a v-link="{path: '/'}"><i class="material-icons">home</i></a>
-      <a @click="editor" v-show="!$refs.note.noting" class="hidden-med-down"><i class="material-icons">border_color</i></a>
+      <a @click="editor" v-show="!$refs.note.noting"><i class="material-icons">border_color</i></a>
       <a><i class="material-icons" @click="toTop">vertical_align_top</i></a>
     </div>
     <div class="col note xs-8 s-6 m-4 l-6 xl-4" :class="{'s-left-1 m-left-2 l-left-3 xl-left-4': !$refs.note.noting, noting: $refs.note.noting}">
@@ -19,7 +19,7 @@
         </div>
       </section>
     </div>
-    <note class="hidden-med-down xs-8 s-5 m-4 l-6" v-ref:note></note>
+    <note class="xs-8 s-5 m-4 l-6" v-ref:note></note>
   </div>
 </template>
 
@@ -95,6 +95,12 @@ export default {
     transform: none;
     left: auto;
     margin-left: 0.5rem;
+  }
+  .noting {
+    display: none;
+  }
+  .note.noting {
+    margin-left: 0;
   }
 }
 </style>

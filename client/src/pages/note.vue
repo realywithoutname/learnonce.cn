@@ -35,7 +35,7 @@
           </li>
         </ul>
       </div>
-      <div v-show="!noData" @click="loadMore" class="xs-8 load-more">
+      <div v-show="!noData" @click="loadMore" class="col xs-8 load-more">
         <i class="material-icons">expand_more</i>
       </div>
     </div>

@@ -1,29 +1,29 @@
 CACHE MANIFEST
-#v1.2.1
+#v1.2.3
 #
-#
+#    *                   *                                                      *
 #
 #
 #    *          *                 *                      *                                      *
 #
+#        *                                   *
+#
+#    *                                                   *                      
 #
 #
-#
-#
-#
+#                                                                               *
 CACHE:
-static/js/app.7e4d325bf5914b2a658e.js
-static/fonts/MaterialIcons-Regular.e79bfd8.eot
-static/fonts/MaterialIcons-Regular.012cf6a.woff
-static/fonts/MaterialIcons-Regular.570eb83.woff2
-static/js/manifest.ff3644a6768cf968adef.js
-static/js/vendor.8691442f6a25cb9ce557.js
-static/fonts/MaterialIcons-Regular.a37b0c0.ttf
-static/css/app.58fe30ab95f929fe5a6269108a7323bd.css
-static/js/manifest.ff3644a6768cf968adef.js.map
-static/js/vendor.8691442f6a25cb9ce557.js.map
-static/js/app.7e4d325bf5914b2a658e.js.map
-static/css/app.58fe30ab95f929fe5a6269108a7323bd.css.map
-
+/static/js/app.c7433a360f5a22b5d855.js
+/static/fonts/MaterialIcons-Regular.e79bfd8.eot
+/static/fonts/MaterialIcons-Regular.012cf6a.woff
+/static/fonts/MaterialIcons-Regular.570eb83.woff2
+/static/js/manifest.a5f1a387afde92703b2e.js
+/static/js/vendor.8691442f6a25cb9ce557.js
+/static/fonts/MaterialIcons-Regular.a37b0c0.ttf
+/static/css/app.9455b0c5e7455d5371e5e7f7b069cd5b.css
+/static/js/manifest.a5f1a387afde92703b2e.js.map
+/static/js/vendor.8691442f6a25cb9ce557.js.map
+/static/js/app.c7433a360f5a22b5d855.js.map
+/static/css/app.9455b0c5e7455d5371e5e7f7b069cd5b.css.map
 NETWORK:
 *

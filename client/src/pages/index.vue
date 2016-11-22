@@ -64,6 +64,9 @@ export default {
     padding: 0.3rem 1.5rem;
     margin-top: 1rem;
   }
+  .main b {
+    color: #fff;
+  }
   .main ul {
     margin-top: 0.5rem;
   }

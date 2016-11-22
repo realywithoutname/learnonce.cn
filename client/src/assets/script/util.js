@@ -53,27 +53,33 @@ let offset = (e) => {
 }
 const prevent = (e) => { e.preventDefault() }
 // const stop = (ev) => { ev.stopPropagation() }
-
-window.lock = (selector) => {
-  document.body.style.overflow = 'hidden'
+const touchStart = (selector, lock) => {
   let el = document.querySelector(selector)
+  el.removeEventListener('touchmove', prevent)
+  if (!lock) {
+    return
+  }
   if (el.offsetHeight === window.scrollHeight) {
-    el.addEventListener('touchstart', prevent)
     el.addEventListener('touchmove', prevent)
   }
-  el.addEventListener('scroll', (ev) => {
-    if (el.scrollTop + window.innerHeight >= el.scrollHeight) {
-      el.addEventListener('touchstart', prevent)
-      el.addEventListener('touchmove', prevent)
+  let toBottom = el.scrollHeight - window.innerHeight
+  el.addEventListener('touchstart', (e) => {
+    // 滚动条到地步的距离大于3时判断滑动方向，向下阻止继续滑动，向上删除上次的阻止操作
+    // todo 滑到底再次滑动会解除touchmove事件
+    if (el.scrollHeight < el.scrollTop + window.innerHeight + 4) {
+      !(el.scrollHeight - el.scrollTop >= toBottom && el.scrollHeight - 4 < el.scrollTop + window.innerHeight) ? prevent(e) : el.removeEventListener('touchmove', prevent)
     }
+    toBottom = el.scrollHeight - el.scrollTop
   })
+}
+window.lock = (selector) => {
+  document.body.style.overflow = 'hidden'
+  touchStart(selector, true)
 }
 
 window.unlock = (selector) => {
   document.body.style.overflow = 'auto'
-  let el = document.querySelector(selector)
-  el.removeEventListener('touchstart', prevent)
-  el.removeEventListener('touchmove', prevent)
+  touchStart(selector, false)
 }
 window.launchFullscreen = (element) => {
   element = element || document.body

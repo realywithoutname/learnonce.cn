@@ -6,18 +6,6 @@ body {
 body .home {
 
 }
-body.app .container {
-  margin-top: 20px;
-}
-body.app .container::before {
-  content: '';
-  height: 20px;
-  width: 100%;
-  top: 0;
-  background: rgba(61, 59, 74, 1);
-  display: block;
-  position: fixed;
-}
 /*.app {
   height: 20px;
   width: 100%;
