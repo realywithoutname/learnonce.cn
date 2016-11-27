@@ -30,6 +30,10 @@ API.Note = {
   updateById: {
     method: 'PUT',
     url: '/api/notes{/id}'
+  },
+  deleteById: {
+    method: 'DELETE',
+    url: '/api/notes{/id}'
   }
 }
 API.Feed = {

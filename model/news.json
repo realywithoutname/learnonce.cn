@@ -11,6 +11,9 @@
     "image": "String",
     "content": "String",
     "feedId": "Object",
-    "star": "Boolean"
+    "star": {
+      "type": "boolean",
+      "default": false
+    }
   }
 }

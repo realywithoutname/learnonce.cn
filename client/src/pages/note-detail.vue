@@ -1,12 +1,20 @@
 <template>
   <div class="container">
-    <div :class="{top: $refs.note.noting, noting: $refs.note.noting}" class="menu-bar zindex-4  xs-8 s-6 m-4 l-6 xl-4">
-      <a v-link="{path: '/note'}"><i class="material-icons" @click="smallMenuShow = true">view_list</i></a>
+    <header class="nav-bar xs-8">
+      <a class="back-icon" @click="goback">
+        <i class="material-icons">navigate_before</i>
+      </a>
+      <div class="logo">
+        <img class="" src="/static/image/logo.png" alt="" />
+      </div>
+      <a v-link="{path: '/note/create'}" v-if="$root.level" class="edit-icon"><i class="material-icons">border_color</i></a>
+    </header>
+    <div class="menu-bar">
       <a v-link="{path: '/'}"><i class="material-icons">home</i></a>
-      <a @click="editor" v-show="!$refs.note.noting"><i class="material-icons">border_color</i></a>
+      <a v-if="$root.level" @click="editor"><i class="material-icons">mode_edit</i></a>
       <a><i class="material-icons" @click="toTop">vertical_align_top</i></a>
     </div>
-    <div class="col note xs-8 s-6 m-4 l-6 xl-4" :class="{'s-left-1 m-left-2 l-left-3 xl-left-4': !$refs.note.noting, noting: $refs.note.noting}">
+    <div class="note note-detail xs-8 s-6 m-4 l-6 xl-4 x-center">
       <section class="card">
         <header>
           <h1 class="card-title">{{note.title}}</h1>
@@ -17,9 +25,22 @@
           </p>
           <div class="markdown-body" v-html="note.content || '' | marked"></div>
         </div>
+        <footer class="card-action">
+          <button type="button" name="button">
+            <i class="material-icons">navigate_before</i>
+          </button>
+          <button type="button" name="button">
+            <i class="material-icons">navigate_next</i>
+          </button>
+        </footer>
       </section>
     </div>
-    <note class="xs-8 s-5 m-4 l-6" v-ref:note></note>
+    <div class="xs-8 note-editor">
+      <modal class="body-sroll" :show.sync="noting" :title="'文章编辑'">
+        <note v-ref:note></note>
+        <footer slot="footer"></footer>
+      </modal>
+    </div>
   </div>
 </template>
 
@@ -37,7 +58,8 @@ export default {
   name: 'note-detail',
   data () {
     return {
-      note: {}
+      note: {},
+      noting: false
     }
   },
   ready () {
@@ -57,9 +79,7 @@ export default {
         })
     },
     editor () {
-      // this.$refs.note.note = Object.assign({}, this.note)
-      this.$refs.note.isPreview = true
-      this.$refs.note.noting = true
+      this.noting = true
     }
   },
   filters: {
@@ -70,37 +90,18 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.card {
-  background: #fff;
-  margin-bottom: 5rem;
+.card, .card:hover {
+  background: #fafafa;
+  margin-bottom: 1rem;
+  box-shadow: none;
+  margin-top: 5rem;
 }
 .menu-bar {
-  transform: translate(-50%);
-  left: 50%;
-  margin-left: 0rem;
-}
-.menu-bar.top {
-  left: 0.5rem;
-  margin: 0;
-  transform: none;
-}
-.menu-bar.top + .note {
-  margin-top: 4rem;
-}
-.note.noting {
-  margin-left: 0.5rem;
+  bottom: 8rem;
 }
 @media (max-width: 600px) {
-  .menu-bar {
-    transform: none;
-    left: auto;
-    margin-left: 0.5rem;
-  }
-  .noting {
-    display: none;
-  }
-  .note.noting {
-    margin-left: 0;
+  .card, .card:hover {
+    margin-top: 4rem;
   }
 }
 </style>

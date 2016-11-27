@@ -1,10 +1,9 @@
 <template>
   <div class="home">
     <div class="content">
-      <span class="logo"></span>
+      <img class="logo" src="/static/image/logo.png" alt="" />
     </div>
     <div class="main">
-      <b v-text="$root.key"></b>
       <ul>
         <li>
           <a v-link="{path: '/news'}" class="flat-btn">资讯</a>
@@ -14,6 +13,7 @@
         </li>
       </ul>
     </div>
+    <b v-text="$root.key"></b>
   </div>
 </template>
 
@@ -35,19 +35,22 @@ export default {
     width: 100%;
     height: 100%;
     top: 0;
+    background: linear-gradient(170deg, #3f51b5 0%, #3f51b5 45%, #888 45%, #888 100%);
+  }
+  .logo {
+    display: block;
+    position: relative;
+    height: 15rem;
+    width: 15rem;
+    margin: 0 auto;
   }
   .content {
     text-align: center;
     position: relative;
     top: 50%;
-    height: 144px;
+    height: 15rem;
     transform: translateY(-100%);
     color: rgba(255, 255, 255, 0.25);
-  }
-  @media (max-width: 1024px) {
-    .content {
-      transform: scale(0.5) translateY(-150%);
-    }
   }
   .main {
     position: absolute;
@@ -57,15 +60,20 @@ export default {
     font-size: 1.2rem;
     text-align: center;
   }
-
-  .main .flat-btn {
-    border: 1px solid #fff;
-    color: #fff;
-    padding: 0.3rem 1.5rem;
+  .main li {
     margin-top: 1rem;
   }
-  .main b {
+  .main .flat-btn {
     color: #fff;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 1px #fff;
+  }
+  .home b {
+    color: #fff;
+    position: fixed;
+    width: 100%;
+    text-align: center;
+    bottom: 2rem;
   }
   .main ul {
     margin-top: 0.5rem;
@@ -73,6 +81,15 @@ export default {
   .main ul li {
     display: inline-block;
     padding: 0.5rem;
+  }
+  @media (max-width: 600px) {
+    .content {
+      transform: scale(0.8) translateY(-120%);
+    }
+    .main ul li {
+      margin-top: 1rem;
+      display: block;
+    }
   }
 
 </style>

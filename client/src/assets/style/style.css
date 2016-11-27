@@ -1,95 +1,40 @@
 body {
   /*perspective: 100px;*/
   /*-moz-user-select:none;*/
-  /*-webkit-user-select:none;*/
+  -webkit-user-select:none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
 }
-body .home {
+.nav-bar {
+  background: #3f51b5;
+  z-index: 999;
+}
 
+body.app .nav-bar, body.app .note-detail, body.app .notes, body.app .news-detail {
+  padding-top: 20px;
 }
-/*.app {
-  height: 20px;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  background: #fff;
-}*/
-body .home::before {
-  position: absolute;
-  content: '';
-  width: 100%;
-  top: 0;
-  bottom: 0;
-  background: -webkit-radial-gradient(50% 50%, ellipse farthest-corner,
-    rgba(251, 255, 0, 0.62) 0%, rgba(255, 224, 0, 0.6) 2%, rgba(249, 0, 0, 0.4) 4%, rgba(249, 43, 43, 0.1) 8%, rgba(249, 43, 43, 0) 10%),
-    -webkit-radial-gradient(50% 50%, ellipse farthest-corner,
-      rgba(254, 223, 255, 0.51) 0%, rgba(39, 0, 253, 0.3) 8%, rgba(56, 83, 175, 0.22) 17%),
-      -webkit-radial-gradient(50% 50%, ellipse farthest-corner,
-          rgba(170, 173, 185, 0.2) 15%, rgba(0, 0, 0, 0.71) 60%, rgba(0, 0, 0, 1) 90%);
-  z-index: -1;
+body.app #news-modal.v-dialog.body-sroll .v-modal header, body.app .note-editor .v-dialog.body-sroll .v-modal header {
+  padding-top: 38px;
 }
-@media (max-width: 1024px) {
-  body .home::before {
-    background: -webkit-radial-gradient(50% 50%, ellipse farthest-corner,
-      rgba(251, 255, 0, 1) 0%, rgba(255, 224, 0, 0.5) 1.5%, rgba(249, 0, 0, 0.3) 3%, rgba(249, 0, 0, 0.1) 5%, rgba(249, 43, 43, 0) 7%),
-      -webkit-radial-gradient(50% 50%, ellipse farthest-corner,
-        rgba(254, 223, 255, 0.41) 0%, rgba(39, 0, 253, 0.2) 4%, rgba(56, 83, 175, 0.22) 10%),
-        -webkit-radial-gradient(50% 50%, ellipse farthest-corner,
-            rgba(170, 173, 185, 0.1) 7%, rgba(0, 0, 0, 0.16) 16%, rgba(0, 0, 0, 0.4) 35%, rgba(0, 0, 0, 0.9) 90%);
-    background:
-        -webkit-radial-gradient(50% 50%, ellipse farthest-corner,
-            rgba(170, 173, 185, 0.3) 0%, rgba(0, 0, 0, 0.9) 90%);
-  }
+body.app .notes-header {
+  top: 2rem;
+  box-sizing: border-box;
 }
-body .home::after {
-  position: absolute;
-  width: 100%;
-  top: 0;
-  bottom: 0;
-  content: '';
-  z-index: -1;
-  transform: translateZ(20px);
-  background: rgba(219, 219, 219, 0.2);
-  /*box-shadow: 0 0 100px 100px rgba(255, 255, 255, 0.5) ;*/
-
+body.app .note-tags {
+  top: 15rem;
 }
- .logo {
-  display: block;
-  position: relative;
-  height: 128px;
-  width: 128px;
-  margin: 0 auto;
-  border-radius: 128px;
-  border: 2px solid;
-  border-color: #fff;
-
+body.app .news {
+  margin-top: calc(13rem + 10px);
 }
- .logo::before {
-  display: block;
-  position: absolute;
-  width: 48px;
-  height: 48px;
-  border: 4px solid #fff;
-  border-radius: 48px;
-  top: 14px;
-  content: '';
-  left: 40px;
-  border-right-color: transparent;
-  border-bottom-color: transparent;
-  transform: rotate(-30deg);
+body.app .node-editor {
+  padding-top: calc(1rem + 20px)
 }
- .logo::after {
-  display: block;
-  position: absolute;
-  width: 48px;
-  height: 48px;
-  border: 4px solid #fff;
-  border-radius: 48px;
-  top: 64px;
-  content: '';
-  left: 26px;
-  border-left-color: transparent;
-  border-top-color: transparent;
-  transform: rotate(-30deg);
+body.app .news-header {
+  padding-top: 1.5rem !important;
+}
+body.app #news-modal .v-close, body.app .note-editor .v-close {
+  margin-top: 20px;
 }
 .container {
   background: #d1beaf;
@@ -97,150 +42,150 @@ body .home::after {
   width: 100%;
   min-height: 100%;
 }
-.side-bar {
-  padding: 0 !important;
-  position: fixed;
+/***********************/
+/*******header css******/
+/***********************/
+.home-icon, .edit-icon, .back-icon {
+  color: #fff;
+  display: inline-block;
+  height: 4rem;
+  width: 4rem;
+  font-size: 2rem;
+}
+.home-icon {
+  top: 1rem;
+  left: 1rem;
+  text-align: left;
+}
+.edit-icon {
+  right: 1rem;
+  text-align: right;
+}
+.edit-icon {
+  float: right;
+  margin-right: 0.5rem;
+}
+.back-icon {
+  float: left;
+  margin-left: 0.5rem;
+  color: #fff;
+  display: inline-block;
+  height: 4rem;
+  width: 4rem;
+}
+header.nav-bar .logo {
+  display: inline-block;
+  height: 4rem;
   overflow: hidden;
+  width: 4rem;
+  position: relative;
+}
+header.nav-bar .logo img {
+  height: 3rem;
+  width: 3rem;
+  padding: 0.5rem;
+}
+/*******************/
+/****note-editor modal****/
+/**********************/
+#news-modal.v-dialog .v-modal, .note-editor .v-dialog .v-modal {
+  z-index: 103;
+  border-radius: 3px;
+  background: #fafafa;
+}
+#news-modal.v-dialog .scrim, .note-editor .scrim {
+  background: rgba(153, 153, 153, 0.5);
+}
+#news-modal.v-dialog.body-sroll .v-modal header, .note-editor .v-dialog.body-sroll .v-modal header {
+  background: #3f51b5;
+  color: #fff;
+  padding-bottom: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 400;
+}
+#news-modal.v-dialog.body-sroll .v-modal footer, .note-editor .v-dialog.body-sroll .v-modal footer {
+  position: fixed;
   bottom: 0;
+  background: #fafafa;
+}
+#news-modal .v-close, .note-editor .v-close {
+  color: #fff !important;
+  position: absolute;
+  right: 0;
   top: 0;
-  /*background: #fff;*/
+  height: 58px;
+  width: 48px;
+  line-height: 58px;
 }
-.side-bar:hover {
-  overflow: auto;
+.v-modal .v-modal-body {
+  height: calc(100% - 110px) !important;
 }
-.side {
-  padding: 0 1rem;
-}
-@media screen and (min-width: 601px) {
-  .side {
-    box-shadow: 0 0 0 #eee !important;
+@media (max-width: 600px) {
+  #news-modal.v-dialog.body-sroll .v-modal, .note-editor .v-dialog.body-sroll .v-modal {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    border-radius: 0;
+  }
+  #news-modal .v-modal .v-modal-body, .note-editor .v-modal .v-modal-body {
+    padding: 1rem;
+    -webkit-overflow-scrolling : touch;
+  }
+  #news-modal .scrim, .note-editor .scrim {
+    display: none;
   }
 }
-.card-image {
-  max-height: 300px;
-  overflow: hidden;
-}
-.detail-container {
-  padding: 1rem;
-  box-sizing: border-box;
-}
-.tag {
-  background: #607d8b;
-  color: #fff;
-  padding: 0.125rem 0.25rem;
-  font-size: 0.8rem;
-  margin: 0.125rem;
-  margin-left: 0;
-  font-weight: normal;
-  position: relative;
-  display: inline-block;
-}
+/***********************/
+/********menu-bar css **/
+/***********************/
 .menu-bar {
+  flex-flow: column;
+  box-shadow: none;
+  background: transparent;
   display: flex;
-  flex-flow: row;
-  background-color: #3d3b4a;
   position: fixed;
   line-height: 3rem;
-  bottom: 1rem;
   height: 3rem;
   margin: 0 0.5rem;
   border-radius: 5px;
   color: #fff;
   z-index: 6;
+  right: 1rem;
+  bottom: 5rem;
 }
-.menu-bar.top {
-  top: 0.5rem;
-}
+
 .menu-bar a {
   flex: 1;
   text-align: center;
   line-height: 3rem;
   color: #fff;
+  flex: 1;
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 0.5rem;
 }
 .menu-bar a i {
   display: inline-block;
   line-height: 3rem;
 }
-.menus {
-  position: fixed;
-  padding: 0;
-  z-index: 5;
-}
-.menus ul {
-  overflow: auto;
-  top: 4rem;
-  border-radius: 5px;
-  margin: 0.5rem;
-  background-color: #3d3b4a;
-  width: 100%;
-  padding: 0 1rem;
-  box-sizing: border-box;
-  color: #fff;
-}
-
-.menus .close {
-  float: right;
-  margin-top: 1rem;
-  margin-right: 0.5rem;
-  width: 4rem;
-  height: 2rem;
-  text-align: right;
-  cursor: default;
-}
-body.app .menus .close {
-  margin-top: 2rem;
-}
-@media (min-width: 601px) {
-  .menus .close {
-    display: none;
-  }
-  .menus.scrim {
-    background: rgba(255, 255, 255, 0);
-  }
-  .menus ul li.item {
-    display: block;
-  }
-  .menus ul {
-    position: absolute;
-    bottom: 0;
-    overflow: hidden;
-  }
-  .menus ul:hover {
-    overflow: auto;
-  }
-  .menus {
-    top: 0;
-    bottom: 5rem;
-  }
+.menu-bar a:hover {
+  background: rgba(153, 153, 153, 0.3);
 }
 @media (max-width: 600px) {
   .menu-bar {
-    width: calc(100% - 1rem);
+    width: auto;
   }
-  .menus .close {
-    display: block;
-  }
-  .menus ul {
-    margin: 0 0.5rem;
-    width: calc(100% - 1rem);
-    bottom: 5rem;
-    top: 20%;
-    border-radius: 5px;
-    position: fixed;
-  }
-  .menus ul li.item {
-    display: inline-block;
-    margin: 0.5rem;
-    border: 1px solid #fff;
-  }
-  .menus.scrim {
-    background: rgba(255, 255, 255, 0.7);
-    position: fixed;
+  .menu-bar a {
+    border-radius: 100%;
+    background: #db4437;
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.3);
   }
 }
 .load-more {
   text-align: center;
-  color: #fff;
+  color: #444;
   cursor: default;
 }
 .load-more i {

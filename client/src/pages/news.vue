@@ -1,51 +1,77 @@
 <template>
   <div class="content container">
-    <div class="menu-bar hidden-small-down top zindex-4 col l-2 m-2 s-2">
-      <a v-link="{path: '/'}"><i class="material-icons">home</i></a>
-      <a v-link="{path: '/note/create'}"><i class="material-icons">border_color</i></a>
-    </div>
-    <div class="menu-bar zindex-4 col l-2 m-2 s-2">
-      <a class="hidden-small-and-up"><i class="material-icons" @click="smallMenuShow = true">menu</i></a>
-      <a  class="hidden-small-and-up" v-link="{path: '/'}"><i class="material-icons">home</i></a>
-      <a  class="hidden-small-and-up" v-link="{path: '/note/create'}"><i class="material-icons">border_color</i></a>
+    <div class="menu-bar">
+      <a><i class="material-icons" @click="smallMenuShow = true">apps</i></a>
+      <a class="hidden-small-down" v-link="{path: '/'}"><i class="material-icons">home</i></a>
+      <a class="hidden-small-down" v-if="$root.level" v-link="{path: '/note/create'}">
+        <i class="material-icons">border_color</i>
+      </a>
       <a><i class="material-icons" @click="toTop">vertical_align_top</i></a>
+      <div v-show="smallMenuShow" class="">
+        <div @click="smallMenuShow = false" class="scrim"></div>
+        <ul id="feeds" class="feeds zindex-4">
+          <li @click="loadAll">
+            <i class="material-icons indigo-5 feed-icon">all_inclusive</i>
+            <span class="feed-name">ALL</span>
+          </li>
+          <li @click.stop="getStarNews">
+            <i class="material-icons feed-icon red-5">favorite</i>
+            <span class="feed-name">收藏</span>
+          </li>
+          <li @click.stop="getFeedNews(feed._id)" v-for="feed in feeds">
+              <img class="feed-icon":src="feed.icon" alt="" />
+              <span class="feed-name">{{feed.name}}</span>
+          </li>
+          <!-- <li @click.stop="addFeed">
+            <i class="material-icons blue-5 feed-icon">add</i>
+            <span class="feed-name">添加</span>
+          </li> -->
+        </ul>
+      </div>
     </div>
-    <div :class="{'hidden-small-down': !smallMenuShow}" class="menus scrim col l-2 m-2 s-2">
-      <i class="material-icons close" @click="smallMenuShow = false">close</i>
-      <ul class="chips zindex-4">
-        <li class="title">
-          <h3></h3>
-        </li>
-        <li @click.stop="getStarNews" class="item">
-          <i class="material-icons chip-image red-5">favorite</i>
-          <span class="title">收藏</span>
-        </li>
-        <li class="title">
-          <h3>RSS 源</h3>
-        </li>
-        <li @click.stop="getFeedNews(feed._id)"  class="item" v-for="feed in feeds">
-            <img :src="feed.icon" alt="" />
-            <span class="title">{{feed.name}}</span>
-        </li>
-      </ul>
+    <header class="nav-bar hidden-small-and-up xs-8">
+      <a class="hidden-small-up home-icon" v-link="{path: '/'}"><i class="material-icons">home</i></a>
+      <a class="hidden-small-up edit-icon" v-if="$root.level" v-link="{path: '/note/create'}">
+        <i class="material-icons">border_color</i>
+      </a>
+    </header>
+    <div class="col xs-8 s-6 m-4 l-6 news-header xl-4 x-center">
+      <div class="logo">
+        <img class="" src="/static/image/logo.png" alt="" />
+      </div>
+      <div class="description">
+        <h3>刘建东</h3>
+        <p>
+          <a href="mailto:erchuochuo@163.com">erchuochuo@163.com</a>
+        </p>
+        <hr>
+        <p>该页面所有内容来自RSS订阅,仅供个人阅读</p>
+      </div>
     </div>
-    <div class="col news l-left-2 m-left-2 s-left-3 l-10 m-6 s-4 xs-8">
-      <scroller :l-col="3" :m-col="2" :is-top.sync="toTop" :s-col="1" v-ref:scroller>
+    <div class="col xs-8 s-6 m-4 l-6 xl-4 news x-center">
+      <scroller v-ref:scroller>
         <div slot="scroller-body">
-          <div class=""  :class="'col l-4 m-4 s-8 xs-8 col-' + $index + '-List'" v-for="column in $refs.scroller.columns">
+          <div class="" :class="'col-' + $index + '-List'"
+            v-for="column in $refs.scroller.columns">
             <div class="col xs-8" v-for="item in column">
               <div track-by="_id" class="card">
                 <header>
-                  <a v-html="item.title" class="card-title"  @click.stop="readMore(item)"></a>
+                  <a v-html="item.title" class="card-title" @click.stop="readMore(item)">
+                  </a>
                 </header>
                 <div class="content">
                   <p v-html="item.content"></p>
                 </div>
                 <footer class="card-footer">
-                  <span class="title" v-html="item.from"></span>
+                  <span class="from" v-html="item.from"></span>
+                  <i>{{item.pubTime | date 'MM/dd HH:mm'}}</i>
                   <div class="right">
-                    <a><i v-show="!item.star" @click.stop="setStar(item._id)" class="material-icons star">star_border</i></a>
-                    <a v-link="{path: '/news/' + item._id}" target="_blank" > <i class="material-icons">send</i></a>
+                    <a @click.stop="setStar(item._id)">
+                      <i v-show="!item.star"  class="material-icons star">star_border</i>
+                    </a>
+                    <a v-link="{path: '/news/' + item._id}" target="_blank" >
+                      <i class="material-icons">send</i>
+                    </a>
                   </div>
                 </footer>
               </div>
@@ -57,28 +83,20 @@
         </div>
       </scroller>
     </div>
-    <side-nav class="col xs-8 wood-bg" :title="curNews.title" :show.sync="detailShow">
-      <div class="col xs-8 s-6 m-4 l-4 s-left-1 m-left-2 l-left-4">
-        <div class="news-detail card">
-          <p class="content" v-html="curNews.content"></p>
-          <footer>
-            <a :href="curNews.link" target="_blank">阅读原文</a>
-            <a v-link="{path: '/news/' + curNews._id}" target="_blank">本文地址</a>
-          </footer>
-        </div>
-      </div>
-    </side-nav>
+    <modal id="news-modal" class="body-sroll" :show.sync="detailShow" :title="curNews.title">
+      <p class="news-content" v-html="curNews.content"></p>
+      <footer class="xs-8" slot="footer">
+        <a :href="curNews.link" target="_blank" class="flat-btn">阅读原文</a>
+        <a v-link="{path: '/news/' + curNews._id}" target="_blank" class="flat-btn">本文地址</a>
+      </footer>
+    </modal>
   </div>
 </template>
 
 <script>
-import side from 'components/Side'
-import vHeader from 'components/Head'
-import note from 'components/Note'
-import sideNav from 'components/SideNav'
 import scroller from 'components/Scroller'
 export default {
-  components: {side, note, sideNav, scroller, vHeader},
+  components: { scroller },
   data () {
     return {
       feeds: [],
@@ -87,11 +105,12 @@ export default {
       curNews: {},
       timestamp: new Date().getTime(),
       smallMenuShow: false,
+      showFeedEdit: false,
       filter: {
         where: {},
         limit: 20,
         offset: 0,
-        fields: ['id', 'title', 'star', 'content', 'from', 'createTime', 'image'],
+        fields: ['id', 'title', 'star', 'content', 'from', 'pubTime', 'image'],
         sort: {createTime: 'desc'}
       }
     }
@@ -105,6 +124,7 @@ export default {
   },
   methods: {
     query () {
+      this.smallMenuShow = false
       this
         .News
         .find({filter: this.filter})
@@ -131,7 +151,7 @@ export default {
       e.target.src = ''
     },
     readMore (news) {
-      window.lock('#sideNavBody')
+      window.lock('#news-modal')
       this.curNews = news
       this.findOneNews(news._id)
       this.detailShow = true
@@ -155,6 +175,15 @@ export default {
       this.$root.menu = false
       this.query()
     },
+    addFeed () {
+
+    },
+    loadAll () {
+      this.filter.where = {}
+      this.filter.offset = 0
+      this.$refs.scroller.$emit('data:empty')
+      this.query()
+    },
     getStarNews () {
       this.filter.where = {star: true}
       this.filter.offset = 0
@@ -166,14 +195,14 @@ export default {
   watch: {
     'detailShow' (isView) {
       if (!isView) {
-        window.unlock('#sideNavBody')
+        window.unlock('#news-modal')
       }
     },
     smallMenuShow (isshow) {
       if (isshow) {
-        window.lock('.menus ul')
+        window.lock('#feeds')
       } else {
-        window.unlock('.menus ul')
+        window.unlock('#feeds')
       }
     }
   },
@@ -191,80 +220,190 @@ export default {
   }
 }
 </script>
-
+<style media="screen">
+#news-modal .news-content * {
+  max-width: 100% !important;
+  height: auto;
+}
+</style>
 <style lang="css" scoped>
+  hr {
+    border-color: rgba(153, 153, 153, 0.5);
+  }
+  .content > .news-header {
+    height: 10rem;
+    background: #fafafa;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-start;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  }
+  .content > .news-header .logo {
+    height: 8rem;
+    border-radius: 100%;
+    background: #3f51b5;
+    width: 8rem;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+  .content > .news-header .logo img {
+    height: 6rem;
+    transform: scale(0.8);
+  }
+  .content > .news-header .description {
+    height: 8rem;
+    flex: auto;
+    padding-left: 1rem;
+  }
+  .content > .news-header .description h3 {
+    margin: 0;
+    margin-top: 1rem;
+    margin-bottom: 0.3rem;
+    color: #4c4c4c;
+  }
+  .content > .news-header .description a {
+    color: #999999;
+  }
+  @media (max-width: 600px) {
+    .nav-bar {
+      box-shadow: none;
+    }
+    .content > .news-header {
+      margin-top: 0;
+      margin-bottom: 0;
+      background: #3f51b5;
+      box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.4);
+      position: fixed;
+      top: 3rem;
+      z-index: 22;
+      height: 11rem;
+    }
+    .content > .news-header .description h3 {
+      color: #fff;
+    }
+    .content > .news-header .description p {
+      color: #f2f2f2;
+    }
+    .news {
+      margin-top: 13.5rem;
+    }
+  }
   .news {
-    margin-bottom: 4rem;
+    background: #fafafa;
+    /*margin-bottom: 4rem;*/
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
   }
-  .card {
-    box-shadow: 0 0 0.125rem 0.125rem rgba(209, 190, 175, 0.5);
-    background: #fff;
-  }
-  .card:hover {
-    box-shadow: 0.1rem 0.5rem 0.2rem 0.2rem  rgba(144, 133, 123, 0.35);
-    background: #fff;
+  .card, .card:hover {
+    background: #fafafa;
+    margin-bottom: 1rem;
+    box-shadow: none;
+    padding-bottom: 1rem;
+    border-bottom: #d7d7d7 2px dashed;
   }
   .card .card-title {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #4c4c4c;
+  }
+  .card .card-title:hover {
+    color: #828d95;
   }
   .card header, .card footer {
     border: none;
   }
-  .card .content {
-    max-height: 300px;
-    overflow: hidden;
-  }
-  .card .content img {
-    width: 100%;
-  }
-  .card .content-full {
-    max-height: initial;
-    overflow: auto;
-  }
-  .card-title {
-    color: #222;
-    font-weight: 600;
-  }
-  .card-title:hover {
-    color: #2793C7;
+  .card-footer {
+    color: #828d95;
   }
   .card-footer a, .card-footer a i {
-    color: #9a9a9a;
+    color: #828d95;
     width: 2.5rem;
     text-align: right;
-  }
-  .news-detail {
-    margin-top: 1.5rem;
-    background: #fff;
-    border-radius: 5px;
-  }
-  .news-detail.card .content {
-    max-height: initial;
-    overflow: auto;
-  }
-  .news-detail footer {
-    display: flex;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  .news-detail footer a {
-    flex: 1;
-    text-align: center;
-    color: #777;
-  }
-  @media (max-width: 600px) {
-    .news-detail {
-      margin-top: 1.5rem;
-      background: #fff;
-      margin: 0.5rem;
-      width: calc(100% - 1rem);
-      padding: 0.5rem;
-      border-radius: 5px;
-    }
   }
   .chips > .item img + .title {
     word-spacing: nowrap;
     display: initial;
   }
-
+  #news-modal footer .flat-btn {
+    height: 48px;
+    line-height: 48px;
+    float: right;
+  }
+  #news-modal footer a.flat-btn {
+    color: #999999;
+    font-size: 0.9rem;
+  }
+  .menu-bar {
+    bottom: 11rem;
+  }
+  .feeds {
+    width: 400px;
+    overflow: auto;
+    position: absolute;
+    z-index: 99;
+    background: #fafafa;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    overflow-x: hidden;
+    justify-content: flex-start;
+    align-content: flex-start;
+    padding: 1rem;
+    z-index: 999;
+    border-radius: 5px;
+  }
+  .feeds li {
+    display: flex;
+    flex-flow: column;
+    flex-shrink: 0;
+    flex-grow: 0;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+  .feeds .feed-icon {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+  }
+  .feeds i.feed-icon {
+    font-size: 32px;
+    line-height: 50px;
+  }
+  .feeds .feed-name {
+    color: #444;
+    flex-shrink: 0;
+    white-space: nowrap;
+    width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  @media (max-width: 600px) {
+    .menu-bar {
+      bottom: 5rem;
+    }
+    .feeds {
+      position: fixed;
+      top: 12rem;
+      bottom: 2rem;
+      right: 1.5rem;
+      left: 1.5rem;
+      width: auto;
+    }
+    .home-icon {
+      top: 0;
+      left: 1rem;
+    }
+    .edit-icon {
+      top: 0;
+      right: 1rem;
+    }
+  }
 </style>

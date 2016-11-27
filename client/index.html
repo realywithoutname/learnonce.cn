@@ -14,9 +14,9 @@
     <meta name="x5-page-mode" content="app">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="white">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="so">
-    <link rel="apple-touch-icon" href="/static/image/logo.png">
+    <link rel="apple-touch-icon" href="/static/image/ico-1.png">
 
     <meta name="theme-color" content="#000000">
     <meta name="mobile-web-app-capable" content="yes">
@@ -24,7 +24,7 @@
     <link rel="shortcut icon" href="/static/image/logo.png">
     <title>Just Can't Get Enough</title>
   </head>
-  <body :class="{app: true}">
+  <body :class="{app: isApp}">
     <router-view></router-view>
   </body>
 </html>

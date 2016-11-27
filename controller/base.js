@@ -11,5 +11,8 @@ class BaseCtrl {
   * updateById (ctx, next) {
     ctx.body = yield this.service.updateById(ctx.params.id, ctx.request.body);
   }
+  * deleteById (ctx, next) {
+    ctx.body = yield this.service.distroyById(ctx.params.id);
+  }
 }
 module.exports = BaseCtrl

@@ -220,9 +220,9 @@ export default {
       if (ww <= sT) {
         this.media = 's'
       } else if (ww > mT) {
-        this.media = 'l'
+        this.media = 's'
       } else {
-        this.media = 'm'
+        this.media = 's'
       }
     }
   },

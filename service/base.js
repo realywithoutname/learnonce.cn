@@ -5,6 +5,13 @@ class Base {
     this.model = model;
   }
   * find ({where = {}, fields = [], limit = 20, offset = 0, sort = {}}) {
+    if (where.$like) {
+      let like = where.$like
+      delete where.$like
+      Object.keys(like).forEach((key) => {
+        where[key] = new RegExp(like[key], 'ig')
+      })
+    }
     return this.model.find(where).limit(limit).skip(offset).sort(sort).select(fields.join(' '));
   }
   * findOne ({where = {}, fields = []}) {
@@ -21,6 +28,9 @@ class Base {
   }
   * create (instance) {
     return this.model.insertMany([instance])
+  }
+  * distroyById (id) {
+    return this.model.findByIdAndRemove(id)
   }
 }
 module.exports = Base

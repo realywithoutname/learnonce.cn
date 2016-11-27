@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
-import {plug} from 'assets/script/vue-wheel'
+import {plug, Modal} from 'assets/script/vue-wheel'
 import route from './route'
 import './assets/style/base.css'
 import './assets/style/style.css'
@@ -14,6 +14,7 @@ Vue.use(VueRouter)
 Vue.use(VueResource)
 Vue.use(plug)
 Vue.use(resources)
+Vue.component('Modal', Modal)
 Vue.filter('date', function (date, string) {
   date = new Date(date)
   if (date.toString() === 'Invalid date') {

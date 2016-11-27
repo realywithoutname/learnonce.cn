@@ -4,6 +4,6 @@
   "prototype": {
     "name": "String",
     "notes": "array",
-    "count": "String"
+    "count": "Number"
   }
 }
