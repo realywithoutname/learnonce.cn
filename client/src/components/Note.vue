@@ -53,7 +53,7 @@ export default {
       console.log('upload image')
     },
     save () {
-      this.note.content = document.getElementById('note-content-editor').innerHTML
+      this.note.content = document.getElementById('note-content-editor').innerText
       if (this.note._id) {
         this.update()
       } else {
