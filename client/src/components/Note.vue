@@ -16,7 +16,7 @@
     </div>
     <div contenteditable="true" id="note-content-editor" spellcheck="false" v-html="note.content" class="col xs-8 note-content-editor">
     </div>
-    <div class="note-action">
+    <div slot="footer" class="note-action">
       <a>
         <i class="material-icons">photo_size_select_actual</i>
         <input type="file" name="name" value="">
@@ -99,8 +99,9 @@ export default {
   display: flex;
   bottom: 0;
   left: 0;
-  position: absolute;
+  position: fixed;
   background: #fff;
+  z-index: 999;
 }
 .note-action a, .note-action a i {
   flex: 1 1 auto;
@@ -119,6 +120,7 @@ export default {
   position: relative;
   -webkit-user-modify: read-write-plaintext-only;
   margin-bottom: 4rem;
+  -webkit-user-select:text
 }
 .note-content-editor:empty::before {
   content: 'Input Some Text';
