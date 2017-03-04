@@ -1,0 +1,127 @@
+/**/
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(/assets/font/MaterialIcons-Regular.eot); /* For IE6-8 */
+  src: local('Material Icons'),
+       local('MaterialIcons-Regular'),
+       url(/assets/font/MaterialIcons-Regular.woff2) format('woff2'),
+       url(/assets/font/MaterialIcons-Regular.woff) format('woff'),
+       url(/assets/font/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+html {
+  font-size: 100%;
+  height: 100%;
+  word-break: break-word;
+  box-sizing: border-box;
+  font-family: "Verdana", Consolas, "Roboto Regular",  "Microsoft Yahei", "Aril", "sans-serif";
+  box-sizing: border-box;
+  -webkit-touch-callout: none;
+}
+body, section {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+* {
+  -webkit-tap-highlight-color:rgba(255,255,255,0)
+}
+input{ -webkit-appearance: none;}
+.isApp {
+  height: 100%;
+}
+.app {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/*@media (max-width: 1024px) {
+  ::-webkit-scrollbar {
+    width: 0;
+  }
+}*/
+::-webkit-scrollbar-track-piece{
+  background: #fff;
+  -webkit-border-radius: 3px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(84, 74, 74, 0.18);
+  -webkit-border-radius: 3px;
+}
+.hidden {
+  display: none;
+}
+/*end point*/
+@media (min-width: 601px) {
+  .hidden-med-and-up {
+    display: none;
+  }
+}
+@media (max-width: 600px) {
+  .hidden-med-down {
+    display: none;
+  }
+}
+@media (min-width: 901px) {
+  .hidden-lg-and-up {
+    display: none;
+  }
+}
+@media (max-width: 900px) {
+  .hidden-lg-down {
+    display: none;
+  }
+}
+/*grid*/
+.grid-row {
+  display: flex;
+  flex-direction: row;
+}
+.grid-col {
+  display: flex;
+  flex-direction: column;
+}
+.grid-item {
+  flex: 1;
+}
+.grid-2-item {
+  flex: 2 1 0;
+}
+.grid-3-item {
+  flex: 3 1 0;
+}
+.grid-4-item {
+  flex: 4 1 0;
+}

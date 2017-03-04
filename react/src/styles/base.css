@@ -1,0 +1,7 @@
+@value baseColor: #3f51b5;
+@value whiteColor: #fff;
+.header {
+  height: 56px;
+  color: whiteColor;
+  background-color: baseColor;
+}
