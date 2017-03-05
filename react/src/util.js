@@ -49,3 +49,23 @@ export function throttle (fn, interval) {
     }, interval || 20000)
   }
 }
+window.addEventListener('touchstart', (e) => e.stopPropagation())
+window.addEventListener('touchmove', (e) => e.stopPropagation())
+window.imgloadError = (e) => {
+  e = e || window.event
+  e.target.style.display = 'none'
+  var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new window.ActiveXObject('Microsoft.XMLHTTP')
+  xmlhttp.responseType = 'blob'
+  xmlhttp.open('GET', '/img?source-url=' + e.target.src, true)
+  xmlhttp.send()
+  xmlhttp.onload = function () {
+    var objectURL = window.URL.createObjectURL(this.response)
+    e.target.src = objectURL
+    e.target.height = 60
+    e.target.onerror = null
+    e.target.onload = function () {
+      window.URL.revokeObjectURL(this.src)
+      e.target.style.display = 'initial'
+    }
+  }
+}

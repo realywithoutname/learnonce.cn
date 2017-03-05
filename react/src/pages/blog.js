@@ -6,11 +6,11 @@ import {
   filterArticlesWithKeyword,
   articleSearchStart,
   articleSearchEnd,
-  fetchArticleContent,
   articleReading,
   scrolling,
-  ifNeedPull
+  fetchMoreArticle
 } from 'src/redux/actions'
+import Scroller from 'components/Scroller'
 import Article from 'components/Article'
 import ArticleList from 'components/ArticleList'
 import ArticleHeader from 'components/ArticleHeader'
@@ -19,8 +19,8 @@ class Blog extends Component {
   componentDidMount () {
     this.props.dispatch(fecthArticlesIfNeeded())
   }
-  preview (article) {
-    this.props.dispatch(fetchArticleContent(article._id))
+  reading (article) {
+    this.props.dispatch(articleReading(article._id))
   }
   readed () {
     this.props.dispatch(articleReading())
@@ -35,11 +35,16 @@ class Blog extends Component {
     const {dispatch} = this.props
     dispatch(scrolling(scrollInfo))
   }
+  readMore () {
+    const {dispatch, article, scroll} = this.props
+    let toBottom = scroll.scrollHeight - scroll.height - scroll.curTop
+    if (toBottom < 500 && !article.isEnd && scroll.direction && !scroll.lock) {
+      dispatch(fetchMoreArticle())
+    }
+  }
   render () {
     const {dispatch, article, isApp, scroll} = this.props
     const barToTop = isApp || (scroll.curTop > 56 || article.searching)
-    const toBottom = scroll.scrollHeight - scroll.height - scroll.curTop
-    dispatch(ifNeedPull())
     return (
       <section className={isApp ? style.appPage : ''}>
         <ArticleHeader barToTop={barToTop} />
@@ -49,14 +54,17 @@ class Blog extends Component {
           filterChange={this.filterChange.bind(this)}
           searchEnd={() => dispatch(articleSearchEnd())}
           searchStart={() => dispatch(articleSearchStart())} />
-        <ArticleList
-          barToTop={barToTop}
-          reading={article.reading !== -1}
-          emit={this.emit.bind(this)}
-          className={style.hiddenList}
-          articles={article.data}
-          preview={this.preview.bind(this)} />
-        <Article reading={article.reading} readed={this.readed.bind(this)} article={article.data[article.reading]} />
+        <Scroller
+          onScroll={this.readMore.bind(this)}
+          dispatch={dispatch}>
+          <ArticleList
+            barToTop={barToTop}
+            reading={article.reading !== -1}
+            className={style.hiddenList}
+            articles={article.data}
+            preview={this.reading.bind(this)} />
+        </Scroller>
+        <Article reading={article.reading} close={this.readed.bind(this)} article={article.data[article.reading]} />
       </section>
     )
   }

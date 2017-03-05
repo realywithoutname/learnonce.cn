@@ -1,18 +1,18 @@
 import React, { Component, PropTypes } from 'react'
 import Remarkable from 'remarkable'
 
-import * as style from 'styles/article.css'
+import * as style from 'styles/news.css'
 const md = new Remarkable()
 export default class ArticleList extends Component {
   render () {
-    let {article, reading, close} = this.props
+    let {news, reading, close} = this.props
     return (
       <div
-      className={`${style.page} ${reading === -1 ? style.pageHidden : style.pageShow}`}
+      className={`${style.page} ${style.newsContent} ${reading === -1 ? style.pageHidden : style.pageShow}`}
       >
         <header>
           <i onClick={close} className="global-material-icons">keyboard_backspace</i>
-          <span>{article && article.title}</span>
+          <span>{news && news.title}</span>
           <i onClick={close} className="global-material-icons">clear</i>
         </header>
         <div
@@ -23,9 +23,7 @@ export default class ArticleList extends Component {
           e.stopPropagation()
         }}
         className={style.markdown}
-        dangerouslySetInnerHTML={
-          {__html: (md.render(article && article.content))}
-        }
+        dangerouslySetInnerHTML={{__html: news && news.content}}
         >
         </div>
       </div>

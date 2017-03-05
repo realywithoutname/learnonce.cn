@@ -6,7 +6,7 @@ const createInstance = (config) => {
 
 let API = {}
 API.News = {}
-API.News.find = filter => createInstance({method: 'GET', url: '/api/news', filter})
+API.News.find = filter => createInstance({method: 'GET', url: '/api/news', params: {filter}})
 API.News.findById = id => createInstance({method: 'GET', url: `/api/news/${id}`})
 API.News.updateById = id => createInstance({method: 'PUT', url: `/api/news/${id}`})
 

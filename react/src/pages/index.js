@@ -1,14 +1,24 @@
 import React, {Component} from 'react'
+import { connect } from 'react-redux'
 import {Link} from 'react-router'
-export default class Me extends Component {
+import * as style from 'styles/index.css'
+class Index extends Component {
   render () {
+    let {isApp} = this.props
     return (
-      <div>
-        <Link to="/blog">blog</Link><br />
-        <Link to="/news">news</Link><br />
-        <Link to="/me">me</Link><br />
+      <div
+        onTouchStart={(e) => e.stopPropagation()}
+        onTouchMove={(e) => e.preventDefault()}
+        className={isApp ? style.appPage : style.page}>
+        <div className={style.links}>
+        <Link to="/blog">blog</Link>
+        <Link to="/news">news</Link>
+        </div>
         {this.props.children}
       </div>
     )
   }
 }
+export default connect((state) => ({
+  isApp: state.isApp
+}))(Index)

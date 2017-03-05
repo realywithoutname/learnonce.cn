@@ -15,7 +15,7 @@ class NewsCtrl extends BaseCtrl {
   }
   * afterFind (ctx, next) {
     ctx.body.forEach((news) => {
-      news.content = this._getFirstTagP(news.content)
+      news.description = this._getFirstTagP(news.content)
     })
   }
   _getFirstTagP (data) {
