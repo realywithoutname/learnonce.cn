@@ -1,4 +1,4 @@
-const feedParser = require('feedParser')
+const feedParser = require('feedparser')
 
 const request = require('request')
 
