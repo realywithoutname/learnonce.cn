@@ -5,16 +5,23 @@ var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.conf')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-
+const assetsPath = (_path) => {
+  var assetsDirectory = process.env.NODE_ENV === 'production'
+  ? config.pro.dist
+  : config.dev.dist
+  return path.posix.join(assetsDirectory, _path)
+}
+console.log(assetsPath('css/[name].[contenthash].css'));
 var webpackConfig = merge(baseWebpackConfig, {
-  module: {
-    loaders: utils.styleLoaders({ sourceMap: config.build.productionSourceMap, extract: true })
-  },
-  devtool: config.build.productionSourceMap ? '#source-map' : false,
+  // module: {
+  //   loaders: utils.styleLoaders({ sourceMap: config.pro.productionSourceMap, extract: true })
+  // },
+  devtool: config.pro.productionSourceMap ? 'source-map' : false,
   output: {
-    path: config.build.assetsRoot,
-    filename: utils.assetsPath('js/[name].[chunkhash].js'),
-    chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
+    path: config.pro.dist,
+    publicPath: process.env.NODE_ENV === 'production' ? config.pro.publicPath : config.dev.publicPath,
+    filename: assetsPath('js/[name].[chunkhash].js'),
+    chunkFilename: assetsPath('js/[id].[chunkhash].js')
   },
   plugins: [
     // http://vuejs.github.io/vue-loader/workflow/production.html
@@ -27,7 +34,7 @@ var webpackConfig = merge(baseWebpackConfig, {
       }
     }),
     // extract css into its own file
-    new ExtractTextPlugin(utils.assetsPath('css/[name].[contenthash].css')),
+    new ExtractTextPlugin(assetsPath('css/[name].[contenthash].css')),
     // generate dist index.html with correct asset hash for caching.
     // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin
@@ -68,7 +75,7 @@ var webpackConfig = merge(baseWebpackConfig, {
   ]
 })
 
-if (config.build.productionGzip) {
+if (config.pro.productionGzip) {
   var CompressionWebpackPlugin = require('compression-webpack-plugin')
 
   webpackConfig.plugins.push(
@@ -77,7 +84,7 @@ if (config.build.productionGzip) {
       algorithm: 'gzip',
       test: new RegExp(
         '\\.(' +
-        config.build.productionGzipExtensions.join('|') +
+        config.pro.productionGzipExtensions.join('|') +
         ')$'
       ),
       threshold: 10240,

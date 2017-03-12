@@ -1,11 +1,11 @@
 const path = require('path')
 let config = {
-  root: path.join(__dirname, '../'),
-  assets: path.join(__dirname, '../assets'),
+  root: path.resolve(__dirname, '../'),
+  assets: path.resolve(__dirname, '../assets'),
   assetsDirectory: 'assets',
   publicPath: '/',
-  dist: path.join(__dirname, '../dist'),
-  index: path.join(__dirname, '../dist/index.html')
+  dist: path.resolve(__dirname, '../dist'),
+  index: path.resolve(__dirname, '../dist/index.html')
 }
 module.exports = {
   dev: Object.assign({}, config, {

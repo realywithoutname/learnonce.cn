@@ -1,0 +1,42 @@
+.page {
+  background: rgb(26, 27, 45);
+  height: 100%;
+  margin: 0;
+}
+.appPage {
+  padding-top: 20px;
+  height: 100%;
+  background: rgb(26, 27, 45);
+}
+.finger {
+  position: fixed;
+  bottom: 25px;
+  text-align: center;
+  width: 100%;
+  color: rgb(37, 38, 58);
+}
+.links {
+  width: 200px;
+  height: 80px;
+  margin: auto;
+  top: 50%;
+  position: fixed;
+  left: 50%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  transform: translate(-50%, -50%);
+}
+.links a {
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 0 2px 1px rgba(254, 91, 122, 0.5);
+  border-radius: 3px;
+  text-decoration: none;
+  line-height: 30px;
+  font-size: 16px;
+  height: 30px;
+  margin: 5px;
+}
+.page a {
+}

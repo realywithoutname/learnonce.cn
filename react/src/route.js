@@ -6,6 +6,14 @@ function blog () {
     })
   }
 }
+function editor () {
+  this.path = 'editor'
+  this.getComponent = (nextstate, cb) => {
+    require.ensure([], (require) => {
+      cb(null, require('pages/editor').default)
+    })
+  }
+}
 function news () {
   this.path = 'news'
   this.getComponent = (nextstate, cb) => {
@@ -36,4 +44,4 @@ const createRoute = (R) => {
   return route
 }
 
-export default [root, me, news, blog].map((route) => createRoute(route))
+export default [root, me, news, blog, editor].map((route) => createRoute(route))

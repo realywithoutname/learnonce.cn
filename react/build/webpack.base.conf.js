@@ -3,8 +3,8 @@ const config = require('./config')
 const projectRoot = path.resolve(__dirname, '../')
 const assetsPath = (_path) => {
   var assetsDirectory = process.env.NODE_ENV === 'production'
-  ? config.pro.assets
-  : config.dev.assets
+  ? config.pro.dist
+  : config.dev.dist
   return path.posix.join(assetsDirectory, _path)
 }
 module.exports = {

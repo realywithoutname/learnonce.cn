@@ -1,0 +1,27 @@
+CACHE MANIFEST
+#v1.1.3
+#
+#
+#
+#
+#    *          *                 *                      *                                      *
+#
+#
+#
+#
+#
+#
+CACHE:
+/static/font/MaterialIcons-Regular.eot
+/static/font/MaterialIcons-Regular.woff
+/static/font/MaterialIcons-Regular.woff2
+/static/font/MaterialIcons-Regular.ttf
+/static/image/logo.png
+/assets/0.app.js
+/assets/0.app.js.map
+/assets/2.app.js
+/assets/2.app.js.map
+/assets/app.js
+/assets/app.js.map
+NETWORK:
+*

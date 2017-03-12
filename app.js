@@ -5,13 +5,14 @@ let static = require('koa-static-server');
 let xmlParser = require('koa-xml-body').default;
 
 let router = require('./route');
-let boot = require('./boot'); // 都没有使用,结果执行了。。。
-let task = require('./task');
+let boot = require('./boot');
 let app = koa();
+
+require('./task/reader');
 
 app.use(xmlParser());
 app.use(bodyParser());
-app.use(static({rootDir: 'dist'}));
+app.use(static({rootDir: 'react-re/dist'}));
 app.use(router.routes());
 app.on('error', function (err, ctx) {
   if (process.env.NODE_ENV === 'production') {
@@ -22,4 +23,4 @@ app.on('error', function (err, ctx) {
 });
 app.listen(3000)
 console.info('server listen on %s', 3000)
-task();
+// task();

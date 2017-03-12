@@ -9,7 +9,7 @@ export default class ArticleList extends Component {
         <Link to="/">
           <img src="/assets/image/logo.png" />
         </Link>
-        <Link to="/">
+        <Link to="/editor">
           <i className="global-material-icons">border_color</i>
         </Link>
         <div className={style.headerTitle}>

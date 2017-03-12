@@ -32,5 +32,9 @@ class Base {
   * distroyById (id) {
     return this.model.findByIdAndRemove(id)
   }
+  * destroy (where) {
+    // console.log(this.find(filter))
+    return this.model.remove(where)
+  }
 }
 module.exports = Base

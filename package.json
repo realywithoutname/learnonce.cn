@@ -24,6 +24,7 @@
   "dependencies": {
     "co": "^4.6.0",
     "co-fs": "^1.2.0",
+    "feedparser": "^2.1.0",
     "koa": "^1.2.2",
     "koa-body": "^1.5.0",
     "koa-request": "^1.0.0",
@@ -31,7 +32,9 @@
     "koa-static-server": "^0.1.8",
     "koa-xml-body": "^1.0.3",
     "mongoose": "^4.6.0",
+    "rss-feed-emitter": "^1.0.6",
     "superagent": "^2.2.0",
+    "tiny-emitter": "^1.1.0",
     "xml2js": "^0.4.17"
   }
 }
