@@ -2,10 +2,16 @@
   "name": "news",
   "plural": "news",
   "prototype": {
-    "title": "String",
+    "title": {
+      "type": "String",
+      "index": true
+    },
     "description": "String",
     "link": "String",
-    "createTime": "Date",
+    "createTime": {
+      "type": "Date",
+      "index": true
+    },
     "pubTime": "Date",
     "from": "String",
     "image": "String",

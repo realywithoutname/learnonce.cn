@@ -37,37 +37,48 @@ export default class EditorContainer extends Component {
     return typeof val === 'number'
   }
   render () {
-    let {inputChange, contentChange, descChange, tagsChange, save} = this.props
+    let {inputChange, contentChange, descChange, tagsChange, save, clear} = this.props
+    let {title, description, tags, content} = this.props.article
     return (
       <div className={style.editor}>
         <div className={
           `${this.state.onlyEditor ? 'hidden' : ''} ${style.header}`
         }>
-          <input defaultValue={this.state.title}
+          <input
+          value={title}
           onChange={inputChange}
           placeholder="Please input the title"></input>
-          <input onChange={tagsChange}
-          defaultValue={this.state.tags}
+          <input
+          value={tags}
+          onChange={tagsChange}
           placeholder="Tags"></input>
         </div>
-        <textarea spellCheck={false}
-        defaultValue={this.state.description}
+        <textarea
+        spellCheck={false}
+        value={description}
         className={
           `${this.state.onlyEditor ? 'hidden' : ''} ${style.desc}`
-        } onChange={descChange} placeholder="The state description"></textarea>
-        <textarea defaultValue={this.state.content}
+        }
+        onChange={descChange}
+        placeholder="The state description"></textarea>
+        <textarea
+        value={content}
         spellCheck={false} onKeyDown={(e) => {
           if (e.keyCode === 9) {
             e.preventDefault()
             this.tabPress(e)
           }
         }}
-        className={style.content} onChange={contentChange} placeholder="The article content"></textarea>
+        className={style.content}
+        onChange={contentChange}
+        placeholder="The article content"></textarea>
         <div className={style.actionBar}>
           <i style={{textAlign: 'left'}} className="material-icons"
           onClick={() => {
             window.history.back()
           }}>keyboard_return</i>
+          <i style={{textAlign: 'center'}} className="material-icons"
+          onClick={clear}>clear</i>
           <i style={{textAlign: 'center'}}
           onClick={() => {
             this.setState({onlyEditor: !this.state.onlyEditor})

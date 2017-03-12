@@ -3,12 +3,16 @@
   "plural": "notes",
   "prototype": {
     "content": "String",
-    "title": "String",
+    "title": {
+      "type": "String",
+      "index": true
+    },
     "description": "String",
     "tags": "String",
     "createTime": {
       "type": "Date",
-      "default": 0
+      "default": 0,
+      "index": true
     }
   }
 }

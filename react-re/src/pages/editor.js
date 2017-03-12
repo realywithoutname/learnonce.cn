@@ -8,7 +8,8 @@ import {
   changeContent,
   changeTags,
   changeDescription,
-  saveArticle
+  saveArticle,
+  clearEditor
 } from 'src/redux/actions'
 class Editor extends Component {
   render () {
@@ -31,6 +32,9 @@ class Editor extends Component {
         }}
         save={() => {
           dispatch(saveArticle())
+        }}
+        clear={() => {
+          dispatch(clearEditor())
         }}
         ></EditorContainer>
         <Previewer

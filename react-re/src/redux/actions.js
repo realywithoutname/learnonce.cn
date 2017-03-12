@@ -169,6 +169,7 @@ export const EAS = {
   REQUEST_STATE: 'EDITOR_REQUEST_STATE',
   CHANGE_CONTNET: 'EDITOR_CHANGE_CONTNET',
   SAVE_STATE: 'EDITOR_SAVE_STATE',
+  CLEAR: 'EDITOR_CLEAR',
   FETCH_ARTICLE_FINISH: 'EDITOR_FETCH_ARTICLE_FINISH'
 }
 export function changeTitle (title) {
@@ -186,19 +187,24 @@ export function changeDescription (description) {
 export function saveArticle () {
   return (dispatch, getState) => {
     let editor = getState().editor
+    editor.createTime = new Date()
     let request = editor.id ?
       API.Note.updateById(editor.id, editor) : API.Note.create(editor)
     dispatch({type: EAS.REQUEST_STATE, loading: true})
     request.catch(({message}) => dispatch({
       type: 'ERROR', error: {message}
     }))
-    .then(() => dispatch({
-      type: EAS.REQUEST_STATE, loading: false
-    }))
+    .then(({data}) => {
+      dispatch({type: EAS.REQUEST_STATE, loading: false})
+      dispatch({type: EAS.FETCH_ARTICLE_FINISH, article: data})
+    })
     .then(() => dispatch({
       type: 'ERROR', error: {message: '保存成功'}
     }))
   }
+}
+export function clearEditor () {
+  return {type: EAS.CLEAR}
 }
 export function editArticle (article) {
   return dispatch => {

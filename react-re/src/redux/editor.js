@@ -26,4 +26,14 @@ export default class EditorReducer {
       {}, state, {id, content, description, tags, title}
     )
   }
+  [EAS.CLEAR] (state) {
+    return Object.assign({}, state, {
+      id: '',
+      title: '',
+      content: '',
+      tags: '',
+      description: '',
+      loading: false
+    })
+  }
 }
