@@ -86,6 +86,13 @@ input{ -webkit-appearance: none;}
 .active {
   color: #ff9800 !important;
 }
+.error-tip.app {
+  padding-top: 20px;
+  box-sizing: border-box;
+}
+.error-tip.app.show {
+  height: 76px;
+}
 .error-tip {
   position: fixed;
   width: 100%;

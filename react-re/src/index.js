@@ -15,7 +15,8 @@ let finger = new Fingerprint({canvas: true}).get()
 
 store.dispatch(auth(finger))
 store.dispatch({type: 'FINGER', value: finger})
-window.navigator.standalone && store.dispatch(isApp())
+let isapp = window.navigator.standalone || true
+isapp && store.dispatch(isApp())
 
 let TipComponent = connect(
   (state) => ({error: state.error})
@@ -24,7 +25,7 @@ let TipComponent = connect(
 render((
   <Provider store={store}>
     <div className='page'>
-      <TipComponent clear={
+      <TipComponent isApp={isapp} clear={
         () => store.dispatch({type: 'CLEAR_ERROR'})
       } />
       <Router history={hashHistory} routes={routes} />

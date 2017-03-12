@@ -14,10 +14,10 @@ export default class Tip extends Component {
     }
   }
   render () {
-    let {error = {}, clear} = this.props
+    let {error = {}, clear, isApp} = this.props
     error.message && this.clear()
     return (
-      <div onClick={clear} className={`error-tip ${error.message ? 'show' : ''}`}>
+      <div onClick={clear} className={`error-tip ${isApp ? 'app' : ''} ${error.message ? 'show' : ''}`}>
         {error.message}
       </div>
     )

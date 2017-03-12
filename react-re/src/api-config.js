@@ -1,6 +1,6 @@
 import axios from 'axios'
 const baseCfg = {
-  timeout: 2000,
+  timeout: 5000,
   finger: null
 }
 
@@ -10,7 +10,7 @@ const token = () => {
 }
 
 const createInstance = (config) => {
-  return axios(Object.assign({}, {timeout: 1000}, config))
+  return axios(Object.assign({}, baseCfg, config))
 }
 
 axios.interceptors.request.use((config) => {
