@@ -1,0 +1,79 @@
+.ide {
+  height: 100%;
+  flex-direction: row;
+  display: flex;
+}
+.ideEditor {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.header {
+  display: flex;
+  flex-flow: row;
+  background: #21252b;
+}
+.header .save {
+  width: 47px;
+  color: #ff9800;
+  text-align: center;
+  padding: 4px 0;
+  cursor: default;
+}
+.tabs {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  color: rgba(157, 165, 180, 0.6);
+  line-height: 36px;
+  height: 36px;
+  cursor: default;
+}
+.tab {
+  flex: 1;
+  text-align: center;
+}
+.tab.active {
+  color: #ff9800;
+  background: rgba(157, 165, 180, 0.5);
+}
+.editorContainer {
+  flex: 5;
+}
+.editor {
+  height: 100%;
+  background: #282c34;
+}
+.debug {
+  flex: 1;
+  background-color: #21252b;
+  color: #fff;
+  padding: 10px;
+  overflow-y: auto;
+  line-height: 24px;
+}
+.error, .log {
+  font-size: 14px;
+}
+.log span:first-child, .error span:first-child {
+  color: #ff9800;
+  font-size: 12px;
+}
+.error span:last-child {
+  color: red;
+}
+.log span:last-child {
+  color: #52d9e2;
+}
+.result {
+  flex: 1;
+}
+.result {
+  display: flex;
+  flex-direction: column;
+}
+.result iframe {
+  outline: none;
+  border: none;
+  flex: 1;
+}

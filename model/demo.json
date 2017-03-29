@@ -1,0 +1,10 @@
+{
+  "name": "demo",
+  "plural": "demos",
+  "prototype": {
+    "script": "String",
+    "html": "String",
+    "css": "String",
+    "createTime": "Date"
+  }
+}
