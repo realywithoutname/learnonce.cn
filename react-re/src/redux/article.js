@@ -39,4 +39,10 @@ export default class ArticleReducer {
   [AAS.READING] (state, action) {
     return Object.assign({}, state, {reading: action.id})
   }
+  [AAS.ARTICLE_FILTER] (state, action) {
+    let filter = Object.assign({}, state.filter)
+    filter.offset = 0
+    filter[action.key] = Object.assign(filter[action.key], action.filter)
+    return Object.assign({}, state, {filter, data: []})
+  }
 }

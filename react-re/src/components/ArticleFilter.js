@@ -8,11 +8,9 @@ export default class ArticleList extends Component {
     this.filterChange = throttle(this.props.filterChange, 1000)
   }
   render () {
-    let {searchStart, searchEnd, barToTop} = this.props
+    let {searchStart, searchEnd} = this.props
     return (
-      <div className={
-        barToTop ? style.topArticleFilter : style.articleFilter
-      }>
+      <div className={style.filter}>
         <input type="search"
           onBlur={searchEnd}
           onFocus={searchStart}

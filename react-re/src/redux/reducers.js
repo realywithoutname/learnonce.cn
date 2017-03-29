@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 import ArticleReducer from './article'
 import NewsReducer from './news'
 import EditorReducer from './editor'
+import DemoReducer from './demo'
 const initState = {
   article: {
     data: {},
@@ -38,6 +39,7 @@ const initState = {
         'star',
         'content',
         'from',
+        'link',
         'pubTime',
         'image'
       ],
@@ -57,13 +59,21 @@ const initState = {
     content: '',
     tags: '',
     description: '',
-    loading: false
+    loading: false,
+    translated: false
+  },
+  demo: {
+    id: '',
+    css: '',
+    html: '',
+    script: ''
   }
 }
 const reducers = {}
 const AR = new ArticleReducer()
 const NR = new NewsReducer()
 const ER = new EditorReducer()
+const DR = new DemoReducer()
 reducers.articles = (state = initState.article, action) => {
   return AR[action.type] ? AR[action.type](state, action) : state
 }
@@ -72,6 +82,9 @@ reducers.editor = (state = initState.editor, action) => {
 }
 reducers.news = (state = initState.news, action) => {
   return NR[action.type] ? NR[action.type](state, action) : state
+}
+reducers.demo = (state = initState.demo, action) => {
+  return DR[action.type] ? DR[action.type](state, action) : state
 }
 reducers.isApp = function (state = false, action) {
   return action.type === 'IS-APP' ? true : state

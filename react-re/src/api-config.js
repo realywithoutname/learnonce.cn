@@ -45,4 +45,10 @@ API.Feed.find = filter => createInstance({method: 'GET', url: '/api/feeds', para
 API.Tag = {}
 API.Tag.find = filter => createInstance({method: 'GET', url: '/api/tags', params: {filter}})
 
+API.Demo = {}
+API.Demo.create = data => createInstance({method: 'POST', url: '/api/demos', data})
+API.Demo.find = filter => createInstance({method: 'GET', url: '/api/demos', params: {filter}})
+API.Demo.findById = id => createInstance({method: 'GET', url: `/api/demos/${id}`})
+API.Demo.updateById = (id, data) => createInstance({method: 'PUT', url: `/api/demos/${id}`, data})
+API.Demo.deleteById = id => createInstance({method: 'DELETE', url: `/api/demos/${id}`})
 export default API

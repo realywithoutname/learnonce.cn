@@ -21,13 +21,15 @@ class Base {
     return this.model.findById(id).select(fields.join(''));
   }
   * updateById (id, data) {
-    return this.model.findByIdAndUpdate(id, data);
+    data = yield this.model.findByIdAndUpdate(id, data);
+    return this.model.findById(data._id);
   }
   * insertMany (array) {
     return this.model.insertMany(array);
   }
   * create (instance) {
-    return this.model.insertMany([instance])
+    data = yield this.model.create(instance)
+    return this.model.findById(data._id);
   }
   * distroyById (id) {
     return this.model.findByIdAndRemove(id)

@@ -4,13 +4,8 @@ const tab = '  '
 export default class EditorContainer extends Component {
   constructor (props) {
     super(props)
-    let article = props.article || {}
     this.state = {
-      onlyEditor: false,
-      title: article.title || '',
-      description: article.description || '',
-      tags: article.tags || '',
-      content: article.content || ''
+      onlyEditor: false
     }
   }
   tabPress (e) {
@@ -37,8 +32,8 @@ export default class EditorContainer extends Component {
     return typeof val === 'number'
   }
   render () {
-    let {inputChange, contentChange, descChange, tagsChange, save, clear} = this.props
-    let {title, description, tags, content} = this.props.article
+    let {inputChange, contentChange, descChange, isTranslate, tagsChange, save, clear} = this.props
+    let {title, description, tags, content, translated} = this.props.article
     return (
       <div className={style.editor}>
         <div className={
@@ -85,6 +80,10 @@ export default class EditorContainer extends Component {
           }} className={
             `${this.state.onlyEditor ? 'active' : ''} material-icons`
           }>import_export</i>
+          <i style={{textAlign: 'center'}} className={
+            `${translated ? 'active' : ''} material-icons`
+          }
+          onClick={isTranslate}>translate</i>
           <i onClick={save} className="material-icons">send</i>
         </div>
       </div>

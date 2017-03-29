@@ -6,15 +6,15 @@ const md = new Remarkable({
     return hljs.highlightAuto(code, [lang]).value
   }
 })
-import * as style from 'styles/article.css'
+import * as style from 'styles/view-page.css'
 export default class ArticleList extends Component {
   render () {
     let {article, reading, close} = this.props
     return (
       <div
-      className={`${style.page} ${reading === -1 ? style.pageHidden : style.pageShow}`}
+      className={`${style.view} ${reading === -1 ? style.hidden : style.show}`}
       >
-        <header>
+        <header className={style.header}>
           <i onClick={close} className="material-icons">keyboard_backspace</i>
           <span>{article && article.title}</span>
           <i onClick={close} className="material-icons">clear</i>

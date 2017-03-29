@@ -1,7 +1,5 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-// import {Link} from 'react-router'
-import * as style from 'styles/news.css'
 import Scroller from 'components/Scroller'
 import NewsHeader from 'components/NewsHeader'
 import NewsList from 'components/NewsList'
@@ -29,10 +27,9 @@ class News extends Component {
     }
   }
   render () {
-    let {isApp, news, dispatch} = this.props
+    let {news, dispatch} = this.props
     return (
-      <section
-        className={isApp ? style.appPage : ''}>
+      <section className="container">
         <NewsHeader></NewsHeader>
         <Scroller
         dispatch={dispatch}

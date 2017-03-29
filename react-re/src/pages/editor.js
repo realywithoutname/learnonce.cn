@@ -4,10 +4,7 @@ import * as style from 'styles/edit.css'
 import EditorContainer from 'components/Editor'
 import Previewer from 'components/Previewer'
 import {
-  changeTitle,
-  changeContent,
-  changeTags,
-  changeDescription,
+  changeEditor,
   saveArticle,
   clearEditor
 } from 'src/redux/actions'
@@ -19,22 +16,25 @@ class Editor extends Component {
         <EditorContainer
         article={editor}
         contentChange={(e) => {
-          dispatch(changeContent(e.target.value))
+          dispatch(changeEditor({content: e.target.value}))
         }}
         inputChange={(e) => {
-          dispatch(changeTitle(e.target.value))
+          dispatch(changeEditor({title: e.target.value}))
         }}
         tagsChange={(e) => {
-          dispatch(changeTags(e.target.value))
+          dispatch(changeEditor({tags: e.target.value}))
         }}
         descChange={(e) => {
-          dispatch(changeDescription(e.target.value))
+          dispatch(changeEditor({description: e.target.value}))
         }}
         save={() => {
           dispatch(saveArticle())
         }}
         clear={() => {
           dispatch(clearEditor())
+        }}
+        isTranslate={() => {
+          dispatch(changeEditor({translated: !editor.translated}))
         }}
         ></EditorContainer>
         <Previewer

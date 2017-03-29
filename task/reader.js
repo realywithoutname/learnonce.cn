@@ -13,7 +13,7 @@ const NewsModel = new BaseService(News);
 let reader = new Reader()
 
 function formatItem (item) {
-  item.content = item.content.replace(
+  item.content = item.content && item.content.replace(
     /<img.+?src=\"/g, '<img onerror="imgloadError()" src=\"'
   ).replace(
     /\<script.+?\<\/script\>|\<style.+?\<\/style\>/g, ' '
@@ -43,7 +43,7 @@ reader.on('news-fecthed', (data) => {
 })
 
 function* loadReader () {
-  let feeds = yield FeedModel.find({})
+  let feeds = yield FeedModel.find({limit: 1000})
   feeds.forEach((feed) => {
     feed = feed.toJSON()
     feed.url = feed.link
@@ -62,7 +62,7 @@ function IntervalClearFeed () {
 }
 
 co(function* () {
-  IntervalClearFeed()
+  // IntervalClearFeed()
   yield loadReader()
 }).catch((err) => {
   console.log(err);

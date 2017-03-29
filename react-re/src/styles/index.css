@@ -1,42 +1,71 @@
 .page {
-  background: rgb(26, 27, 45);
   height: 100%;
   margin: 0;
+  position: relative;
 }
-.appPage {
-  padding-top: 20px;
-  height: 100%;
-  background: rgb(26, 27, 45);
+
+.page h1 {
+  font-family: Papyrus;
+  color: rgb(255, 152, 0);
+  z-index: 0;
+  position: absolute;
+  text-align: center;
+  font-size: 48px;
+  width: 100%;
+  top: 30%;
+  white-space: nowrap;
 }
 .finger {
   position: fixed;
-  bottom: 25px;
+  bottom: 16px;
   text-align: center;
   width: 100%;
-  color: rgb(37, 38, 58);
+  color: rgba(82, 82, 82, 0.1);
 }
 .links {
-  width: 200px;
-  height: 80px;
-  margin: auto;
-  top: 50%;
-  position: fixed;
-  left: 50%;
+  position: absolute;
   display: flex;
-  flex-flow: column;
+  flex-direction: row;
+  top: 50%;
+  width: 100%;
   justify-content: center;
-  transform: translate(-50%, -50%);
+  font-family: Calibri;
+  font-size: 24px;
+  line-height: 36px;
 }
 .links a {
-  color: #fff;
-  text-align: center;
-  box-shadow: 0 0 2px 1px rgba(254, 91, 122, 0.5);
-  border-radius: 3px;
+  color: rgba(6, 0, 255, 0.28);
+  font-weight: 200;
+  margin: 0 15px;
   text-decoration: none;
-  line-height: 30px;
-  font-size: 16px;
-  height: 30px;
-  margin: 5px;
+  text-align: center;
 }
-.page a {
+/*.justspan {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+.justspan span {
+  width: 100px;
+  height: 100px;
+  box-shadow: 0 0 1px rgb(82, 82, 82);
+  display: inline-block;
+}*/
+@media (max-width: 600px) {
+  .page {
+    background: rgb(26, 27, 45);
+  }
+  .page h1 {
+    top: 48px;
+    font-size: 48px;
+  }
+  .links {
+    top: 30%;
+    /*display: none;*/
+    flex-direction: column;
+  }
+  .links a {
+    flex: 1;
+    color: #ababad;
+  }
 }

@@ -4,6 +4,7 @@ import * as style from 'styles/article.css'
 import {
   fecthArticlesIfNeeded,
   filterArticlesWithKeyword,
+  setFecthArticlesFilter,
   articleSearchStart,
   articleSearchEnd,
   articleReading,
@@ -18,6 +19,9 @@ import ArticleHeader from 'components/ArticleHeader'
 import ArticleFilter from 'components/ArticleFilter'
 class Blog extends Component {
   componentDidMount () {
+    this.props.dispatch(setFecthArticlesFilter({
+      key: 'where', filter: {translated: {$ne: true}}
+    }))
     this.props.dispatch(fecthArticlesIfNeeded())
   }
   reading (article) {
@@ -44,10 +48,9 @@ class Blog extends Component {
     const {dispatch, article, isApp, scroll, isAuth} = this.props
     const barToTop = isApp || (scroll.curTop > 56 || article.searching)
     return (
-      <section className={isApp ? style.appPage : ''}>
-        <ArticleHeader isAuth={isAuth} barToTop={barToTop} />
+      <section className={barToTop && style.toTop}>
+        <ArticleHeader isAuth={isAuth} />
         <ArticleFilter
-          barToTop={barToTop}
           className={style.hidden}
           filterChange={this.filterChange.bind(this)}
           searchEnd={() => dispatch(articleSearchEnd())}
@@ -56,12 +59,12 @@ class Blog extends Component {
           onScroll={this.readMore.bind(this)}
           dispatch={dispatch}>
           <ArticleList
-            barToTop={barToTop}
             isAuth={isAuth}
             edit={(article) => {
               dispatch(editArticle(article))
             }}
-            reading={article.reading !== -1}
+            form="blog"
+            reading={article.reading}
             className={style.hiddenList}
             articles={article.data}
             preview={this.reading.bind(this)} />

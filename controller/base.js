@@ -2,6 +2,9 @@ class BaseCtrl {
   constructor (Service) {
     this.service = new Service;
   }
+  * create (ctx, next) {
+    ctx.body = yield this.service.create(ctx.request.body || {})
+  }
   * find (ctx, next) {
     ctx.body = yield this.service.find(ctx.query.filter || {});
   }

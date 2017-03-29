@@ -41,7 +41,6 @@ export function throttle (fn, interval) {
     if (timer) {
       return
     }
-
     timer = setTimeout(() => {
       clearTimeout(timer)
       timer = null

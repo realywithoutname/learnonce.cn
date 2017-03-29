@@ -25,7 +25,6 @@ class NoteCtrl extends BaseCtrl {
   }
   * create (ctx) {
     let data = yield Note.create(ctx.request.body);
-    data = data[0]
     if (data.tags) {
       let tags = data.tags.split(',')
       for (var i = 0; i < tags.length; i++) {

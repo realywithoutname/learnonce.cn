@@ -6,6 +6,22 @@ function blog () {
     })
   }
 }
+function article () {
+  this.path = '/**/article/:id'
+  this.getComponent = (nextstate, cb) => {
+    require.ensure([], (require) => {
+      cb(null, require('pages/article').default)
+    })
+  }
+}
+function translate () {
+  this.path = '/translate'
+  this.getComponent = (nextstate, cb) => {
+    require.ensure([], (require) => {
+      cb(null, require('pages/translate').default)
+    })
+  }
+}
 function news () {
   this.path = 'news'
   this.getComponent = (nextstate, cb) => {
@@ -30,18 +46,25 @@ function editor () {
     })
   }
 }
+function ide () {
+  this.path = 'ide'
+  this.getComponent = (nextstate, cb) => {
+    require.ensure([], (require) => {
+      cb(null, require('pages/ide').default)
+    })
+  }
+}
+
 function root () {
   this.path = '/'
   this.component = require('pages/index').default
 }
 const createRoute = (R) => {
   let route = new R()
-  if (route.childRoutes) {
-    route.childRoutes = route.childRoutes.map((r) => {
-      return createRoute(r)
-    })
-  }
+  route.childRoutes = route.childRoutes && route.childRoutes.map(r => createRoute(r))
   return route
 }
 
-export default [root, me, news, blog, editor].map((route) => createRoute(route))
+export default [
+  root, me, news, blog, editor, ide, article, translate
+].map((route) => createRoute(route))

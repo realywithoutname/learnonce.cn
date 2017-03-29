@@ -6,8 +6,8 @@ CACHE MANIFEST
 #      +++++++             ++++++++++++
 #         +                       +
 #         +                       +
-#         +
-#         +
+#         +                   +
+#         +                      +
 #
 #
 #
@@ -28,6 +28,8 @@ CACHE:
 /assets/2.app.js.map
 /assets/3.app.js
 /assets/3.app.js.map
+/assets/4.app.js
+/assets/4.app.js.map
 /assets/app.js
 /assets/app.js.map
 NETWORK:

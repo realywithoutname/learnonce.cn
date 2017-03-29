@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import * as style from 'styles/news.css'
+import * as style from 'styles/view-page.css'
 export default class ArticleList extends Component {
   render () {
     let {news, reading, close} = this.props
     return (
       <div
-      className={`${style.page} ${style.newsContent} ${reading === -1 ? style.pageHidden : style.pageShow}`}
+      className={`${style.view} ${reading === -1 ? style.hidden : style.show}`}
       >
-        <header>
+        <header className={style.header}>
           <i onClick={close} className="material-icons">keyboard_backspace</i>
           <span>{news && news.title}</span>
           <i onClick={close} className="material-icons">clear</i>
@@ -19,7 +19,7 @@ export default class ArticleList extends Component {
         onTouchMove={(e) => {
           e.stopPropagation()
         }}
-        className={`markdown-body ${style.markdown}`}
+        className={`markdown-body ${style.content}`}
         dangerouslySetInnerHTML={{__html: news && news.content}}
         >
         </div>

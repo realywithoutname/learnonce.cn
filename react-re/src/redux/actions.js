@@ -3,6 +3,7 @@ import { hashHistory } from 'react-router'
 
 export const AAS = {
   ADD_ARTICLE: 'ADD_ARTICLE',
+  ARTICLE_FILTER: 'ARTICLE_FILTER',
   REQUEST_STATE: 'ARTICLE_REQUEST_STATE',
   ARTICLE_SEARCH_STATE: 'ARTICLE_SEARCH_STATE',
   ARTICLE_FILTER_KEYWORD: 'ARTICLE_FILTER_KEYWORD',
@@ -28,6 +29,10 @@ export function scrolling (info) {
 
 export function lockScroll (lock) {
   return {type: 'LOCK_SCROLL', lock}
+}
+
+export function setFecthArticlesFilter ({key, filter}) {
+  return {type: AAS.ARTICLE_FILTER, key, filter}
 }
 
 export function articleSearchStart () {
@@ -58,7 +63,7 @@ function fetchArticles (filter, hook = () => {}) {
       .then(() => hook())
   }
 }
-function fetchArticleContent (id) {
+export function fetchArticleContent (id) {
   return dispatch => {
     dispatch({type: AAS.REQUEST_STATE, loading: true})
     API.Note.findById(id)
@@ -163,44 +168,37 @@ export function fecthNewsIfNeeded () {
   }
 }
 export const EAS = {
-  CHANGE_TITLE: 'EDITOR_CHANGE_TITLE',
-  CHANGE_TAGS: 'EDITOR_CHANGE_TAGS',
-  CHANGE_DESCRIPTION: 'EDITOR_CHANGE_DESCRIPTION',
+  CHANGE_EDITOR: 'EDITOR_CHANGE_EDITOR',
   REQUEST_STATE: 'EDITOR_REQUEST_STATE',
   CHANGE_CONTNET: 'EDITOR_CHANGE_CONTNET',
-  SAVE_STATE: 'EDITOR_SAVE_STATE',
   CLEAR: 'EDITOR_CLEAR',
   FETCH_ARTICLE_FINISH: 'EDITOR_FETCH_ARTICLE_FINISH'
 }
-export function changeTitle (title) {
-  return {type: EAS.CHANGE_TITLE, title}
-}
-export function changeContent (content) {
-  return {type: EAS.CHANGE_CONTNET, content}
-}
-export function changeTags (tags) {
-  return {type: EAS.CHANGE_TAGS, tags}
-}
-export function changeDescription (description) {
-  return {type: EAS.CHANGE_DESCRIPTION, description}
+export function changeEditor (content) {
+  return {type: EAS.CHANGE_EDITOR, content}
 }
 export function saveArticle () {
   return (dispatch, getState) => {
     let editor = getState().editor
-    editor.createTime = new Date()
+    editor.createTime = editor.id ? editor.createTime : new Date()
+    dispatch({type: EAS.REQUEST_STATE, loading: true})
+    if (editor.loading) {
+      return
+    }
     let request = editor.id ?
       API.Note.updateById(editor.id, editor) : API.Note.create(editor)
-    dispatch({type: EAS.REQUEST_STATE, loading: true})
-    request.catch(({message}) => dispatch({
-      type: 'ERROR', error: {message}
-    }))
+    request
     .then(({data}) => {
-      dispatch({type: EAS.REQUEST_STATE, loading: false})
       dispatch({type: EAS.FETCH_ARTICLE_FINISH, article: data})
+      dispatch({type: EAS.REQUEST_STATE, loading: false})
     })
     .then(() => dispatch({
       type: 'ERROR', error: {message: '保存成功'}
     }))
+    .catch(({message}) => {
+      dispatch({type: 'ERROR', error: {message}})
+      dispatch({type: EAS.REQUEST_STATE, loading: false})
+    })
   }
 }
 export function clearEditor () {
@@ -208,6 +206,7 @@ export function clearEditor () {
 }
 export function editArticle (article) {
   return dispatch => {
+    dispatch({type: EAS.CLEAR})
     dispatch({type: EAS.REQUEST_STATE, loading: true})
     API.Note.findById(article._id)
       .then(({data}) => dispatch({
@@ -222,5 +221,34 @@ export function editArticle (article) {
         })
         hashHistory.push('/editor')
       })
+  }
+}
+
+export const DAS = {
+  SET_CONTENT: 'DEMO_SET_CONTENT',
+  REQUEST_STATE: 'DEMO_REQUEST_STATE',
+  FETCH_ARTICLE_FINISH: 'DEMO_FETCH_ARTICLE_FINISH'
+}
+
+export function setDemoContent (content) {
+  return {type: DAS.SET_CONTENT, content}
+}
+
+
+export function saveDemo () {
+  return (dispatch, getState) => {
+    let demo = getState().demo
+    dispatch(setDemoContent({loading: true}))
+    if (demo.loading) {
+      return
+    }
+    demo.createTime = demo.id ? demo.createTime : new Date()
+    let request = demo.id ? API.Demo.updateById(demo.id, demo) : API.Demo.create(demo)
+    request.then(({data}) => {
+      dispatch({type: DAS.REQUEST_STATE, loading: false})
+      dispatch({type: DAS.FETCH_ARTICLE_FINISH, demo: data})
+      dispatch({type: 'ERROR', error: {message: '保存成功'}})
+    }).catch(({message}) => dispatch({type: 'ERROR', error: {message}}))
+    .then(() => dispatch({type: DAS.REQUEST_STATE, loading: false}))
   }
 }
