@@ -28,7 +28,8 @@ class Base {
     return this.model.insertMany(array);
   }
   * create (instance) {
-    data = yield this.model.create(instance)
+    let data = yield this.model.create(instance)
+    console.log(data);
     return this.model.findById(data._id);
   }
   * distroyById (id) {
