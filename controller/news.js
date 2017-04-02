@@ -18,7 +18,7 @@ class NewsCtrl extends BaseCtrl {
       news.description = this._getFirstTagP(news.content)
     })
   }
-  _getFirstTagP (data) {
+  _getFirstTagP (data = '') {
     let p = data.match(/.*?<\/p>/);
     p = p === null ? data : p[0];
     let str = this._getString(p)

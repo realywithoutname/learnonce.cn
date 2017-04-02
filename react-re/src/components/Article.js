@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Remarkable from 'remarkable'
 import hljs from 'highlight.js'
 const md = new Remarkable({
+  html: true,
   highlight: function (code, lang) {
     return hljs.highlightAuto(code, [lang]).value
   }

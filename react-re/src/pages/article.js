@@ -5,6 +5,7 @@ import Remarkable from 'remarkable'
 import hljs from 'highlight.js'
 import {Link} from 'react-router'
 const md = new Remarkable({
+  html: true,
   highlight: function (code, lang) {
     return hljs.highlightAuto(code, [lang]).value
   }
