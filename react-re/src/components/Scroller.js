@@ -6,6 +6,14 @@ export default class Scroller extends Component {
     super(props)
     this.scrolling = throttle(this.scroll(), 10)
   }
+  componentWillUnmount () {
+    this.props.dispatch(scrolling({
+      curTop: 0,
+      scrollHeight: 0,
+      height: 0,
+      direction: false
+    }))
+  }
   scroll () {
     let {dispatch, onScroll} = this.props
     let lastTop = 0
@@ -13,19 +21,25 @@ export default class Scroller extends Component {
       let top = el.scrollTop
       let scrollHeight = el.scrollHeight
       let height = el.offsetHeight
+      onScroll && onScroll({
+        curTop: top,
+        scrollHeight,
+        height,
+        direction: top > lastTop
+      })
       dispatch(scrolling({
         curTop: top,
         scrollHeight,
         height,
         direction: top > lastTop
       }))
-      onScroll && onScroll(el)
       lastTop = top
     }
   }
   render () {
     return (
       <div
+        className={this.props.className}
         onScroll={(e) => {
           e.persist()
           this.scrolling(e.target)

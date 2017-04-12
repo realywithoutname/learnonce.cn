@@ -14,7 +14,7 @@ export default class ArticleReducer {
       return articles
     }, oldArticles)
   }
-  [AAS.ARTICLE_REQUEST_STATE] (state, action) {
+  [AAS.REQUEST_STATE] (state, action) {
     return Object.assign({}, state, {loading: action.loading})
   }
   [AAS.ARTICLE_SEARCH_STATE] (state, action) {

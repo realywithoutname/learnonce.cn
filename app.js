@@ -23,4 +23,3 @@ app.on('error', function (err, ctx) {
 });
 app.listen(3000)
 console.info('server listen on %s', 3000)
-// task();

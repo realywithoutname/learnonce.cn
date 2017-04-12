@@ -1,5 +1,5 @@
 import API from 'src/api-config'
-import { hashHistory } from 'react-router'
+import { browserHistory } from 'react-router'
 
 export const AAS = {
   ADD_ARTICLE: 'ADD_ARTICLE',
@@ -49,8 +49,12 @@ function addArticle (article) {
 
 function fetchArticles (filter, hook = () => {}) {
   return (dispatch, getState) => {
+    let article = getState().articles
+    filter = filter || article.filter
+    if (article.loading) {
+      return hook()
+    }
     dispatch({type: AAS.REQUEST_STATE, loading: true})
-    filter = filter || getState().articles.filter
     API.Note.find(filter)
       .then(res => res.data)
       .then(data => dispatch(addArticle(data)))
@@ -101,9 +105,9 @@ export function fetchMoreArticle () {
     dispatch(fetchArticles(null, () => dispatch(lockScroll(false))))
   }
 }
-export function fecthArticlesIfNeeded () {
+export function fecthArticlesIfNeeded (filter) {
   return (dispatch) => {
-    return dispatch(fetchArticles())
+    return dispatch(fetchArticles(filter))
   }
 }
 
@@ -121,8 +125,11 @@ function addNews (news) {
 
 function fetchNews (filter, hook = () => {}) {
   return (dispatch, getState) => {
-    let state = getState()
-    filter = filter || state.news.filter
+    let state = getState().news
+    filter = filter || state.filter
+    if (state.loading) {
+      return hook(filter)
+    }
     dispatch({type: NAS.REQUEST_STATE, loading: true})
     API.News.find(filter)
       .then(({data}) => dispatch(addNews(data)))
@@ -219,7 +226,7 @@ export function editArticle (article) {
         dispatch({
           type: EAS.REQUEST_STATE, loading: false
         })
-        hashHistory.push('/editor')
+        browserHistory.push('/editor')
       })
   }
 }

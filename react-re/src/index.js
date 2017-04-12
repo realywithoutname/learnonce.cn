@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import { Router, hashHistory } from 'react-router'
+import { Router, browserHistory } from 'react-router'
 import { connect } from 'react-redux'
 
 import routes from './route'
@@ -28,7 +28,7 @@ render((
       <TipComponent isApp={isapp} clear={
         () => store.dispatch({type: 'CLEAR_ERROR'})
       } />
-      <Router history={hashHistory} routes={routes} />
+      <Router history={browserHistory} routes={routes} />
     </div>
   </Provider>
 ), document.getElementById('app'))

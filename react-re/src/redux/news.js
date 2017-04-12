@@ -13,6 +13,9 @@ export default class NewsReducer {
   [NAS.ADD_NEWS] (state, action) {
     return Object.assign({}, state, {data: this.setNews(action.news, state.data)})
   }
+  [NAS.REQUEST_STATE] (state, action) {
+    return Object.assign({}, state, {loading: action.loading})
+  }
   [NAS.PULL_MORE] (state) {
     let filter = Object.assign({}, state.filter)
     filter.offset += filter.limit

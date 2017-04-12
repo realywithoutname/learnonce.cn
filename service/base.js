@@ -21,6 +21,7 @@ class Base {
     return this.model.findById(id).select(fields.join(''));
   }
   * updateById (id, data) {
+    data.updateTime = new Date()
     data = yield this.model.findByIdAndUpdate(id, data);
     return this.model.findById(data._id);
   }
