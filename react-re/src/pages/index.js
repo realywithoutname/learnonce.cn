@@ -38,13 +38,13 @@ class Index extends Component {
         <h1>
           Just so so.
         </h1>
-        <div className={style.justspan}>
-          <span></span>
+        <div className={style.justLogo}>
+          <img src="/static/image/logo-copy.png" />
         </div>
         <div className={style.links}>
-          <Link to="/blog">Article</Link>
-          <Link to="/news">News</Link>
-          <Link to="/Translate">Translate</Link>
+          <Link to="/blog">My Notes</Link>
+          <Link to="/news">World Daily</Link>
+          <Link to="/Translate">Translate Texts</Link>
         </div>
         <div className={style.welcome}>
           <span>Welcome, guy !</span>

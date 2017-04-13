@@ -44,7 +44,6 @@
   z-index: 1;
   transition: all ease .8s;
   justify-content: center;
-  font-family: Calibri;
   font-size: 24px;
   line-height: 56px;
   height: 56px;
@@ -56,7 +55,14 @@
   margin: 0 15px;
   text-decoration: none;
   text-align: center;
+  font-family: serif;
 }
+
+.links a:hover {
+  font-weight: bold;
+  color: rgb(255, 152, 0);
+}
+
 .scrolling h1 {
   margin: 0;
   top: 0;
@@ -96,7 +102,7 @@
   overflow: hidden;
 }
 .scrollTable {
-  min-width: 700px;
+  min-width: 600px;
   width: 70%;
   max-width: 1024px;
   padding: 48px 36px;
@@ -105,7 +111,7 @@
   height: 100%;
   position: relative;
   transition: all ease .8s;
-  background: rgba(157, 67, 67, 0.87);
+  background: #ca3d3d;
 }
 .scrollTable ul {
   height: 100%;
@@ -130,6 +136,9 @@
   height: 48px;
   line-height: 48px;
 }
+.scrollTable ul li:hover a {
+  color: rgb(255, 152, 0);
+}
 .scrollTable ul li time {
   width: 100px;
   font-size: 14px;
@@ -137,6 +146,9 @@
 }
 .scrollTable ul li a {
   flex: 1;
+  font-weight: initial;
+  color: #999;
+  text-shadow: 0px -1px rgba(91, 91, 91, 0.59);
 }
 .scrolling .scrollTable {
   height: 85%;
@@ -155,19 +167,73 @@
   width: 100%;
   color: rgba(82, 82, 82, 0.1);
 }
-
+.justLogo {
+  display: none;
+}
 @media (max-width: 600px) {
+  .page {
+    background: rgba(26, 27, 45, 0.7);
+    border: none;
+  }
+  .page::before {
+    background: url(/static/image/bg-index.png);
+    filter: blur(15px);
+    z-index: -1;
+    width: calc(100% + 60px);
+    transform: translate(-30px, -30px);
+    height: calc(100% + 60px);
+  }
+  .page .articles, .page .welcome {
+    display: none;
+  }
   .page h1 {
-    top: 48px;
-    font-size: 48px;
+    top: calc(15% + 74px);
+    font-size: 36px;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 1px -2px rgb(255, 152, 0);
+  }
+  .justLogo {
+    height: 64px;
+    text-align: center;
+    display: block;
+    position: absolute;
+    width: 100%;
+    top: 15%;
+  }
+  .justLogo img {
+    height: 100%;
+  }
+  .finger {
+    color: rgba(0, 0, 0, 0.2);
+    text-shadow: 0 -1px rgba(255, 255, 255, 0.2);
   }
   .links {
-    top: 30%;
-    /*display: none;*/
+    bottom: 120px;
+    top: auto;
     flex-direction: column;
+    font-size: 16px;
+    line-height: 36px;
+    height: 36px;
   }
   .links a {
     flex: 1;
-    color: #ababad;
+    margin: auto;
+    width: auto;
+    color: rgb(255, 152, 0);
+    position: relative;
+    white-space: nowrap;
+  }
+  .links a::after {
+    content: '';
+    position: absolute;
+    height: 28px;
+    width: 140px;
+    left: 50%;
+    top: 50%;
+    border-radius: 2px;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 1px 0px rgb(255, 152, 0);
+    display: inline-block;
   }
 }
