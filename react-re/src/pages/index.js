@@ -17,7 +17,7 @@ class Index extends Component {
   componentDidMount () {
     this.props.dispatch(fecthArticlesIfNeeded({
       fields: [
-        'id', 'title', 'createTime', 'updateTime', 'translated'
+        'id', 'title', 'updateTime', 'translated', 'sourceUrl'
       ],
       sort: {createTime: -1},
       limit: 1000
@@ -57,11 +57,19 @@ class Index extends Component {
               let post = article[key]
               return (
                 <li key={key}>
-                <Link to={
-                  `/${post.translated ? 'translate' : 'blog'}/article/${post._id}`
-                }>
-                {post.title}
-                </Link>
+                  {
+                    article[key].sourceUrl ? (
+                      <a onClick={(e) => {
+                        e.stopPropagation()
+                      }} href={article[key].sourceUrl} target="_blank">{article[key].title}</a>
+                    ) : (
+                      <Link to={
+                        `/${post.translated ? 'translate' : 'blog'}/article/${post._id}`
+                      }>
+                      {post.title}
+                      </Link>
+                    )
+                  }
                 <time>{
                   formatDate(post.updateTime, 'yyyy/MM/dd')
                 }</time>
