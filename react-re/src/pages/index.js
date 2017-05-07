@@ -4,7 +4,7 @@ import {Link} from 'react-router'
 import * as style from 'styles/index.css'
 import Scroller from 'components/Scroller'
 import {formatDate} from 'src/util'
-import {fecthArticlesIfNeeded} from 'src/redux/actions'
+import {fecthArticlesIfNeeded, destroyArticle} from 'src/redux/actions'
 
 class Index extends Component {
   constructor (props) {
@@ -59,9 +59,7 @@ class Index extends Component {
                 <li key={key}>
                   {
                     article[key].sourceUrl ? (
-                      <a onClick={(e) => {
-                        e.stopPropagation()
-                      }} href={article[key].sourceUrl} target="_blank">{article[key].title}</a>
+                      <a href={article[key].sourceUrl} target="_blank">{article[key].title}</a>
                     ) : (
                       <Link to={
                         `/${post.translated ? 'translate' : 'blog'}/article/${post._id}`
@@ -73,6 +71,11 @@ class Index extends Component {
                 <time>{
                   formatDate(post.updateTime, 'yyyy/MM/dd')
                 }</time>
+                {
+                  isAuth && (<span onClick={() => {
+                    dispatch(destroyArticle(key))
+                  }}>×</span>)
+                }
                 </li>
               )
             })

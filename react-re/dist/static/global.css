@@ -122,3 +122,13 @@ input{ -webkit-appearance: none;}
   transition: all ease 0.3s;
   height: 56px;
 }
+.error-tip button {
+  float: right;
+  height: 100%;
+  margin: 0 8px;
+  color: #ff9800;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 18px;
+}

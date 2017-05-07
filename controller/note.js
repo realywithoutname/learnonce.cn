@@ -9,6 +9,9 @@ class NoteCtrl extends BaseCtrl {
     super(NoteService);
   }
   * afterDeleteById (ctx, next) {
+    if (!ctx.body) {
+      throw new Error('不存在该对象')
+    }
     let tags = ctx.body.tags
     if (tags) {
       tags = tags.split(',')

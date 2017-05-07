@@ -45,4 +45,9 @@ export default class ArticleReducer {
     filter[action.key] = Object.assign(filter[action.key], action.filter)
     return Object.assign({}, state, {filter, data: []})
   }
+  [AAS.DESTROY_BY_ID] (state, action) {
+    let data = state.data
+    delete data[action.id]
+    return Object.assign({}, state, {data})
+  }
 }

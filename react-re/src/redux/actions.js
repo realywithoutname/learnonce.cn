@@ -1,16 +1,7 @@
 import API from 'src/api-config'
 import { browserHistory } from 'react-router'
 
-export const AAS = {
-  ADD_ARTICLE: 'ADD_ARTICLE',
-  ARTICLE_FILTER: 'ARTICLE_FILTER',
-  REQUEST_STATE: 'ARTICLE_REQUEST_STATE',
-  ARTICLE_SEARCH_STATE: 'ARTICLE_SEARCH_STATE',
-  ARTICLE_FILTER_KEYWORD: 'ARTICLE_FILTER_KEYWORD',
-  PULL_MORE: 'ARTICLE_PULL_MORE',
-  READING: 'ARTICLE_READING',
-  CONTENT_LOADED: 'ARTICLE_CONTENT_LOADED'
-}
+
 export function isApp () {
   return {type: 'IS-APP'}
 }
@@ -29,6 +20,36 @@ export function scrolling (info) {
 
 export function lockScroll (lock) {
   return {type: 'LOCK_SCROLL', lock}
+}
+
+export const AAS = {
+  ADD_ARTICLE: 'ADD_ARTICLE',
+  ARTICLE_FILTER: 'ARTICLE_FILTER',
+  REQUEST_STATE: 'ARTICLE_REQUEST_STATE',
+  ARTICLE_SEARCH_STATE: 'ARTICLE_SEARCH_STATE',
+  ARTICLE_FILTER_KEYWORD: 'ARTICLE_FILTER_KEYWORD',
+  PULL_MORE: 'ARTICLE_PULL_MORE',
+  READING: 'ARTICLE_READING',
+  CONTENT_LOADED: 'ARTICLE_CONTENT_LOADED',
+  DESTROY_BY_ID: 'ARTICLE_DESTROY_BY_ID'
+}
+
+export function destroyArticle (id) {
+  return dispatch => {
+    dispatch({
+      type: 'ERROR',
+      error: {
+        message: '你正在进行删除操作,请确认',
+        process: () => {
+          dispatch({type: AAS.REQUEST_STATE, loading: true})
+          API.Note.deleteById(id).then(() => {
+            dispatch({type: AAS.DESTROY_BY_ID, id})
+          }).catch((message) => dispatch({type: 'ERROR', error: {message}}))
+          .then(() => dispatch({type: AAS.REQUEST_STATE, loading: false}))
+        }
+      }
+    })
+  }
 }
 
 export function setFecthArticlesFilter ({key, filter}) {

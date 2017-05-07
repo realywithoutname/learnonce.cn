@@ -150,6 +150,11 @@
   color: #999;
   text-shadow: 0px -1px rgba(91, 91, 91, 0.59);
 }
+.scrollTable ul li span {
+  font-size: 14px;
+  color: #fff;
+  cursor: default;
+}
 .scrolling .scrollTable {
   height: 85%;
   margin-top: 20px;
