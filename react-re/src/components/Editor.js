@@ -32,10 +32,29 @@ export default class EditorContainer extends Component {
     return typeof val === 'number'
   }
   render () {
-    let {inputChange, contentChange, descChange, isTranslate, tagsChange, save, clear} = this.props
-    let {title, description, tags, content, translated} = this.props.article
+    let {inputChange, contentChange, descChange, urlChange, isTranslate, tagsChange, save, clear} = this.props
+    let {title, description, tags, content, translated, sourceUrl} = this.props.article
     return (
       <div className={style.editor}>
+        <div className={style.actionBar}>
+          <i style={{textAlign: 'left'}} className="material-icons"
+          onClick={() => {
+            window.history.back()
+          }}>keyboard_return</i>
+          <i style={{textAlign: 'center'}} className="material-icons"
+          onClick={clear}>clear</i>
+          <i style={{textAlign: 'center'}}
+          onClick={() => {
+            this.setState({onlyEditor: !this.state.onlyEditor})
+          }} className={
+            `${this.state.onlyEditor ? 'active' : ''} material-icons`
+          }>import_export</i>
+          <i style={{textAlign: 'center'}} className={
+            `${translated ? 'active' : ''} material-icons`
+          }
+          onClick={isTranslate}>translate</i>
+          <i onClick={save} className="material-icons">send</i>
+        </div>
         <div className={
           `${this.state.onlyEditor ? 'hidden' : ''} ${style.header}`
         }>
@@ -67,25 +86,13 @@ export default class EditorContainer extends Component {
         className={style.content}
         onChange={contentChange}
         placeholder="The article content"></textarea>
-        <div className={style.actionBar}>
-          <i style={{textAlign: 'left'}} className="material-icons"
-          onClick={() => {
-            window.history.back()
-          }}>keyboard_return</i>
-          <i style={{textAlign: 'center'}} className="material-icons"
-          onClick={clear}>clear</i>
-          <i style={{textAlign: 'center'}}
-          onClick={() => {
-            this.setState({onlyEditor: !this.state.onlyEditor})
-          }} className={
-            `${this.state.onlyEditor ? 'active' : ''} material-icons`
-          }>import_export</i>
-          <i style={{textAlign: 'center'}} className={
-            `${translated ? 'active' : ''} material-icons`
-          }
-          onClick={isTranslate}>translate</i>
-          <i onClick={save} className="material-icons">send</i>
+        <div className={style.sourceUrl}>
+          <input
+            value={sourceUrl}
+            onChange={urlChange}
+            placeholder="Enter Source URL"></input>
         </div>
+        
       </div>
     )
   }

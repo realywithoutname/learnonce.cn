@@ -14,11 +14,19 @@ export default class ArticleList extends Component {
                 preview(articles[key], e)
               }}>
                 <h1 className={style.title}>
-                  <Link onClick={(e) => {
-                    e.stopPropagation()
-                  }} to={'/' + form + '/article/' + articles[key]._id}>
-                    {articles[key].title}
-                  </Link>
+                  {
+                    articles[key].sourceUrl ? (
+                      <a onClick={(e) => {
+                        e.stopPropagation()
+                      }} href={articles[key].sourceUrl} target="_blank">{articles[key].title}</a>
+                    ) : (
+                      <Link onClick={(e) => {
+                        e.stopPropagation()
+                      }} to={'/' + form + '/article/' + articles[key]._id}>
+                        {articles[key].title}
+                      </Link>
+                    )
+                  }
                   <small>{formatDate(articles[key].createTime, 'yyyy MM/dd')}</small>
                 </h1>
                 <p className={style.description}>

@@ -15,11 +15,9 @@ app.use(xmlParser());
 app.use(bodyParser());
 app.use(static({rootDir: 'react-re/dist'}));
 app.use(router.routes());
-app.use(function* (err, next) {
+app.use(function* (err) {
   if (this.response.status === 404) {
     yield send(this, path.resolve(__dirname, '/react-re/dist/index.html'))
-  } else {
-    yield next
   }
 })
 app.on('error', function (err, ctx) {

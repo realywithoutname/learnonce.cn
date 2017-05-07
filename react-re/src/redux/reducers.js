@@ -14,6 +14,7 @@ const initState = {
         'title',
         'createTime',
         'description',
+        'sourceUrl',
         'tags'
       ],
       sort: {createTime: 'desc'},

@@ -27,6 +27,9 @@ class Editor extends Component {
         descChange={(e) => {
           dispatch(changeEditor({description: e.target.value}))
         }}
+        urlChange={(e) => {
+          dispatch(changeEditor({sourceUrl: e.target.value}))
+        }}
         save={() => {
           dispatch(saveArticle())
         }}

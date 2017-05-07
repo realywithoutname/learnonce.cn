@@ -21,6 +21,7 @@
     "translated": {
       "type": "Boolean",
       "default": false
-    }
+    },
+    "sourceUrl": "String"
   }
 }

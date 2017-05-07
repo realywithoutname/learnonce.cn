@@ -293,6 +293,7 @@
 }
 .detail {
   height: 100%;
+  overflow: auto;
   box-sizing: border-box;
 }
 
@@ -330,7 +331,6 @@
 }
 .detail section {
   -webkit-overflow-scrolling : touch;
-  overflow: auto;
   height: 100%;
   padding: 76px 8px;
 }
