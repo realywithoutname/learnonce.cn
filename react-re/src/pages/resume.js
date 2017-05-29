@@ -41,6 +41,10 @@ class Resume extends Component {
                 <i className={`material-icons ${style.icon}`}>W</i>
                 <span>www.justsoso.me</span>
               </div>
+              <div className={`print-show ${style.item}`}>
+                <i className={`material-icons ${style.icon}`}>M</i>
+                <span>编程是为了解决问题</span>
+              </div>
             </div>
             <div className={style.kills}>
               <h2 className={style.title}>专业技能</h2>
@@ -199,6 +203,16 @@ class Resume extends Component {
                 <dd>
                   <p className={style.content}>
                     设想解决的校园内发掘人才解决方案。在校园服务平台基础上添加社交属性——圈子，能力反应模块——竞赛。期望通过学生在校参与竞赛，圈子社交等信息，挖掘并整理分析学生能力，面向实验室，学校，企业等用人处提供学生信息，面向学生提供大学轨迹档案。我在项目中作为负责人，带领团队开发以及参与2016全国大学生创业大赛，获校赛金奖。
+                  </p>
+                </dd>
+              </dl>
+              <dl className={style.worklist}>
+                <dt>
+                  <p className={style.time}>2016.7-2017.01</p><p className={style.company}>个人博客</p>
+                </dt>
+                <dd>
+                  <p className={style.content}>
+                    该作品后端使用Koa.js，前端使用vue.js，后来使用React.js进行重构，该作品使用RSS聚合网络信息，使用前后端分离技术解决每天停留在互联网查看信息的时间，该网站使用持续加载，HTML5离线缓存，浏览器指纹等方式减少数据加载时间以及身份验证。在该作品把加载一篇文章所需时间尽量控制在1s内，实际使用中基本感觉不到加载时间。最终该作品作为本人毕业设计《响应式web博客系统设计》作品，获得优秀毕业设计。
                   </p>
                 </dd>
               </dl>
