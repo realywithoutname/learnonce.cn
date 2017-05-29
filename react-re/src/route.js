@@ -6,6 +6,14 @@ function blog () {
     })
   }
 }
+function resume () {
+  this.path = 'resume'
+  this.getComponent = (nextstate, cb) => {
+    require.ensure([], (require) => {
+      cb(null, require('pages/resume').default)
+    })
+  }
+}
 function article () {
   this.path = '/**/article/:id'
   this.getComponent = (nextstate, cb) => {
@@ -66,5 +74,5 @@ const createRoute = (R) => {
 }
 
 export default [
-  root, me, news, blog, editor, ide, article, translate
+  root, me, news, blog, editor, ide, article, translate, resume
 ].map((route) => createRoute(route))

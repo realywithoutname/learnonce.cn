@@ -1,12 +1,12 @@
 CACHE MANIFEST
-# v2.1.5
+# v2.2.5
 #
 #
 #
 #      +++++++             ++++++++++++
 #         +                       +
 #         +                       +
-#         +  +                +       +
+#      +  +  +                +       +
 #         +                       +
 #         +                       +
 #
@@ -21,6 +21,7 @@ CACHE:
 /static/image/logo-copy.png
 /static/image/bg-index.png
 /static/image/ico-1.png
+/static/image/wechat.png
 /static/global.css
 /static/markdown.css
 /static/fingerprint.js
@@ -32,6 +33,8 @@ CACHE:
 /assets/3.app.js.map
 /assets/4.app.js
 /assets/4.app.js.map
+/assets/5.app.js
+/assets/5.app.js.map
 /assets/app.js
 /assets/app.js.map
 NETWORK:

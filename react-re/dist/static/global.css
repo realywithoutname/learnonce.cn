@@ -49,7 +49,7 @@ body, .page, .container, #app {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 .page .container {
   display: flex;
@@ -132,3 +132,11 @@ input{ -webkit-appearance: none;}
   outline: none;
   font-size: 18px;
 }
+/*.print-show {
+  display: none !important;
+}
+@media print {
+  .print-show {
+    display: block;
+  }
+}*/

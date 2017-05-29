@@ -24,7 +24,7 @@ class Index extends Component {
     }))
   }
   render () {
-    let {isApp, finger, isAuth, article, dispatch} = this.props
+    let {finger, isAuth, article, dispatch} = this.props
     article = article.data
     return (
       <Scroller

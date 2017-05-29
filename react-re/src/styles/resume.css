@@ -1,0 +1,209 @@
+.container {
+  width: 100%;
+  display: flex;
+}
+.download {
+  position: absolute;
+  top: 50px;
+  right: 20px;
+}
+/*.container ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}*/
+.container p {
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+.container h2.title {
+  font-size: 28px;
+  color: #717171;
+  line-height: 50px;
+  margin: 0;
+  margin-bottom: 0.2em;
+  padding: 0;
+  width: 100%;
+}
+.content .title {
+  font-size: 18px;
+  color: #333;
+}
+.content {
+  color: #555;
+}
+.baseInfo {
+  text-align: center;
+  display: flex;
+  flex: 1;
+  box-sizing: border-box;
+}
+.chat {
+  width: 200px;
+  font-size: 24px;
+  background: #fff;
+  padding-top: 50%;
+  position: relative;
+}
+.chat img {
+  width: 150px;
+  height: 150px;
+  border-radius: 200px;
+}
+.myInfo {
+  flex: 1;
+  text-align: left;
+  padding: 20px;
+  background: #f7f7f7;
+  color: #717171;
+}
+.myInfo .item {
+  line-height: 36px;
+  display: flex;
+}
+.myInfo .item span {
+  flex: 1;
+  font-size: 16px;
+}
+.item .icon {
+  color: #81919B;
+  margin-right: 8px;
+  line-height: 36px;
+}
+.kills {
+  display: flex;
+  flex-flow: wrap;
+}
+.kills .item {
+  margin: 8px;
+  position: relative;
+  margin: 28px 24px 36px 0;
+  transform: rotate(30deg)
+}
+.kills .item i {
+  transform: rotate(-30deg);
+  display: block;
+  height: 55.5px;
+  line-height: 55.5px;
+}
+.kills .item span, .kills .item::after, .kills .item::before {
+  width: 96px;
+  height: 55.5px;
+  text-align: center;
+  line-height: 55.5px;
+  border-left: 2px solid #ced7dd;
+  border-right: 2px solid #ced7dd;
+  content: '';
+}
+.kills .item::after {
+  transform: rotate(60deg);
+  position: absolute;
+}
+.kills .item::before {
+  transform: rotate(-60deg);
+  position: absolute;
+}
+.workInfo {
+  background: #f2f2f2;
+  padding: 20px;
+  flex: 1;
+}
+dl.worklist {}
+dl.worklist dt {
+  display: flex;
+}
+dl.worklist dt p {
+  flex: 1;
+}
+dl.worklist dd {
+  padding: 8px 0;
+  padding-left: 1em;
+  margin: 0;
+}
+
+@media (max-width: 1200px) {
+  .container {
+    flex-direction: column;
+    max-width: 960px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .baseInfo, .myInfo {
+    display: flex;
+  }
+  .baseInfo {
+    flex-direction: column;
+  }
+  .chat {
+    padding-top: 0;
+    width: 100%;
+    height: 200px;
+    position: relative;
+    line-height: 200px;
+  }
+  .chat img {
+    margin-top: 25px;
+  }
+  .chat div {
+    position: absolute;
+    font-size: 36px;
+    left: 130px;
+  }
+  .myInfo .info {
+    width: 230px;
+  }
+  .kills {
+    flex: 1;
+  }
+  .kills .item i {
+    height: 41.6px;
+    line-height: 41.6px;
+    font-size: 8px;
+  }
+  .kills .item span, .kills .item::after, .kills .item::before {
+    width: 72px;
+    height: 41.6px;
+    line-height: 41.6px;
+  }
+  .workInfo {
+    padding: 0;
+  }
+  .workInfo .experience, .workInfo .programme {
+    padding: 20px;
+  }
+  .workInfo .experience {
+    background: #f5f5f5;
+  }
+}
+@media screen and (max-width: 670px) {
+  .container h2.title {
+    font-size: 18px;
+  }
+  .chat {
+    line-height: 1;
+  }
+  .chat div {
+    bottom: 8px;
+    font-size: 24px;
+    width: 100%;
+    left: auto;
+    text-align: center;
+  }
+  .myInfo .info {
+    width: 180px;
+  }
+  .kills .item,  .kills .item i {
+    transform: none;
+    margin: 8px;
+    line-height: 16px;
+    height: 16px;
+  }
+  .kills .item span, .kills .item::after, .kills .item::before {
+    content: none;
+    border: none;
+    line-height: 16px;
+    height: 16px;
+    width: auto
+  }
+}

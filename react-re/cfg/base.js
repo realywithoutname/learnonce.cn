@@ -31,7 +31,7 @@ module.exports = {
       '/img': 'http://localhost:3000',
       '/offline.manifest': 'http://localhost:3000'
     },
-    noInfo: false
+    noInfo: true
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
