@@ -32,3 +32,8 @@
   ~~~
   
 ### 基本逻辑
+#### 服务器
+![服务器1](http://upload-images.jianshu.io/upload_images/1496452-096d0b67ecbaaa4c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![服务器2](http://upload-images.jianshu.io/upload_images/1496452-092bd9717485969d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+#### 客户端
+![客户端](http://upload-images.jianshu.io/upload_images/1496452-3197006b23b22672.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
