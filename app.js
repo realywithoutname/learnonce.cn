@@ -9,11 +9,11 @@ let router = require('./route');
 let boot = require('./boot');
 let app = koa();
 
-// require('./task/reader');
+require('./task/reader');
 
 app.use(xmlParser());
 app.use(bodyParser());
-app.use(static({rootDir: 'react-re/dist'}));
+app.use(static({ rootDir: 'react-re/dist' }));
 app.use(router.routes());
 app.use(function* (err) {
   if (this.response.status === 404) {

@@ -4,7 +4,7 @@ const co = require('co')
 
 const BaseService = require('../service/base');
 
-const {Feed, News} = require('./../model');
+const { Feed, News } = require('./../model');
 
 const FeedModel = new BaseService(Feed);
 
@@ -12,12 +12,12 @@ const NewsModel = new BaseService(News);
 
 let reader = new Reader()
 
-function formatItem (item) {
+function formatItem(item) {
   item.content = item.content && item.content.replace(
     /<img.+?src=\"/g, '<img onerror="imgloadError()" src=\"'
   ).replace(
     /\<script.+?\<\/script\>|\<style.+?\<\/style\>/g, ' '
-  );
+    );
   return item
 }
 
@@ -27,7 +27,7 @@ reader.on('news-fecthed', (data) => {
     let result = []
 
     for (let item of data) {
-      let ids = yield NewsModel.findOne({where: {link: item.link}, fields: ['id']})
+      let ids = yield NewsModel.findOne({ where: { link: item.link }, fields: ['id'] })
       if (!ids.length) {
         formatItem(item)
         result.push(item)
@@ -42,18 +42,18 @@ reader.on('news-fecthed', (data) => {
   })
 })
 
-function* loadReader () {
-  let feeds = yield FeedModel.find({limit: 1000})
+function* loadReader() {
+  let feeds = yield FeedModel.find({ limit: 1000 })
   feeds.forEach((feed) => {
     feed = feed.toJSON()
     feed.url = feed.link
-    reader.add(Object.assign({}, feed, {refresh: 60 * 60 * 1000}))
+    reader.add(Object.assign({}, feed, { refresh: 60 * 60 * 1000 }))
   })
 }
 
-function IntervalClearFeed () {
-  function* clear (date) {
-    yield NewsModel.destroy({createTime: {$lt: new Date(date)}})
+function IntervalClearFeed() {
+  function* clear(date) {
+    yield NewsModel.destroy({ createTime: { $lt: new Date(date) } })
   }
   setInterval(() => {
     let date = new Date().getTime() - 2 * 24 * 60 * 60 * 1000
@@ -62,7 +62,7 @@ function IntervalClearFeed () {
 }
 
 co(function* () {
-  // IntervalClearFeed()
+  IntervalClearFeed()
   yield loadReader()
 }).catch((err) => {
   console.log(err);
