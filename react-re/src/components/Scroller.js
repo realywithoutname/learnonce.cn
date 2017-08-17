@@ -1,21 +1,12 @@
 import React, { Component } from 'react'
 import {throttle} from 'src/util'
-import {scrolling} from 'src/redux/actions'
 export default class Scroller extends Component {
   constructor (props) {
     super(props)
-    this.scrolling = throttle(this.scroll(), 10)
-  }
-  componentWillUnmount () {
-    this.props.dispatch(scrolling({
-      curTop: 0,
-      scrollHeight: 0,
-      height: 0,
-      direction: false
-    }))
+    this.scrolling = throttle(this.scroll(), props.interval)
   }
   scroll () {
-    let {dispatch, onScroll} = this.props
+    let {onScroll} = this.props
     let lastTop = 0
     return (el) => {
       let top = el.scrollTop
@@ -27,12 +18,6 @@ export default class Scroller extends Component {
         height,
         direction: top > lastTop
       })
-      dispatch(scrolling({
-        curTop: top,
-        scrollHeight,
-        height,
-        direction: top > lastTop
-      }))
       lastTop = top
     }
   }
@@ -42,6 +27,7 @@ export default class Scroller extends Component {
         className={this.props.className}
         onScroll={(e) => {
           e.persist()
+          e.stopPropagation()
           this.scrolling(e.target)
         }}
         onTouchStart={(e) => e.stopPropagation()}

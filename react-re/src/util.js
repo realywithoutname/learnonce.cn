@@ -19,6 +19,7 @@ export function formatDate (date, string) {
   }
   return replaceString(string)
     .replace(/yyyy|YYYY/g, date.getFullYear())
+    .replace(/YY|yy/g, date.getFullYear().toString().substr(2))
     .replace('MM', supplyZero(date.getMonth() + 1))
     .replace(/DD|dd/g, supplyZero(date.getDate()))
     .replace(/hh|HH/g, supplyZero(date.getHours()))
@@ -30,12 +31,18 @@ export function throttle (fn, interval) {
   let timer = null
   let firstTime = true
   let _self = fn
+  let lastTime = Date.now()
   return function () {
     let args = arguments
     let _me = this
     if (firstTime) {
       firstTime = false
       return _self.apply(_me, args)
+    }
+
+    if (Date.now() - lastTime > interval) {
+      lastTime = Date.now()
+      _self.apply(_me, args)
     }
 
     if (timer) {
@@ -46,6 +53,23 @@ export function throttle (fn, interval) {
       timer = null
       _self.apply(_me, args)
     }, interval || 200)
+  }
+}
+
+export const scroll = {
+  locked: [],
+  lock (el) {
+    el = el || document.body
+    el.classList.add('lock')
+    this.locked.push(1)
+  },
+  unLock (el) {
+    if (!this.locked.length) {
+      return
+    }
+    this.locked.pop()
+    el = el || document.body
+    el.classList.remove('lock')
   }
 }
 window.addEventListener('touchstart', (e) => e.stopPropagation())

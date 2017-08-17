@@ -1,8 +1,8 @@
 CACHE MANIFEST
-# v2.2.6
+# v3.0
 #
 #
-#
+#       +   +
 #      +++++++             ++++++++++++
 #         +                       +
 #         +                       +
@@ -27,6 +27,8 @@ CACHE:
 /static/fingerprint.js
 /assets/0.app.js
 /assets/0.app.js.map
+/assets/1.app.js
+/assets/1.app.js.map
 /assets/2.app.js
 /assets/2.app.js.map
 /assets/3.app.js

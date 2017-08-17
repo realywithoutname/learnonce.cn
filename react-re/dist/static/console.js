@@ -1,14 +1,14 @@
 window.debug = {
-  log () {
-    postMessage({message: [...arguments].join(' '), type: 'log'})
+  log() {
+    postMessage({ message: arguments, type: 'log' })
   },
-  error () {
-    postMessage({message: [...arguments].join(' '), type: 'error'})
+  error() {
+    postMessage({ message: arguments, type: 'error' })
   }
 }
 window.ready = function () {
-  postMessage({message: 'reload', type: 'reload'})
+  postMessage({ message: 'reload', type: 'reload' })
 }
-function postMessage (data) {
+function postMessage(data) {
   window.parent.postMessage(JSON.stringify(data), '*')
 }

@@ -36,7 +36,7 @@ class Reader extends TinyEmitter {
       this.fetch(feed.link).then(data => this.formatRequest(data, feed))
     }, feed.refresh)
   }
-  formatRequest (items, feed) {
+  formatRequest (items = [], feed) {
     let data = items.map(({
       title, description, link, pubDate: pubTime
     }) => ({

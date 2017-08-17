@@ -1,34 +1,19 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { Provider } from 'react-redux'
 import { Router, browserHistory } from 'react-router'
-import { connect } from 'react-redux'
 
 import routes from './route'
-import configureStore from 'src/redux/store'
-import {isApp, auth} from 'src/redux/actions'
-import Fingerprint from '../dist/static/fingerprint'
 import Tip from 'components/Tip'
+import puller from './puller'
+import API from 'src/api-config'
 
-let store = configureStore()
-let finger = new Fingerprint({canvas: true}).get()
+API.auth().then(() => puller.push('auth', true)).catch(() => puller.push('auth', false))
 
-store.dispatch(auth(finger))
-store.dispatch({type: 'FINGER', value: finger})
 let isapp = window.navigator.standalone
-isapp && store.dispatch(isApp())
-
-let TipComponent = connect(
-  (state) => ({error: state.error})
-)(Tip)
 
 render((
-  <Provider store={store}>
-    <div className={`${isapp && 'app'} page`}>
-      <TipComponent isApp={isapp} clear={
-        () => store.dispatch({type: 'CLEAR_ERROR'})
-      } />
-      <Router history={browserHistory} routes={routes} />
-    </div>
-  </Provider>
+  <div className={`${isapp ? 'app' : ''} page`}>
+    <Tip isApp={isapp} />
+    <Router history={browserHistory} routes={routes} />
+  </div>
 ), document.getElementById('app'))

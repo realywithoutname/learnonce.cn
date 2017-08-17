@@ -1,67 +1,108 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
+import puller from 'src/puller'
+import styld from 'styled-components'
+
+let TipBar = styld.div`
+  opacity: ${props => props.show ? 1 : 0};
+  position: fixed;
+  background: #ca3d3d;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 4px 9px 0px rgba(50, 50, 50, 0.6);
+  color: #fff;
+  z-index: ${props => props.show ? 100 : -1};
+  transition: opacity ease-in-out .3s;
+`
+
+let Message = styld.div`
+  height: 64px;
+  line-height: 48px;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 8px;
+  box-sizing: border-box;
+`
+
+let Btn = styld.button`
+  border: none;
+  background: transparent;
+  color: #ff9800;
+  font-size: 16px;
+  line-height: 48px;
+  position: absolute;
+  top: 8px;
+  right: 15px;
+  outline: none;
+`
 export default class Tip extends Component {
-  constructor () {
+  constructor() {
     super()
-    this.clear = this.clearForAmoment()
-    this.process = []
-    this.curErr = {}
-    this.state = {show: false}
+    this.state = { show: false, message: {} }
+    this.messages = []
+    this.check()
+    puller.on('message', (message) => {
+      message = typeof message === 'string' ? { message } : message
+      this.messages.push(message)
+      this.check()
+    })
   }
-  clearForAmoment () {
-    let timer = null
-    return () => {
-      this.curErr = {}
-      clearTimeout(timer)
-      timer = setTimeout(() => {
-        this.hidden()
-      }, 1500);
-    }
+
+  componentDidMount() {
+    this.mounted = true
+    this.check()
   }
-  componentDidUpdate () {
-    let {error, clear} = this.props
-    if (!error.message) {
+
+  componentWillUnMount() {
+    this.mounted = false
+    clearTimeout(this.timer)
+    this.timer = null
+  }
+
+  check() {
+    if (this.timer || !this.mounted) {
       return
     }
-    this.process.push(error)
-    clear()
-    this.show()
-  }
-  checkMessage () {
-    this.curErr = this.process.shift()
-    if (!this.curErr) {
-      this.curErr = {}
-      return this.hidden()
+    if (this.messages.length === 0) {
+      this.setState({ show: false })
+      return
     }
-    this.process.length === 0 && !this.curErr.process && this.clear()
+    this.queen(this.messages.shift())
   }
-  hidden () {
-    this.setState({show: false})
+
+  queen(message) {
+    this.setState({ message: message, show: true })
+    if (message.ok || message.cancel) {
+      return
+    }
+    this.timer = setTimeout(() => {
+      this.timer = null
+      this.check()
+    }, 2 * 1000)
   }
-  show () {
-    this.setState({show: true})
-    !this.curErr.message && this.checkMessage()
+
+  close() {
+    clearTimeout(this.timer)
+    this.timer = null
+    this.check()
   }
-  confirm () {
-    this.curErr.process.call()
-    this.checkMessage()
+  cancel() {
+    this.state.message.cancel && this.state.message.cancel()
+    this.timer = null
+    this.check()
   }
-  cancel () {
-    this.checkMessage()
+  ok() {
+    this.state.message.ok && this.state.message.ok()
+    this.timer = null
+    this.check()
   }
-  render () {
-    let {isApp} = this.props
+  render() {
+    let show = this.state.message.ok || this.state.message.cancel
     return (
-      <div onClick={this.hidden.bind(this)} className={`error-tip ${isApp ? 'app' : ''} ${this.state.show ? 'show' : ''}`}>
-        <span>{this.curErr.message}</span>
-        <button onClick={(e) => {
-          e.stopPropagation()
-          this.confirm()
-        }}>确认</button>
-        <button onClick={(e) => {
-          e.stopPropagation()
-          this.cancel()
-        }}>取消</button>
-      </div>
+      <TipBar show={this.state.show}>
+        <Message onClick={this.close.bind(this)}>{this.state.message.message}</Message>
+        {show && <Btn onClick={this.ok.bind(this)} style={{ right: '64px' }}>确认</Btn>}
+        {show && <Btn onClick={this.cancel.bind(this)}>取消</Btn>}
+      </TipBar>
     )
   }
 }

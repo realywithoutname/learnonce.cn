@@ -9,7 +9,7 @@ let router = require('./route');
 let boot = require('./boot');
 let app = koa();
 
-require('./task/reader');
+// require('./task/reader');
 
 app.use(xmlParser());
 app.use(bodyParser());

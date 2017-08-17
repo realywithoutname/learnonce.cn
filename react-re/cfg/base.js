@@ -40,7 +40,8 @@ module.exports = {
       'assets': path.resolve(__dirname, '../assets'),
       'pages': path.resolve(__dirname, '../src/pages'),
       'styles': path.resolve(__dirname, '../src/styles'),
-      'components': path.resolve(__dirname, '../src/components')
+      'components': path.resolve(__dirname, '../src/components'),
+      'static': path.resolve(__dirname, '../dist/static')
     }
   },
   postcss: function () {

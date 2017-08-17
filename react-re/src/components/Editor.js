@@ -1,99 +1,91 @@
-import React, {Component} from 'react'
-import * as style from 'styles/edit.css'
+import React, { Component } from 'react'
+import styled from 'styled-components'
+import Remarkable from 'remarkable'
+import hljs from 'highlight.js'
+
+const md = new Remarkable({
+  html: true,
+  highlight: function (code, lang) {
+    return hljs.highlightAuto(code, [lang]).value
+  }
+})
+
+let EditorContainer = styled.div`
+  display: flex;
+  height: 100%;
+  padding: 16px 0;
+  box-sizing: border-box;
+`
+let EditArea = styled.textarea`
+  height: 100%;
+  width: 50%;
+  outline: none;
+  border: none;
+  resize: none;
+  padding: 16px;
+  box-sizing: border-box;
+  font-size: 16px;
+  line-height: 2;
+  background: rgba(255, 255, 255, .5);
+  font-family: -apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;
+`
+let PreviewArea = styled.div`
+  flex: 1;
+  padding: 16px;
+  box-sizing: border-box;
+  overflow: auto;
+  background: #fff;
+`
+
 const tab = '  '
-export default class EditorContainer extends Component {
-  constructor (props) {
+export default class Editor extends Component {
+  constructor(props) {
     super(props)
     this.state = {
       onlyEditor: false
     }
   }
-  tabPress (e) {
-    let el = e.target
+  tabPress() {
+    this.setSelectionContent(tab)
+  }
+  setSelectionContent(content) {
+    let el = document.getElementById('editor')
     if (this.DocCanSelection()) {
-      document.selection.createRange().text = tab
+      document.selection.createRange().text = content
     } else if (this.ElCanSelection(el)) {
       let value = el.value
       let startPosition = el.selectionStart
-      el.value = value.substr(0, startPosition) + tab + value.substr(startPosition)
-      el.selectionStart = startPosition + tab.length
+      el.value = value.substr(0, startPosition) + content + value.substr(startPosition)
+      el.selectionStart = startPosition + content.length
       el.selectionEnd = el.selectionStart
     } else {
-      el.value += tab
+      el.value += content
     }
+    return el.value
   }
-  DocCanSelection () {
+  DocCanSelection() {
     return document.selection
   }
-  ElCanSelection (el) {
+  ElCanSelection(el) {
     return this.isNum(el.selectionStart) && this.isNum(el.selectionEnd)
   }
-  isNum (val) {
+  isNum(val) {
     return typeof val === 'number'
   }
-  render () {
-    let {inputChange, contentChange, descChange, urlChange, isTranslate, tagsChange, save, clear} = this.props
-    let {title, description, tags, content, translated, sourceUrl} = this.props.article
+  render() {
+    let { content, change } = this.props
     return (
-      <div className={style.editor}>
-        <div className={style.actionBar}>
-          <i style={{textAlign: 'left'}} className="material-icons"
-          onClick={() => {
-            window.history.back()
-          }}>keyboard_return</i>
-          <i style={{textAlign: 'center'}} className="material-icons"
-          onClick={clear}>clear</i>
-          <i style={{textAlign: 'center'}}
-          onClick={() => {
-            this.setState({onlyEditor: !this.state.onlyEditor})
-          }} className={
-            `${this.state.onlyEditor ? 'active' : ''} material-icons`
-          }>import_export</i>
-          <i style={{textAlign: 'center'}} className={
-            `${translated ? 'active' : ''} material-icons`
+      <EditorContainer>
+        <EditArea id="editor" value={content} spellCheck={false} onKeyDown={
+          (e) => {
+            if (e.keyCode === 9) {
+              e.preventDefault()
+              this.tabPress(e)
+            }
           }
-          onClick={isTranslate}>translate</i>
-          <i onClick={save} className="material-icons">send</i>
-        </div>
-        <div className={
-          `${this.state.onlyEditor ? 'hidden' : ''} ${style.header}`
-        }>
-          <input
-          value={title}
-          onChange={inputChange}
-          placeholder="Please input the title"></input>
-          <input
-          value={tags}
-          onChange={tagsChange}
-          placeholder="Tags"></input>
-        </div>
-        <textarea
-        spellCheck={false}
-        value={description}
-        className={
-          `${this.state.onlyEditor ? 'hidden' : ''} ${style.desc}`
-        }
-        onChange={descChange}
-        placeholder="The state description"></textarea>
-        <textarea
-        value={content}
-        spellCheck={false} onKeyDown={(e) => {
-          if (e.keyCode === 9) {
-            e.preventDefault()
-            this.tabPress(e)
-          }
-        }}
-        className={style.content}
-        onChange={contentChange}
-        placeholder="The article content"></textarea>
-        <div className={style.sourceUrl}>
-          <input
-            value={sourceUrl}
-            onChange={urlChange}
-            placeholder="Enter Source URL"></input>
-        </div>
-        
-      </div>
+        } onChange={change} placeholder="The article content"></EditArea>
+        <PreviewArea className="markdown-body" dangerouslySetInnerHTML={{ __html: md.render(content) }} />
+      </EditorContainer>
     )
   }
 }

@@ -12,6 +12,13 @@
 	clear:both;
 	content:""
 }
+.markdown-body a {
+	color: #ff9800;
+}
+.markdown-body a:after {
+	content: '↵';
+	color: #006cff;
+}
 .markdown-body>*:first-child {
 	margin-top:0 !important
 }
@@ -190,8 +197,10 @@
 .markdown-body table tr:nth-child(2n) {
 	background-color:#f8f8f8
 }
-.markdown-body img {
-	max-width:100%;
+.markdown-body img, .markdown-body video {
+	width:100% !important;
+	max-width: initial !important;
+	height: auto !important;
 	box-sizing:content-box;
 	background-color:#fff
 }
@@ -323,9 +332,10 @@
 	overflow:auto;
 	font-size:1rem;
 	line-height:1.45;
-	background-color:#282c34;
+	background-color:#fff;
 	border-radius:3px;
-  color: #abb2bf;
+	color: #616161;
+	border: 1px solid rgb(241, 241, 241);
 }
 .markdown-body pre code,.markdown-body pre tt {
 	display:inline;
