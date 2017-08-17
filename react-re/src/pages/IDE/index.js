@@ -106,6 +106,7 @@ class IDE extends Component {
   }
   load(id) {
     API.Demo.findById(id).then(({ data: { title, html, css, script, _id } }) => this.setState({ title, html, css, script, _id }))
+      .then(() => this.setState({ isAuth: puller.pull('auth') }))
   }
   save() {
     let { title, html, css, script, _id } = this.state
