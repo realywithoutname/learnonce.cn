@@ -18,12 +18,20 @@ const List = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0 16px;
+  -webkit-overflow-scrolling : touch;
   body.lock & {
+    overflow: auto;
+  }
+  @media (max-width: 640px) {
+    padding: 0;
     overflow: auto;
   }
 `
 const ListTop = styled.li`
   margin-top: 64px;
+  @media (max-width: 640px) {
+    margin-top: 20px;
+  }
 `
 const ListBottom = styled.li`
   display: flex;

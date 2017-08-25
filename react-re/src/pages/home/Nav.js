@@ -5,6 +5,9 @@ import styled from 'styled-components'
 const Nav = styled.nav`
   width: 164px;
   position: relative;
+  @media (max-width: 640px) {
+    display: none;
+  }
 `
 const SLink = styled(Link) `
   display: block;

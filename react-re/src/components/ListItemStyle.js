@@ -68,6 +68,8 @@ const Article = styled.article`
   overflow: auto;
   background: #f1f1f1;
   transition: all ease .5s;
+  -webkit-overflow-scrolling : touch;
+
   & header {
     position: fixed;
     top: ${props => props.show ? 0 : '50%'};
@@ -89,6 +91,10 @@ const Article = styled.article`
       text-align: center;
       cursor: default;
     }
+
+    @media (max-width: 640px) {
+      display: none;
+    }
   }
 `
 const Content = styled.div`
@@ -99,6 +105,10 @@ const Content = styled.div`
   box-sizing: border-box;
   & a {
     color: rgb(255, 152, 0);
+  }
+  @media (max-width: 640px) {
+    margin: 0 auto 48px;
+    overflow: auto;
   }
 `
 
@@ -135,7 +145,8 @@ ListItem.Content = class extends Component {
               : <Link to="/"><Icon className="icon">J</Icon></Link>
           }
         </header>
-        <Content className="markdown-body" dangerouslySetInnerHTML={{ __html: data.content }}>
+        <Content onTouchStart={(e) => e.stopPropagation()}
+          onTouchMove={(e) => e.stopPropagation()} className="markdown-body" dangerouslySetInnerHTML={{ __html: data.content }}>
         </Content>
       </Article>
     )

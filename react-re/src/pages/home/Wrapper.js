@@ -6,6 +6,9 @@ const Banner = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
+  @media (max-width: 640px) {
+    display: none;
+  }
 `
 const Header = styled.div`
   position: ${props => props.skep ? 'fixed' : 'sticky'};
@@ -80,7 +83,7 @@ class Wrapper extends Component {
         return
       }
       let height = winHeight - body.scrollTop
-      if (body.scrollHeight === winHeight + body.scrollTop) {
+      if (body.scrollHeight <= winHeight + body.scrollTop + 1) {
         scroll.lock()
       }
       if (height <= 340) {
@@ -96,7 +99,7 @@ class Wrapper extends Component {
     }
   }
 
-  render () {
+  render() {
     return (
       <Banner>
         <Header shadow={this.props.shadow} height={(this.state.height || 320) + 'px'} skep={this.state.skep}>

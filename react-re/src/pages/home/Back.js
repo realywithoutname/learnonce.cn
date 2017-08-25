@@ -7,6 +7,9 @@ const Header = styled.header`
   top: 0;
   width: 100%;
   left: 0;
+  @media (max-width: 640px) {
+    display: none;
+  }
 `
 const Welcome = styled.div`
   height: calc(100% - 320px);

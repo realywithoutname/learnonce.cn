@@ -22,6 +22,10 @@ const View = styled.section`
   left: 0;
   background: #f1f1f1;
   height: calc(100% - 128px);
+  @media (max-width: 640px) {
+    height: 100%;
+    top: 0;
+  }
 `
 
 const Page = styled.div`
