@@ -62,7 +62,8 @@ class Wrapper extends Component {
   constructor() {
     super()
     this.state = {
-      sticky: false
+      sticky: false,
+      height: 320
     }
     this.onscroll = throttle(this.scroll(), 200)
   }

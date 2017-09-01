@@ -79,12 +79,12 @@ class ArticleItem extends Component {
               <a target="_blank" onClick={e => e.stopPropagation()} href={article.sourceUrl}>{article.title}</a>
               : <Link onClick={e => e.stopPropagation()} to={`/blog/${article._id}`} target="_blank">{article.title}</Link>
           }
-          <Icon onClick={
+          { this.state.isAuth && <Icon onClick={
             e => {
               e.stopPropagation()
               this.deleteItem()
             }
-          } className="material-icons">clear</Icon>
+          } className="material-icons">clear</Icon>}
         </ListItem.Header>
         <ListItem.Description content={article.description} />
         <ListItem.Content show={!!this.state.show} data={this.state.data} close={this.close.bind(this)} />
