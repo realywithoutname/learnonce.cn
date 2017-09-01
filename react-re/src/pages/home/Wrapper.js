@@ -88,7 +88,7 @@ class Wrapper extends Component {
         scroll.lock()
       }
       if (height <= 340) {
-        this.setState({ sticky: true, height })
+        this.setState({ sticky: true, height: height < 0 ? 0 : height })
         if (height < 200) {
           this.setState({ skep: 'skep-0' })
         } else {
