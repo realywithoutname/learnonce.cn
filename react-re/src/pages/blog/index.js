@@ -61,12 +61,6 @@ class Blog extends Component {
   viewItem(lock) {
     this.refs.list.lock(lock)
   }
-  componentWillUnmount() {
-    // if (Object.keys(this.state.articles).length) {
-    //   localStorage.setItem('Note::LIST', JSON.stringify(this.state.articles))
-    // }
-    this.props.$emit('shadow', false)
-  }
   load(index) {
     let filter = [
       { where: { $like: {} } },
@@ -88,7 +82,7 @@ class Blog extends Component {
     })
 
     return (
-      <List ref='list' api='Note' emit={this.props.$emit.bind(this.props)} filter={_filter} commit={this.getArticles.bind(this)}>
+      <List ref='list' api='Note' filter={_filter} commit={this.getArticles.bind(this)}>
         <ListTop>
           <button className={this.state.activeIndex === 1 && 'active'} onClick={() => this.load(1)}>全部</button>
           <button className={this.state.activeIndex === 2 && 'active'} onClick={() => this.load(2)}>笔记</button>
@@ -102,13 +96,4 @@ class Blog extends Component {
   }
 }
 
-Blog.defaultProps = {
-  $ev: {},
-  $on(event, fn) {
-    this.$ev[event] = fn
-  },
-  $emit(event, value) {
-    this.$ev[event] && this.$ev[event].call(this, value)
-  }
-}
 export default Blog

@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router'
+import ProgressBar from 'components/ProgressBar'
+import { throttle } from 'src/util'
+import puller from 'src/puller'
 const Item = styled.li`
   background: #fff;
   padding: 8px 16px;
@@ -126,8 +129,34 @@ let Icon = styled.i.attrs({
     margin-right: 16px;
   }
 `
-
+let _el = null
 ListItem.Content = class extends Component {
+  constructor(props) {
+    super(props)
+    this.scrolling = throttle(this.scroll(), 50)
+    puller.on('scroll-page-to-top', () => {
+      if (_el) _el.scrollTop = 0
+    })
+  }
+  componentWillUnmount () {
+    puller.destroy('scroll-page-to-top')
+  }
+  scroll() {
+    let lastTop = 0
+    return (el) => {
+      _el = el
+      let top = el.scrollTop
+      let scrollHeight = el.scrollHeight
+      let height = el.offsetHeight
+      puller.push('scroll-page', {
+        curTop: top,
+        scrollHeight,
+        height,
+        direction: top > lastTop
+      })
+      lastTop = top
+    }
+  }
   render() {
     let { data, show, close, noClose } = this.props
     if (!show) {
@@ -135,7 +164,9 @@ ListItem.Content = class extends Component {
     }
     return (
       <Article onScroll={e => {
+        e.persist()
         e.stopPropagation()
+        this.scrolling(e.target)
       }} show={true}>
         <header>
           <h2>{data.title}</h2>
@@ -144,6 +175,7 @@ ListItem.Content = class extends Component {
               ? <Icon onClick={e => !e.stopPropagation() && close.call(null, e)} className="material-icons">clear</Icon>
               : <Link to="/"><Icon className="icon">J</Icon></Link>
           }
+          <ProgressBar listenerName="scroll-page" />
         </header>
         <Content onTouchStart={(e) => e.stopPropagation()}
           onTouchMove={(e) => e.stopPropagation()} className="markdown-body" dangerouslySetInnerHTML={{ __html: data.content }}>

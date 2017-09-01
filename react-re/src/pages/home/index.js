@@ -21,9 +21,8 @@ const View = styled.section`
   width: 100%;
   left: 0;
   background: #f1f1f1;
-  height: calc(100% - 128px);
+  height: 100%;
   @media (max-width: 640px) {
-    height: 100%;
     top: 0;
   }
 `
@@ -37,22 +36,22 @@ const Page = styled.div`
 `
 
 class Home extends Component {
-  state = { shadow: false, isAuth: puller.pull('auth') }
-  componentDidMount() {
-    this.props.children.props.$on('shadow', (show) => {
-      this.setState({ shadow: show })
-    })
-  }
-  componentWillUpdate() {
-    this.props.children.props.$on('shadow', (show) => {
-      this.setState({ shadow: show })
-    })
-  }
+  state = { isAuth: puller.pull('auth') }
+  // componentDidMount() {
+  //   this.props.children.props.$on('shadow', (show) => {
+  //     this.setState({ shadow: show })
+  //   })
+  // }
+  // componentWillUpdate() {
+  //   this.props.children.props.$on('shadow', (show) => {
+  //     this.setState({ shadow: show })
+  //   })
+  // }
   render() {
     return (
       <Frame>
         <Back />
-        <Wrapper shadow={this.state.shadow} />
+        <Wrapper />
         <View>
           <Page>
             <Nav isAuth={this.state.isAuth} finger={finger} />

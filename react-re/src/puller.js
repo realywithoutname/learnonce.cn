@@ -10,5 +10,8 @@ export default {
   },
   on (name, fn) {
     E_BUS[name] = fn
+  },
+  destroy (name) {
+    delete E_BUS[name]
   }
 }

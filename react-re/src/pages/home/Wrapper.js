@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { throttle, scroll } from 'src/util'
-
+import ProgressBar from 'components/ProgressBar'
 const Banner = styled.div`
   position: absolute;
   width: 100%;
@@ -16,7 +16,7 @@ const Header = styled.div`
   display: flex;
   width: 100%;
   margin: 0;
-  height: ${props => props.height || '320px'};
+  height: ${props => props.height};
   background: ${props => props.skep ? '#1a1b2d' : '#ca3d3d'};
   font-family: Papyrus;
   color: #ff9800;
@@ -102,13 +102,16 @@ class Wrapper extends Component {
   render() {
     return (
       <Banner>
-        <Header shadow={this.props.shadow} height={(this.state.height || 320) + 'px'} skep={this.state.skep}>
+        <Header shadow={this.props.shadow} height={(this.state.height) + 'px'} skep={this.state.skep}>
           <Fix>
             <Title data-skep={this.state.skep}><i>Just so so.</i></Title>
             <P>Not the best, nor the worst. Everything is getting better</P>
           </Fix>
+          <ProgressBar />
         </Header>
-        <Footer sticky={this.state.sticky}></Footer>
+        <Footer sticky={this.state.sticky}>
+        </Footer>
+
       </Banner>
     )
   }

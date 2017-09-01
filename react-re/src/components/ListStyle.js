@@ -36,7 +36,6 @@ const ListTop = styled.li`
 const ListBottom = styled.li`
   display: flex;
 `
-let isShadow = false
 
 class ListStyle extends Component {
   constructor(props) {
@@ -57,13 +56,6 @@ class ListStyle extends Component {
   }
   scrolling(data) {
     let toBottom = data.scrollHeight - data.height - data.curTop
-    if (data.curTop < 64 && isShadow) {
-      isShadow = false
-      this.props.emit('shadow', false)
-    } else if (data.curTop >= 64 && !isShadow) {
-      isShadow = true
-      this.props.emit('shadow', true)
-    }
     if (toBottom < 500 && !this.state.isEnd && data.direction && !this.state.loading) {
       this.fetch({ offset: this.filter.offset + this.filter.limit })
     }

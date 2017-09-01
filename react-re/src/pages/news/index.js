@@ -31,12 +31,6 @@ class News extends Component {
   viewItem(lock) {
     this.refs.list.lock(lock)
   }
-  componentWillUnmount() {
-    // if (Object.keys(this.state.news).length) {
-    //   localStorage.setItem('News::LIST', JSON.stringify(this.state.news))
-    // }
-    this.props.$emit('shadow', false)
-  }
   render () {
     const {news} = this.state
 
@@ -46,22 +40,13 @@ class News extends Component {
         <NewsItem key={item._id} news={item} view={this.viewItem.bind(this)}/>
       )
     })
-    
+
     return (
-      <List ref='list' api='News' emit={this.props.$emit.bind(this.props)} filter={_filter} commit={this.getNews.bind(this)}>
+      <List ref='list' api='News' filter={_filter} commit={this.getNews.bind(this)}>
         {ListItems}
       </List>
     )
   }
 }
 
-News.defaultProps = {
-  $ev: {},
-  $on (event, fn) {
-    this.$ev[event] = fn
-  },
-  $emit (event, value) {
-    this.$ev[event] && this.$ev[event].call(this, value)
-  }
-}
 export default News
