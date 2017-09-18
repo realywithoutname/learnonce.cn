@@ -25,6 +25,7 @@ const List = styled.ul`
   @media (max-width: 640px) {
     padding: 0;
     overflow: auto;
+    height: ${window.innerHeight}px;
   }
 `
 const ListTop = styled.li`

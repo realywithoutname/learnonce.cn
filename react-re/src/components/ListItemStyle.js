@@ -81,6 +81,7 @@ const Article = styled.article`
     display: flex;
     box-shadow: 0 3px 6px 3px rgba(142, 142, 142, 0.6);
     background: #fff;
+    z-index: 2;
     & h2 {
       flex: 1;
       margin: 0;
@@ -99,13 +100,16 @@ const Article = styled.article`
     @media (max-width: 640px) {
       background: transparent;
       box-shadow: none;
-      width: 32px;
+      width: 48px;
       right: 8px;
       & i {
-        height: 32px;
-        line-height: 32px;
+        height: 48px;
+        line-height: 48px;
       }
       & h2 {
+        display: none;
+      }
+      & div {
         display: none;
       }
     }
