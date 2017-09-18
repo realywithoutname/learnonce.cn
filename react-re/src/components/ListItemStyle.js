@@ -75,6 +75,7 @@ const Article = styled.article`
 
   & header {
     position: fixed;
+    transition: none;
     top: ${props => props.show ? 0 : '50%'};
     width: 100%;
     display: flex;
@@ -96,7 +97,17 @@ const Article = styled.article`
     }
 
     @media (max-width: 640px) {
-      display: none;
+      background: transparent;
+      box-shadow: none;
+      width: 32px;
+      right: 8px;
+      & i {
+        height: 32px;
+        line-height: 32px;
+      }
+      & h2 {
+        display: none;
+      }
     }
   }
 `
