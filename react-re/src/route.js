@@ -6,14 +6,14 @@ function blog() {
     })
   }
 }
-// function resume() {
-//   this.path = 'resume'
-//   this.getComponent = (nextstate, cb) => {
-//     require.ensure([], (require) => {
-//       cb(null, require('pages/resume').default)
-//     })
-//   }
-// }
+function resume() {
+  this.path = 'resume'
+  this.getComponent = (nextstate, cb) => {
+    require.ensure([], (require) => {
+      cb(null, require('pages/resume').default)
+    })
+  }
+}
 function article() {
   this.path = '/blog/:id'
   this.getComponent = (nextstate, cb) => {
@@ -109,6 +109,6 @@ const createRoute = (R) => {
   return route
 }
 export default [
-  home, articleCreate, ide, demo, article, me
+  home, articleCreate, ide, demo, article, me, resume
 ].map((route) => createRoute(route))
 // export default createRoute(home)

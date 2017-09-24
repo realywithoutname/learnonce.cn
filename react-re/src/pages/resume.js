@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import { connect } from 'react-redux'
 import style from 'styles/resume.css'
 
 class Resume extends Component {
@@ -31,7 +30,7 @@ class Resume extends Component {
               </div>
               <div className={style.item}>
                 <i className={`material-icons ${style.icon}`}>email</i>
-                <span>hi@justsoso.me</span>
+                <a style={{color: '#717171'}} target="_blank" href="mailto:hi@justsoso.me"><span>hi@justsoso.me</span></a>
               </div>
               <div className={style.item}>
                 <i className={`material-icons ${style.icon}`}>location_on</i>
@@ -39,7 +38,11 @@ class Resume extends Component {
               </div>
               <div className={`print-show ${style.item}`}>
                 <i className={`material-icons ${style.icon}`}>W</i>
-                <span>www.justsoso.me</span>
+                <a style={{color: '#717171'}} target="_blank" href="http://www.justsoso.me"> <span>www.justsoso.me</span></a>
+              </div>
+              <div className={`print-show ${style.item}`}>
+                <i className={`material-icons ${style.icon}`}>G</i>
+                <a style={{color: '#717171'}} target="_blank" href="https://github.com/realywithoutname"><span>github.com/realywithoutname</span></a>
               </div>
               <div className={`print-show ${style.item}`}>
                 <i className={`material-icons ${style.icon}`}>M</i>
@@ -47,7 +50,11 @@ class Resume extends Component {
               </div>
             </div>
             <div className={style.kills}>
-              <h2 className={style.title}>专业技能</h2>
+              <div className={style.comment}>
+                <h2 className={style.title}>个人评价</h2>
+                <div>生活放荡不羁；技术“博”而不精；热爱JavaScript；追求代码美感。</div>
+              </div>
+              <h2 className={style.title}>常用技术与框架</h2>
               <div className={style.item}>
                 <span>
                   <i className={style.icon}>HTML</i>
@@ -120,52 +127,32 @@ class Resume extends Component {
                   <p className={style.time}>2016.4-至今</p><p className={style.company}>深圳林晨展华科技有限公司</p>
                 </dt>
                 <dd className={`markdown-body ${style.content}`}>
-                  <p className={style.title}>车辆防盗管理系统</p>
                   <ul>
                     <li>工作描述：
-                    管理平台使用vue.js 1.x，服务号使用Angular.js 1.x，在项目中主要负责在原有项目中新功能的开发。</li>
-                    <li>工作成果：
-                      <ul>
-                        <li>感谢vue.js的通俗的文档，以及vue.js自身使用上的简单，在几天时间的掌握使用vue.js进行项目开发，以及组件编写。</li>
-                        <li>开发了灵活的地图组件，组件对不同的地图API厂商提供同一套API，根据配置信息自动使用不同的地图组件。</li>
-                      </ul>
+                    参与多个项目开发，其中有维护老项目，带新人开发新项目，也有独立负责的项目。工作内容包括自动化构建，目录结构设计，
+                    代码结构设计，组件设计与编码，代码审查与重构。当然做的最多的还是编写业务代码。
+                    </li>
+                    <li>
+                      <p className={style.title}>车辆防盗管理系统</p>
+                      <p>我在其中主要负责车辆在地图的显示，如果有什么值得提的，估计就是优化了地图由于一次从后端查询的数据太多，导致浏览器崩溃的问题。</p>
+                    </li>
+                    <li>
+                      <p className={style.title}>学生卡家长版web应用</p>
+                      <p>负责带一名新人做前端开发，前期做一些基础的开发规范，webpack的应用，然后就开发，测试，上线。</p>
+                    </li>
+                    <li>
+                      <p className={style.title}>共享单车管理系统</p>
+                      <p>该项目是今年公司的主要项目，我负责管理系统的独立开发，后期有新同事加入，其中我觉得有意义的
+                      是其中几个重要组件：基于ACL的多级路由组件，基于配置的表单组件，基于Swagger.js的前后端数据分离，
+                      当然更重要的是组件化开发思想，效果如下：
+                        <ul>
+                          <li>提高页面开发速度。常规管理页面，增删改查开发不超过半小时。一份JSON文档，两个表单组件，一个表格组件。足以满足常规需求。</li>
+                          <li>降低页面负责度。页面可通过不同组件搭配，如在表单组件添加时间选择组件，地区选择组件，页面添加Excel导出等，都可通过组件间的搭配满足需求。</li>
+                          <li>组件间低耦合。组件功能尽量单一，提供尽量简单的接口，完成组件应该完成的功能。</li>
+                        </ul>
+                      </p>
                     </li>
                   </ul>
-                  <hr />
-                  <p className={style.title}>家校云-学生卡家长版web应用</p>
-                  <ul>
-                  <li>工作描述：
-                  在项目中作为前端负责人，负责带一名刚入前端的同事，任务划分，前端自动化配置，部分功能开发。（原来的前端开发者大神写后端了）</li>
-                  <li>工作成果：
-                  <ul>
-                  <li>熟练使用vue.js，掌握其基本运行原理。</li>
-                  <li>带领新人，在接下来的项目中可是基于vue.js独立开发</li>
-                  </ul></li>
-                  </ul>
-                  <hr />
-                  <p className={style.title}>共享单车管理系统</p>
-                  <ul>
-                  <li>工作描述：
-                  系统使用vue.js 2.0开发，本人负责管理后台的开发，并做了以下我觉得有意义的工作
-                  <ul>
-                  <li>设计前端权限配置，以及ACL</li>
-                  <li>设计基于配置的表单组件</li>
-                  <li>使用基于Swagger.js的前后端数据分离</li>
-                  <li>系统组件与功能的开发</li>
-                  </ul></li>
-                  <li>工作成果：
-                  <ul>
-                  <li>提高页面开发速度。常规管理页面，增删改查开发不超过半小时。一份JSON文档，两个表单组件，一个表格组件。足以满足常规需求。</li>
-                  <li>降低页面负责度。页面可通过不同组件搭配，如在表单组件添加时间选择组件，地区选择组件，页面添加Excel导出等，都可通过组件间的搭配满足需求。</li>
-                  <li>组件间低耦合。组件功能尽量单一，提供尽量简单的接口，完成组件应该完成的功能。</li>
-                  </ul></li>
-                  <li>工作不足：
-                  <ul>
-                  <li>页面随着需求的增长变得臃肿。</li>
-                  <li>系统设计之初，只考虑了页面的异步加载。为考虑到页面内组件的异步加载。</li>
-                  </ul></li>
-                  </ul>
-                  <p>面对以上两个问题，设想对臃肿的页面进行组件拆分，使用vue.js 2的动态组件+异步组件+webpack code splitting解决，正在验证中。</p>
                 </dd>
               </dl>
             </div>
@@ -175,24 +162,16 @@ class Resume extends Component {
               <h2 className={style.title}>开发项目</h2>
               <dl className={style.worklist}>
                 <dt>
-                  <p className={style.time}>2014.7-2014.9</p>
+                  <p className={style.time}>2014.7-2015.9</p>
                   <p className={style.company}>团团一家</p>
                 </dt>
                 <dd>
                   <p className={style.content}>
                     校园活动平台——使用互联网技术为活动组织者提供活动解决方案，为活动主办方提供信息发布，推广，报名，抢票，投票，抽奖，数据统计等一系列服务的Web服务应用.
                     <br/>
-                    本人负责其中微信接口的开发，如活动推送，自动回复，客户信息，扫码登录等等功能。该项目作为人生第一次大型项目，并在校园内获得全校师生认可的项目。不仅在其中检验了学习的成果，也锻炼了团队合作意识。
-                  </p>
-                </dd>
-              </dl>
-              <dl className={style.worklist}>
-                <dt>
-                  <p className={style.time}>2014.10-2015.9</p><p className={style.company}>校园服务平台</p>
-                </dt>
-                <dd>
-                  <p className={style.content}>
-                    基于团团一家使用Node.js/Strongloop，MongoDB，Angular.js重构。本人在项目中负责后端部分功能开发，后期负责带领团队，以及部分前端开发。RESTful接口设计，以及如何实现更好的前后端分离留下了深刻映像，并在后来实习公司成功推荐使用Swagger.js。
+                    第一版本中本人负责其中微信接口的开发，如活动推送，自动回复，客户信息，扫码登录等等功能。该项目作为人生第一次大型项目，并在校园内获得全校师生认可的项目。
+                    后期使用Node.js/Strongloop，MongoDB，Angular.js重构。负责带领团队，以及部分前端开发。
+                    RESTful接口设计，以及如何实现更好的前后端分离留下了深刻映像，并在后来工作的公司成功推荐使用Swagger.js。
                   </p>
                 </dd>
               </dl>
@@ -216,6 +195,31 @@ class Resume extends Component {
                   </p>
                 </dd>
               </dl>
+              <dl className={style.worklist}>
+                <dt>
+                  <p className={style.time}>2017.8.22-现在</p><p className={style.company}>
+                    <a href="https://github.com/realywithoutname/decorator-doc">decorator-doc</a>
+                  </p>
+                </dt>
+                <dd>
+                  <p className={style.content}>
+                    基于Swagger规范以及ES7 Decorator语法编写的一个swagger文档生成器，集成了swagger-ui，验证等功能，支持在koa1.x，koa2.x以及基于connnect的Node.js框架，
+                    支持ES7 Decorator语法以及使用基于JSON文档两种使用方式。目前正在公司内部使用，找bug。
+                  </p>
+                </dd>
+              </dl>
+              <dl className={style.worklist}>
+                <dt>
+                  <p className={style.time}>2017.9.01-现在</p><p className={style.company}>
+                    <a href="https://github.com/realywithoutname/ECMAScript">ECMAScript® 2018 中文翻译</a>
+                  </p>
+                </dt>
+                <dd>
+                  <p className={style.content}>
+                    因为ECMA文档现在完全通过github维护，所以我认为维护一份中文版本的规范文档是有意义的，目前已翻译到第七章，在翻译过程中让很多理解更加通透了。希望可以造福更多的中国开发者。
+                  </p>
+                </dd>
+              </dl>
             </div>
           </div>
         </div>
@@ -224,4 +228,4 @@ class Resume extends Component {
   }
 }
 
-export default connect()(Resume)
+export default Resume
