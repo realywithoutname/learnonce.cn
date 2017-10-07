@@ -4,7 +4,7 @@ import Fingerprint from 'static/fingerprint'
 let finger = new Fingerprint({ canvas: true }).get()
 
 const baseCfg = {
-  timeout: 5000,
+  timeout: 10000,
   finger
 }
 

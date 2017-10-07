@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
-const Header = styled.header`
+const Section = styled.section`
   height: calc(100% - 64px);
   position: fixed;
   top: 0;
@@ -30,7 +30,7 @@ const Welcome = styled.div`
   }
 `
 
-const Nav = styled.nav`
+const Nav = styled.div`
   height: 320px;
   background: #fff;
   font-family: Papyrus;
@@ -40,10 +40,10 @@ const Nav = styled.nav`
 class Back extends Component {
   render() {
     return (
-      <Header>
+      <Section>
         <Nav />
         <Welcome> welcome guy </Welcome>
-      </Header>
+      </Section>
     )
   }
 }

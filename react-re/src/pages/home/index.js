@@ -37,16 +37,6 @@ const Page = styled.div`
 
 class Home extends Component {
   state = { isAuth: puller.pull('auth') }
-  // componentDidMount() {
-  //   this.props.children.props.$on('shadow', (show) => {
-  //     this.setState({ shadow: show })
-  //   })
-  // }
-  // componentWillUpdate() {
-  //   this.props.children.props.$on('shadow', (show) => {
-  //     this.setState({ shadow: show })
-  //   })
-  // }
   render() {
     return (
       <Frame>

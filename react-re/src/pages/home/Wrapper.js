@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { throttle, scroll } from 'src/util'
 import ProgressBar from 'components/ProgressBar'
-const Banner = styled.div`
+const Banner = styled.section`
   position: absolute;
   width: 100%;
   height: 100%;
@@ -77,7 +77,7 @@ class Wrapper extends Component {
     document.removeEventListener('scroll', this.listener)
   }
   scroll() {
-    let body = document.querySelector('body')
+    let body = document.scrollingElement
     let winHeight = window.innerHeight
     return () => {
       if (!this.mounted) {
@@ -85,6 +85,7 @@ class Wrapper extends Component {
       }
       let height = winHeight - body.scrollTop
       if (body.scrollHeight <= winHeight + body.scrollTop + 1) {
+        document.removeEventListener('scroll', this.listener)
         scroll.lock()
       }
       if (height <= 340) {
