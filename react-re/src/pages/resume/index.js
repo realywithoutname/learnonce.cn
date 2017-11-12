@@ -7,6 +7,9 @@ const Container = styled.div`
   padding: 100px 0;
   min-height: 100%;
   box-sizing: border-box;
+  @media (max-width: 700px) {
+    padding: 0;
+  }
 `
 
 const Banner = styled.div`
@@ -19,7 +22,7 @@ const Banner = styled.div`
 `
 const Content = styled.div`
   margin: 0 auto;
-  width: 820px;
+  max-width: 820px;
   background: #fff;
   &:after {
     content: '';
@@ -53,7 +56,10 @@ const Column = styled.section`
   box-sizing: border-box;
   ${props => props.left ? 'padding-left:' + props.left + 'px' : ''};
   float: left;
-
+  @media (max-width: 700px) {
+    width: 100%;
+    padding-left: 0;
+  }
   & dl {
     margin: 0;
   }
