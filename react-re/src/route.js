@@ -14,6 +14,7 @@ function resume() {
     })
   }
 }
+
 function article() {
   this.path = '/blog/:id'
   this.getComponent = (nextstate, cb) => {
