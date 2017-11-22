@@ -15,6 +15,15 @@ function resume() {
   }
 }
 
+function resume2FE() {
+  this.path = 'resume-for-fore-end'
+  this.getComponent = (nextstate, cb) => {
+    require.ensure([], (require) => {
+      cb(null, require('pages/resume/fore-end').default)
+    })
+  }
+}
+
 function article() {
   this.path = '/blog/:id'
   this.getComponent = (nextstate, cb) => {
@@ -110,6 +119,6 @@ const createRoute = (R) => {
   return route
 }
 export default [
-  home, articleCreate, ide, demo, article, me, resume
+  home, articleCreate, ide, demo, article, me, resume, resume2FE
 ].map((route) => createRoute(route))
 // export default createRoute(home)

@@ -56,10 +56,10 @@ const Column = styled.section`
   box-sizing: border-box;
   ${props => props.left ? 'padding-left:' + props.left + 'px' : ''};
   float: left;
-  @media (max-width: 700px) {
-    width: 100%;
-    padding-left: 0;
-  }
+  // @media (max-width: 700px) {
+  //   width: 100%;
+  //   padding-left: 0;
+  // }
   & dl {
     margin: 0;
   }
@@ -95,9 +95,9 @@ const Column = styled.section`
     color: #ff9800;
   }
 
-  & b {
-    color: #F44336;
-  }
+  // & b {
+  //   color: #F44336;
+  // }
 `
 
 class Resume extends Component {
@@ -126,7 +126,7 @@ class Resume extends Component {
             </Card>
             <Card title="工作经历 2016.04.01-至今">
               <p>
-                参与多个项目开发与落实。其中有维护老项目，带新人开发新项目，也有独立负责的项目。工作内容包括自动化构建，目录结构设计， 代码结构设计，组件设计与编码，代码审查与重构。
+                从2016年4月开始职业生涯，一直就职于<b>深圳林晨展华(杭州)科技有限公司</b>，期间参与多个项目开发与落实。其中有维护老项目，带新人开发新项目，也有独立负责的项目。工作内容包括自动化构建，目录结构设计， 代码结构设计，组件设计与编码，代码审查与重构。
                 <b>介绍以下两个能够体现价值的项目。</b>
               </p>
               <Card title="租车管理平台项目 独立负责">
@@ -142,9 +142,6 @@ class Resume extends Component {
                   </li>
                   <li>
                     基于配置的表单组件：表单生成组件。基于element-ui基础表单组件封装，提供一个submit事件，form参数接口。form参数通过JSON文档配置表单元素，验证等信息生成完整的表单，验证输入。用很少的代码实现复杂的表单，局限是不能够对表单进行灵活的控制。
-                  </li>
-                  <li>
-                    基于ACL的多级路由：路由生成器。提供权限设置，路由配置，子路由设置等接口。理论上可实现无限级别的权限用户登陆和无限的路由层级。
                   </li>
                   <li>
                     组件化开发思想：提高页面开发速度，降低页面负责度，组件间低耦合。
@@ -175,6 +172,10 @@ class Resume extends Component {
                 <dd>杭州</dd>
                 <dt>电话</dt>
                 <dd>17764592171</dd>
+                <dt>学校</dt>
+                <dd>杭州电子科技大学</dd>
+                <dt>专业</dt>
+                <dd>网络工程</dd>
                 <dt>邮箱</dt>
                 <dd><a href="mailto:hi@justsoso.me">hi@justsoso.me</a></dd>
                 <dt>网站</dt>
@@ -193,7 +194,7 @@ class Resume extends Component {
                 第一版使用PHP，MySql，Jquery；第二版使用NodeJS/StrongLoop，MongoDB，AngularJS开发。在项目中主要负责后端开发。
               </p>
             </Card>
-            <Card title="JustSoSo个人博客" src="https://github.com/realywithoutname/decorator-doc">
+            <Card title="JustSoSo个人博客" src="http://www.justsoso.me">
               <p>
                 该作品后端使用Koa.js，前端使用vue.js，后来使用React.js进行重构。
               </p>
