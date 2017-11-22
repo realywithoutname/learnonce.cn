@@ -24,6 +24,15 @@ function resume2FE() {
   }
 }
 
+function resume2Node() {
+  this.path = 'resume-for-node-js'
+  this.getComponent = (nextstate, cb) => {
+    require.ensure([], (require) => {
+      cb(null, require('pages/resume/node').default)
+    })
+  }
+}
+
 function article() {
   this.path = '/blog/:id'
   this.getComponent = (nextstate, cb) => {
@@ -119,6 +128,6 @@ const createRoute = (R) => {
   return route
 }
 export default [
-  home, articleCreate, ide, demo, article, me, resume, resume2FE
+  home, articleCreate, ide, demo, article, me, resume, resume2FE, resume2Node
 ].map((route) => createRoute(route))
 // export default createRoute(home)

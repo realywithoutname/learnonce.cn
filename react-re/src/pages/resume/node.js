@@ -99,7 +99,7 @@ const TimeLine = styled.section`
     color: #2296f4;
   }
 `
-class FE extends Component {
+class Node extends Component {
   render () {
     return (
       <Container>
@@ -219,4 +219,4 @@ class FE extends Component {
   }
 }
 
-export default FE
+export default Node
